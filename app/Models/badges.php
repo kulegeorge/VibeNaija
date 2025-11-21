@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class badges extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'badge_name',
+        'badge_description',
+        'points',
+        'badge_image'
+    ];
+}
