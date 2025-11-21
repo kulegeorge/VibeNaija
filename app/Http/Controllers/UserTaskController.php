@@ -248,7 +248,7 @@ public function updateSubmission(Request $request, $submission_id)
     if (in_array($submission->status, ['approved', 'rejected'])) {
         return back()->with([
             'message' => 'You cannot edit this submission anymore.',
-            'alert-type' => 'warning'
+            'alert-type' => 'danger'
         ]);
     }
 

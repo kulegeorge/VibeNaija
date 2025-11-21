@@ -37,14 +37,21 @@ class AdminTaskController extends Controller
 
         // Update status
         $submission->status = 'approved';
+        $submission->badge_icon = $submission->task->badge_icon;
+        $submission->badges_name = $submission->task->badge_name;
         $submission->save();
 
         // Award task points to user's total points
         $user = $submission->user;
-        $user->points += $submission->task->points;
-        $user->save();
+        $user->points += $submission->task->task_points;
 
-        return redirect()->back()->with('success', 'Submission approved and points awarded!');
+        $user->save();
+         $notification = array(
+                    'message' => 'Submission approved and points awarded!',
+                    'alert-type' => 'success'
+                );
+         return redirect()->back()->with($notification);
+       
     }
 
 
@@ -54,7 +61,11 @@ class AdminTaskController extends Controller
         $submission = UserTaskSubmission::findOrFail($id);
         $submission->status = 'rejected';
         $submission->save();
-
-        return redirect()->back()->with('info', 'Submission rejected.');
+$notification = array(
+                    'message' => 'Submission rejected.',
+                    'alert-type' => 'success'
+                );
+         return redirect()->back()->with($notification);
+       
     }
 }

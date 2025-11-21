@@ -102,7 +102,7 @@
             <div class="mb-4">
                 <h6 class="fw-bold text-uppercase text-secondary small">Task Points</h6>
                 <div class="p-3 bg-white border rounded text-center">
-                    <span class="fw-bold display-6 text-primary">{{ $submission->task->points }}</span>
+                    <span class="fw-bold display-6 text-primary">{{ $submission->task->task_points }}</span>
                     <span class="fw-bold">Points</span>
                 </div>
             </div>

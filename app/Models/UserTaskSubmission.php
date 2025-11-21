@@ -18,6 +18,7 @@ class UserTaskSubmission extends Model
         'video_url',
         'images',        // JSON array
         'documents',     // JSON array
+        'badges_earned',
         'points',     // integer
         'status',        // pending / approved / rejected
     ];

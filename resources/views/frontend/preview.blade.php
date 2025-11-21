@@ -134,7 +134,7 @@
  <div class="col-lg-12">
     @if($joinedAlready)
         <div class="border card p-3">
-            <button class="btn btn-secondary float-end" disabled>Already Enrolled</button>
+            <button class="btn btn-secondary float-end" disabled>Already Enrolled <i class="fa fa-user-check"></i></button>
         </div>
     @else
         <div class="border card p-3">

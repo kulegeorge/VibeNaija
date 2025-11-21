@@ -23,13 +23,19 @@
             <!-- STATUS -->
             <span class="badge 
                 @if($submission->status == 'approved') bg-success 
+               
                 @elseif($submission->status == 'rejected') bg-danger
                 @else bg-warning text-dark 
                 @endif 
                 px-3 py-2">
                 {{ ucfirst($submission->status) }}
             </span>
+<span class="badge float-end">
+     @if(!empty($submission->badge_icon))
 
+     <img src="{{ asset($submission->badge_icon)}}" class="img-responsive" width="100" height="100">
+     @endif
+</span>
         </div>
         <div class="card-body">
 
