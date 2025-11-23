@@ -15,6 +15,13 @@ use App\Http\Controllers\TasksController;
 use App\Http\Controllers\UserTaskController;
 use App\Http\Controllers\JoinTaskController;
 use App\Http\Controllers\AdminTaskController;
+use App\Http\Controllers\DashboardController;
+
+//CBT
+
+use App\Http\Controllers\TopicController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\CBTController;
 
 
 /*
@@ -30,9 +37,9 @@ use App\Http\Controllers\AdminTaskController;
 
 Route::get('/', [HomeController::class, 'homepage']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 
 
@@ -65,8 +72,13 @@ Route::middleware('auth')->group(function () {
 
     //update edited user submission
     Route::post('/update/editSubmission/{id}', [UserTaskController::class, 'updateSubmission'])->name('update.submission');
+//CBT User
+Route::get('/cbt/{topic}', [CBTController::class, 'start'])->name('cbt.start');
+Route::post('/cbt/submit', [CBTController::class, 'submit'])->name('cbt.submit');
+Route::get('/cbt/{topic}/result', [CBTController::class, 'result'])->name('cbt.result');
 
 
+    
 
 });
 
@@ -151,6 +163,31 @@ Route::delete('/admin/tasks/{id}', [TasksController::class, 'taskDestroy'])->nam
         Route::post('/update/permission', 'UpdatePermission')->name('update.permission');
         Route::get('/delete/permission/{id}', 'DeletePermission')->name('delete.permission');
         //Route::get('/all/roles', 'AllRoles')->name('all.roles');
+
+
+        //CBT
+
+    //Topics
+Route::get('/topics', [TopicController::class, 'index'])->name('topics.index');
+Route::get('/topics/create', [TopicController::class, 'create'])->name('topics.create');
+Route::post('/topics', [TopicController::class, 'store'])->name('topics.store');
+
+// Questions
+Route::get('/topics/{topic}/questions', [QuestionController::class, 'index'])->name('questions.index');
+Route::get('/topics/{topic}/questions/create', [QuestionController::class, 'create'])->name('questions.create');
+Route::post('/topics/{topic}/questions', [QuestionController::class, 'store'])->name('questions.store');
+
+// CBT
+//List All Topics
+Route::get('List-All/topics', [TopicController::class, 'allTopics'])->name('All-topics.index');
+
+
+
+// NEW ROUTES YOU ASKED FOR:
+Route::get('/topics/{id}', [TopicController::class, 'show'])->name('topics.show');
+Route::get('/topics/{id}/edit', [TopicController::class, 'edit'])->name('topics.edit');
+Route::put('/topics/{id}', [TopicController::class, 'update'])->name('topics.update');
+Route::delete('/topics/{id}', [TopicController::class, 'destroy'])->name('topics.destroy');
 
     });
 

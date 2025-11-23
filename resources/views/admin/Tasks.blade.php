@@ -139,8 +139,44 @@
                                     <option value="Monthly">Monthly</option>
                                     <option value="Yearly">Yearly</option>
                                 </select>
+
+                               
+<div class="mt-4">
+                               
+                                <label class="form-label">Select Quiz</label>
+                                <small class="form-text text-muted"><i>Test to be completed by User</i></small>
+
+                                <div class="form-check mb-2">
+                                    
+    <input type="radio"
+           id="none"
+           name="topic_id"
+           value=""
+           class="form-check-input"
+           checked>   
+
+    <label class="form-check-label" for="none">None</label>
+</div>
+
+@foreach($topics as $topic)
+    <div class="form-check">
+        <input type="radio" 
+               id="topic_{{ $topic->id }}" 
+               name="topic_id" 
+               value="{{ $topic->id }}" 
+               class="form-check-input">
+
+        <label class="form-check-label" for="topic_{{ $topic->id }}">
+            {{ $topic->name }}
+        </label>
+    </div>
+@endforeach
+
+</div>
+
                             </div>
-                        </div>
+                            </div>
+                       
 
                 </div>
             </div>

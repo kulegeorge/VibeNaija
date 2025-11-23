@@ -1,7 +1,17 @@
 @extends('admin.admin_dashboard')
 @section('admin')
 
+
+
 <div class="container my-5" style="padding-top:80px;">
+
+    {{-- CHECK IF EMPTY --}}
+    @if($submissions->isEmpty())
+        <div class="alert alert-warning text-center fw-bold rounded-3 py-4 shadow-sm">
+            ⚠ No Submissions Found
+        </div>
+    @endif
+
 
     @foreach ($submissions as $submission)
 
@@ -10,9 +20,9 @@
         <!-- HEADER -->
         <div class="card-header bg-primary text-white py-3 d-flex justify-content-between align-items-center">
             <div>
-                <h5 class="mb-0 fw-bold">{{ $submission->task->taskname }}</h5>
+                <h5 class="mb-0 fw-bold">{{ $submission->task->taskname ?? 'Task Not Found' }}</h5>
                 <small class="opacity-75">
-                    Submitted by: {{ $submission->user->name }}
+                    Submitted by: {{ $submission->user->name ?? 'Unknown User' }}
                 </small>
             </div>
 
@@ -22,14 +32,14 @@
                 @else bg-warning text-dark
                 @endif
             ">
-                {{ ucfirst($submission->status) }}
+                {{ ucfirst($submission->status ?? 'pending') }}
             </span>
         </div>
 
         <!-- BODY -->
         <div class="card-body">
 
-            <!-- SECTION: USER EXPLANATION -->
+            <!-- USER EXPLANATION -->
             <div class="mb-4">
                 <h6 class="fw-bold text-uppercase text-secondary small">User Explanation</h6>
                 <div class="p-3 bg-light border rounded">
@@ -37,10 +47,10 @@
                 </div>
             </div>
 
-            <!-- SECTION: VIDEO -->
-            @if($submission->video_url)
+            <!-- VIDEO -->
+            @if(!empty($submission->video_url))
             <div class="mb-4">
-                <h6 class="fw-bold text-uppercase text-secondary small">Video Link</h6>
+                <h6 class="fw-bold text-uppercase text-secondary small">URL Link</h6>
                 <a href="{{ $submission->video_url }}" target="_blank"
                    class="d-inline-block mt-2 fw-semibold text-primary">
                     🔗 {{ $submission->video_url }}
@@ -48,21 +58,23 @@
             </div>
             @endif
 
-            <!-- SECTION: IMAGES -->
+            <!-- IMAGES -->
             <div class="mb-4">
                 <h6 class="fw-bold text-uppercase text-secondary small">Images</h6>
 
                 @php
                     $images = is_array($submission->images)
                         ? $submission->images
-                        : json_decode($submission->images, true);
+                        : json_decode($submission->images ?? '[]', true);
                 @endphp
 
                 @if(!empty($images))
                     <div class="d-flex flex-wrap gap-3 mt-2">
                         @foreach($images as $img)
                             <div class="border rounded shadow-sm p-1 bg-white" style="width: 130px;">
-                                <img src="{{ asset($img) }}" class="w-100 rounded" style="height:120px; object-fit:cover;">
+                                <img src="{{ asset($img) }}"
+                                     class="w-100 rounded"
+                                     style="height:120px; object-fit:cover;">
                             </div>
                         @endforeach
                     </div>
@@ -71,14 +83,16 @@
                 @endif
             </div>
 
-            <!-- SECTION: DOCUMENTS -->
+
+
+            <!-- DOCUMENTS -->
             <div class="mb-4">
                 <h6 class="fw-bold text-uppercase text-secondary small">Documents</h6>
 
                 @php
                     $docs = is_array($submission->documents)
                         ? $submission->documents
-                        : json_decode($submission->documents, true);
+                        : json_decode($submission->documents ?? '[]', true);
                 @endphp
 
                 @if(!empty($docs))
@@ -98,23 +112,33 @@
                 @endif
             </div>
 
-            <!-- SECTION: POINTS -->
+            <!-- POINTS -->
             <div class="mb-4">
                 <h6 class="fw-bold text-uppercase text-secondary small">Task Points</h6>
-                <div class="p-3 bg-white border rounded text-center">
-                    <span class="fw-bold display-6 text-primary">{{ $submission->task->task_points }}</span>
+                <div class="p-3 alert-success border rounded text-center">
+                    <span class="fw-bold display-6 text-primary">
+                        {{ $submission->task->task_points ?? 0 }}
+                    </span>
                     <span class="fw-bold">Points</span>
+                </div>
+            </div>
+ <form action="{{ route('admin.approve.submission', $submission->id) }}"
+                          method="POST" class="d-inline">
+                        @csrf
+             <div class="mb-4">
+                <h6 class="fw-bold text-uppercase text-secondary small"><strong>Approval or Rejection Messaget</h6></strong>
+                <div class="p-3 bg-white border rounded text-center">
+                    
+                   <textarea type="text" name="decision_message" class="form-control" placeholder="Write a message for {{ $submission->user->name ?? 'Unknown User' }}" >{{ old('decision_message') }}</textarea>
                 </div>
             </div>
 
             <!-- ACTION BUTTONS -->
             <div class="text-center mt-4">
 
-                @if($submission->status == 'pending')
+                @if(($submission->status ?? 'pending') == 'pending')
 
-                    <form action="{{ route('admin.approve.submission', $submission->id) }}"
-                          method="POST" class="d-inline">
-                        @csrf
+                   
                         <button class="btn btn-success px-4 py-2 rounded-pill shadow-sm">
                             ✔ Approve Submission
                         </button>
@@ -143,5 +167,6 @@
     @endforeach
 
 </div>
+
 
 @endsection

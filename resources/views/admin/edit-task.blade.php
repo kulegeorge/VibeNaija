@@ -74,24 +74,24 @@
                             <div class="col-lg-4">
                                 <label class="form-label">Badges & Points</label>
                                 <small class="form-text text-muted"><i>Badge earned After Task completion</i></small>
+{{-- Hidden: store the selected badge image filename (hidden from user) --}}
+<input type="hidden" name="badge_image" id="badge_image" value="{{ old('badge_image', $task->badge_image) }}">
 
                                @foreach($badge as $badges)
 <div class="form-check">
-    <input type="radio" 
-           id="badge_{{ $badges->id }}" 
-           name="badge_name" 
-           value="{{ $badges->badge_name }}" 
-           class="form-check-input"
-           @if($task->badge_name == $badges->badge_name) checked @endif>
-
-    <label class="form-check-label" for="badge_{{ $badges->id }}">
-        {{ $badges->badge_name }}
-    </label>
-
-    <input type="hidden" 
-           name="badge_image[{{ $badges->badge_name }}]" 
-           value="{{ $badges->badge_image }}">
-</div>
+        <input
+            type="radio"
+            id="badge_{{ $badges->id }}"
+            name="badge_name"
+            value="{{ $badges->badge_name }}"
+            class="form-check-input badge-radio"
+            data-image="{{ $badges->badge_image }}"
+            @if(old('badge_name', $task->badge_name) == $badges->badge_name) checked @endif
+        >
+        <label class="form-check-label" for="badge_{{ $badges->id }}">
+            {{ $badges->badge_name }}
+        </label>
+    </div>
 @endforeach
 
                             </div>
@@ -130,6 +130,43 @@
                                     <option value="Monthly" @if($task->duration == 'Monthly') selected @endif>Monthly</option>
                                     <option value="Yearly" @if($task->duration == 'Yearly') selected @endif>Yearly</option>
                                 </select>
+
+
+                                <div class="mt-4">
+                               
+                                <label class="form-label">Select Quiz</label>
+                                <small class="form-text text-muted"><i>Test to be completed by User</i></small>
+                                                              <div class="form-check mb-2">
+                                    
+    <input type="radio"
+           id="none"
+           name="topic_id"
+           value=""
+           class="form-check-input " checked
+          >   
+
+    <label class="form-check-label" for="none">None</label>
+</div>
+
+                                
+
+@foreach($topics as $topic)
+    <div class="form-check">
+        <input type="radio" 
+               id="topic_{{ $topic->id }}" 
+               name="topic_id" 
+               value="{{ $topic->id }}" 
+               class="form-check-input"
+               @if($task->topic_id == $topic->id) checked @endif>
+
+        <label class="form-check-label" for="topic_{{ $topic->id }}">
+            {{ $topic->name }}
+        </label>
+    </div>
+@endforeach
+
+
+</div>
                             </div>
                         </div>
 
@@ -195,6 +232,30 @@
     </div>
 
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Badges
+    const badgeRadios = document.querySelectorAll('.badge-radio');
+    const badgeImageField = document.getElementById('badge_image');
+
+    badgeRadios.forEach(radio => {
+        radio.addEventListener('change', function () {
+            // update hidden input with the image linked to the selected badge
+            badgeImageField.value = this.dataset.image || '';
+        });
+    });
+
+    // Levels
+    const levelRadios = document.querySelectorAll('.level-radio');
+    const levelImageField = document.getElementById('level_image');
+
+    levelRadios.forEach(radio => {
+        radio.addEventListener('change', function () {
+            levelImageField.value = this.dataset.image || '';
+        });
+    });
+});
+</script>
 
 <!-- JS to add more file inputs -->
 <script>

@@ -42,6 +42,23 @@
 </style>
 
 <div class="container my-5" style="padding-top:80px;">
+@if(session('submission_failed'))
+<div class="alert alert-danger alert-dismissible fade show">
+    <strong>⚠ Error:</strong> {{ session('error_message') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+@endif
+@if($errors->any())
+<div class="alert alert-danger alert-dismissible fade show">
+    <strong>⚠ Please fix the following errors:</strong>
+    <ul class="mt-2 mb-0">
+        @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+@endif
 
     <!-- Page Title -->
     <div class="text-center mb-4">
@@ -78,13 +95,13 @@
                         <!-- Text Description -->
                         <div class="mb-4">
                             <label class="form-label fw-bold">Write your Answer (Optional)</label>
-                            <textarea name="user_text" class="form-control" rows="4" placeholder="Describe how you completed the task..."></textarea>
+                            <textarea name="user_text" class="form-control" rows="4" placeholder="Describe how you completed the task...">{{old('user_text')}}</textarea>
                         </div>
 
                         <!-- Video URL -->
                         <div class="mb-4">
                             <label class="form-label fw-bold">Video URL (Optional)</label>
-                            <input type="text" name="video_url" class="form-control" placeholder="Paste a YouTube / TikTok / Instagram Video link">
+                            <input type="text" name="video_url" class="form-control" placeholder="Paste a YouTube / TikTok / Instagram Video link" value="{{old('video_url')}}">
                         </div>
 
                         <!-- DRAG & DROP UPLOAD AREA -->

@@ -29,6 +29,8 @@ return new class extends Migration {
             $table->json('documents')->nullable();
             
             $table->integer('points')->nullable();
+            $table->longText('decision_message')->nullable();
+            $table->longText('badge_icon')->nullable();
 
             // Submission status
             $table->enum('status', ['pending', 'approved', 'rejected'])

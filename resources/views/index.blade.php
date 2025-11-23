@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Naija Vibes Home Page</title>
+	<title> Vibe Naija Home Page</title>
 
 	<meta name="author" content="shiftthemes">
 	<meta name="description" content="Palas is a Business HTML Template developed with the the latest HTML5 and CSS3 technologies.">

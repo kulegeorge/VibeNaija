@@ -19,7 +19,14 @@
                     <label class="badge bg-brand-color-1 text-white f-14 f-w-400 float-end">23% Done</label>
                   </div>
                 </div>
-                <h6 class="text-muted mt-4 mb-3">Complete Task : 6/10</h6>
+                <h6 class="text-muted mt-4 mb-3">Complete Task : @if(!empty($taskcompleted))
+                {{$taskcompleted}}
+                @else 
+                0
+
+              @endif
+
+            </h6>
                 <div class="progress">
                   <div
                     class="progress-bar"
@@ -38,25 +45,17 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="mb-4">Points Erned</h5>
-                <h3 class="mb-4">+230</h3>
+                <h3 class="mb-4">+{{$user->points}}</h3>
                 <span class="text-muted d-block">Pointed accumulated from completed Tasks</span>
               </div>
             </div>
           </div>
-          <div class="col-md-12 col-xl-4">
-            <div class="card card-event">
+         <div class="col-md-6 col-xl-4">
+            <div class="card">
               <div class="card-body">
-                <div class="row align-items-center justify-content-center">
-                  <div class="col">
-                    <h5 class="m-0">Badges Acquired</h5>
-                  </div>
-                  <div class="col-auto">
-                    <label class="badge bg-brand-color-2 text-white f-14 f-w-400 float-end">34%</label>
-                  </div>
-                </div>
-                <h2 class="mt-2">45<sub class="text-muted f-14">Competitors</sub></h2>
-                <h6 class="text-muted mt-3 mb-0">All Badges </h6>
-                <i class="ti ti-calendar-check text-info f-50"></i>
+                <h5 class="mb-4">Badges Acquired</h5>
+                <h3 class="mb-4">@if(!empty($taskcompleted)){{$taskcompleted}} @else 0 @endif</h3>
+                <span class="text-muted d-block">View Badages</span>
               </div>
             </div>
           </div>

@@ -91,44 +91,6 @@
             <div class="card-body">
 
 
-<!-- ORIGINAL TOP 3 BOXES (left unchanged) -->
-<!-- <section class="section">
-    <div class="row col-p0 max_height sm_max_height">
-        <div class="col-sm-12 col-md-4">
-            <div class="box-services-d box-services-e el_max_height" style="height:244px;">
-                <div class="bg-overlay"></div>
-                <div class="col-sm-12">
-                    <h3 class="title-uppercased">Easy to use</h3>
-                    <p>Lorem ipsum dolor sit amet...</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-12 col-md-4" style="background:#333;">
-            <div class="box-services-d box-services-e dark el_max_height" style="height:244px;">
-                <div class="bg-overlay"></div>
-                <div class="col-sm-12">
-                    <h3 class="title-uppercased">Customizable</h3>
-                    <p>Lorem ipsum dolor sit amet...</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-12 col-md-4">
-            <div class="box-services-d box-services-e green el_max_height" style="height:244px;">
-                <div class="bg-overlay"></div>
-                <div class="col-sm-12">
-                    <h3 class="title-uppercased">Clean code</h3>
-                    <p>Lorem ipsum dolor sit amet...</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
- -->
-
-
-
 <!-- TRIAL PLAN BOX (unchanged) -->
 <div class="row mb-2">
  <div class="col-lg-12">
@@ -221,6 +183,21 @@
             </a>
         </div>
     </div>
+@endif
+
+@if($task->topic_id > 0)
+
+ <!-- NORMAL LINK CARD -->
+    <div class="card mt-3 border-info">
+        <div class="card-body">
+            <h5 class="card-title">You have a Quiz</h5>
+            <a href="#" target="_blank" class="text-primary">
+                 {{ $topic->name }}
+                <p> {{ $topic->description }}</p>
+            </a>
+        </div>
+    </div>
+
 @endif
 
     </div>
@@ -334,19 +311,34 @@
 </div>
 
 
-
 <!-- ACTION BUTTONS -->
 <div class="mt-4 d-flex justify-content-end">
     <a href="{{ route('user.all-task') }}" class="btn btn-outline-secondary me-2">
         <i class="fas fa-arrow-left"></i> Back
     </a>
     @if($joinedAlready)
-    <a href="{{route('task.submit.page', $task->id)}}" class="btn btn-primary">
-        Submit Task <i class="fa fa-paper-plane"></i>
-    </a>
+    <a href="{{route('task.submit.page', $task->id)}}" 
+                                               class="btn btn-sm btn-secondary me-1">
+                                                 Submit Task <i class="fa fa-paper-plane"></i>
+                                            </a>
+
+   
+<!-- View Topic -->
+                                            <a href="{{route('cbt.start', $task->topic_id)}}" 
+                                               class="btn btn-sm btn-info me-1 text-white">
+                                                <i class="fa-solid fa-play"></i>  Start Quiz
+                                            </a>
+
+
+    
     @else 
-        <a href=""  class="btn btn-primary disabled">
-        Submit Task <i class="fa fa-paper-plane"></i></a>
+
+    <a class="btn btn-sm btn-warning me-1 disabled">
+            <i class="fa-solid fa-pen-to-square"></i> Submit Task <i class="fa fa-paper-plane"></i></a>
+                                            
+
+        
+        
     @endif
 </div>
 

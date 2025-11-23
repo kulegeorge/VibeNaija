@@ -1,6 +1,14 @@
 @extends('admin.admin_dashboard')
 @section('admin')
-
+<style>
+.note-card {
+    background-color: #fff59e;
+    border: none;
+    border-radius: 10px;
+    transform: rotate(1deg);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+}
+</style>
 <div class="container py-5" style="padding-top:80px;">
     <h2 class="fw-bold mb-4">📑 My Task Submissions</h2>
 
@@ -30,12 +38,19 @@
                 px-3 py-2">
                 {{ ucfirst($submission->status) }}
             </span>
-<span class="badge float-end">
+<div class="">
+    <div class="card note-card p-3 mb-4 float-start">
+    <h6 class="fw-bold">@if($submission->status == 'approved')Approval Note @else Rejection Note @endif</h6>
+    <p>{{ $submission->decision_message }}</p>
+</div>
+
+<div class="badge float-end">
      @if(!empty($submission->badge_icon))
 
      <img src="{{ asset($submission->badge_icon)}}" class="img-responsive" width="100" height="100">
      @endif
-</span>
+</div>
+</div>
         </div>
         <div class="card-body">
 

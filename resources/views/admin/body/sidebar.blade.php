@@ -54,6 +54,36 @@
           </li>
 @endif
 
+  @if(Auth::user()->can('role_management.menu'))
+          <li class="nav-item nav-category">Topics & Questions</li>
+          
+
+
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#emails" role="button" aria-expanded="false" aria-controls="emails">
+              <i class="link-icon" data-feather="mail"></i>
+              <span class="link-title">CBT</span>
+              <i class="link-arrow" data-feather="chevron-down"></i>
+            </a>
+            <div class="collapsed" id="emails">
+              <ul class="nav sub-menu">
+                <li class="nav-item">
+                  <a href="{{ route('topics.create')}}" class="nav-link">Admin Create Topics</a>
+                </li>
+
+                
+
+                 <li class="nav-item">
+                  <a href="{{ route('All-topics.index')}}" class="nav-link">Admin All Topics</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('topics.index')}}" class="nav-link">Take Exams</a>
+                </li>
+                
+              </ul>
+            </div>
+          </li>
+@endif
 @if(Auth::user()->can('role_management.menu'))
 
           <li class="nav-item nav-category">Admin Activities</li>

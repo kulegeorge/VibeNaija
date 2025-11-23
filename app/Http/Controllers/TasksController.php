@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Badges;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Tasks;
+use App\Models\Topic;
 use DB;
 
 class TasksController extends Controller
@@ -13,14 +14,14 @@ class TasksController extends Controller
     public function createTasks(){
         $badge = DB::table('Badges')->get();
         $level = DB::table('Levels')->get();
+        $topics = DB::table('topics')->get();
 
-        return view('Admin.Tasks', compact('badge','level'));
+        return view('Admin.Tasks', compact('badge','level','topics'));
     }
 
     public function store(Request $request)
     {
-
-
+        
         // -----------------------------
         // 1. VALIDATION
         // -----------------------------
@@ -83,7 +84,7 @@ class TasksController extends Controller
         $task->category = $request->category;
         $task->url = $request->url;
         $task->task_points = $request->task_points;
-
+        $task->topic_id = $request->topic_id;
         $task->badge_name = $request->badge_name;
         $task->badge_icon = $request->badge_image[$request->badge_name] ?? null;
 
@@ -117,7 +118,9 @@ class TasksController extends Controller
  $task = Tasks::findOrFail($id);
   $badge = DB::table('badges')->get();
   $level = DB::table('levels')->get();
-    return view('admin.edit-task', compact('task','badge','level'));
+
+   $topics = Topic::all();
+    return view('admin.edit-task', compact('task','badge','level','topics'));
 
    }
 
@@ -156,6 +159,7 @@ public function showTask(){
     // Update task
 public function updateTask(Request $request, $id)
 {
+
     $task = Tasks::findOrFail($id);
 
     // Validate inputs
@@ -180,6 +184,8 @@ public function updateTask(Request $request, $id)
     $task->badge_name = $request->badge_name;
     $task->task_level = $request->task_level;
     $task->duration = $request->duration;
+    $task->topic_id = $request->topic_id;
+    $task->badge_icon = $request->badge_image;
     $task->url = $request->url;
     $task->submission_instruction = $request->submission_instruction;
 
@@ -229,6 +235,7 @@ public function updateTask(Request $request, $id)
 public function previewTask($id){
     $userid = Auth::id();
      $task = Tasks::findOrFail($id);
+     
      $joinedAlready = DB::table('JoinTask')->where('userID',$userid)->where('taskID',$id)->first();
 
     return view('admin.preview', compact('task','joinedAlready'));

@@ -21,6 +21,7 @@ class Tasks extends Model
         'submission_instruction',
         'badge_name',
         'badge_icon',
+        'topic_id', //CBT
         'level_image',
         'status'
     ];

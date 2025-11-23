@@ -25,6 +25,8 @@ return new class extends Migration
             $table->longText('submission_instruction');
             $table->integer('badge_point')->nullable();
             $table->string('badge_name')->nullable();
+            $table->integer('topic_id')->nullable();
+
             $table->string('badge_icon')->nullable();
             $table->integer('status')->nullable();
             

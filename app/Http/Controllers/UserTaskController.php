@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use App\Models\Tasks;
 use App\Models\JoinTask;
+use App\Models\Topic;
 use App\Models\UserTaskSubmission;
 
 class UserTaskController extends Controller
@@ -30,17 +31,24 @@ class UserTaskController extends Controller
         SHOW TASK PREVIEW
     ----------------------------------------------------------*/
     public function showTask($id)
-    {
-        $userId = Auth::id();
-        $task = Tasks::findOrFail($id);
+{
+    $task = Tasks::findOrFail($id);
 
-        $joinedAlready = JoinTask::where([
-            ['userID', $userId],
-            ['taskID', $id]
-        ])->exists();
+    $topic = Topic::find($task->topic_id); // avoids crash if missing
 
-        return view('frontend.preview', compact('task', 'joinedAlready'));
+    $userId = Auth::id();
+
+    $joinedAlready = false;
+
+    if ($userId) {
+        $joinedAlready = JoinTask::where('userID', $userId)
+            ->where('taskID', $id)
+            ->exists();
     }
+
+    return view('frontend.preview', compact('task', 'topic', 'joinedAlready'));
+}
+
 
     /*----------------------------------------------------------
         SHOW SUBMISSION PAGE
@@ -67,24 +75,18 @@ public function submitTask(Request $request, $task_id)
 {
     try {
 
-       
-
-        $taskPoints =  Tasks::findOrFail($task_id);
-
+        $taskPoints = Tasks::findOrFail($task_id);
 
         $user_id = Auth::id();
-         $checkAlreadySubmitted = DB::table('user_task_submissions')
-                                            ->where('user_id',$user_id )
-                                            ->where('task_id', $task_id)
-                                            ->first();
-        if($checkAlreadySubmitted){
-            return redirect()->route('editSubmission.task', ['id' => $checkAlreadySubmitted->id]);           
+        $checkAlreadySubmitted = DB::table('user_task_submissions')
+            ->where('user_id', $user_id)
+            ->where('task_id', $task_id)
+            ->first();
 
+        if ($checkAlreadySubmitted) {
+            return redirect()->route('editSubmission.task', ['id' => $checkAlreadySubmitted->id]);
         }
 
-        /*--------------------------------------
-            CUSTOM ERROR MESSAGES
-        --------------------------------------*/
         $messages = [
             'images.*.image' => 'Only image files are allowed.',
             'images.*.mimes' => 'Allowed image formats: jpg, jpeg, png, gif.',
@@ -94,9 +96,6 @@ public function submitTask(Request $request, $task_id)
             'documents.*.max'   => 'Each document must not exceed 10MB.',
         ];
 
-        /*--------------------------------------
-            LARAVEL VALIDATION
-        --------------------------------------*/
         $request->validate([
             'user_text'   => 'nullable|string',
             'video_url'   => 'nullable|string|max:600',
@@ -104,14 +103,10 @@ public function submitTask(Request $request, $task_id)
             'documents.*' => 'nullable|mimes:pdf,doc,docx,ppt,pptx,xls,xlsx,zip|max:10000',
         ], $messages);
 
-        /*------------------------------------------------------
-            EXTRA MANUAL PRE-CHECKS (Before uploading)
-        ------------------------------------------------------*/
-
-        // Manual Image Size Check
+        // Manual checks
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $img) {
-                if ($img->getSize() > 4 * 1024 * 1024) { // > 4MB
+                if ($img->getSize() > 4 * 1024 * 1024) {
                     return back()->with([
                         'submission_failed' => true,
                         'error_message' => 'One of your images exceeds 4MB – remove it and try again.'
@@ -120,10 +115,9 @@ public function submitTask(Request $request, $task_id)
             }
         }
 
-        // Manual Document Size Check
         if ($request->hasFile('documents')) {
             foreach ($request->file('documents') as $doc) {
-                if ($doc->getSize() > 10 * 1024 * 1024) { // > 10MB
+                if ($doc->getSize() > 10 * 1024 * 1024) {
                     return back()->with([
                         'submission_failed' => true,
                         'error_message' => 'One of your documents exceeds 10MB – remove it and try again.'
@@ -132,9 +126,7 @@ public function submitTask(Request $request, $task_id)
             }
         }
 
-        /*--------------------------------------
-            CREATE DIRECTORIES
-        --------------------------------------*/
+        // Directories
         $imgDir = public_path('uploads/task_submissions/images');
         $docDir = public_path('uploads/task_submissions/documents');
 
@@ -144,9 +136,7 @@ public function submitTask(Request $request, $task_id)
         $imagePaths = [];
         $documentPaths = [];
 
-        /*--------------------------------------
-            SAVE IMAGES
-        --------------------------------------*/
+        // Save images
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $filename = uniqid() . '_' . time() . '.' . $image->getClientOriginalExtension();
@@ -155,9 +145,7 @@ public function submitTask(Request $request, $task_id)
             }
         }
 
-        /*--------------------------------------
-            SAVE DOCUMENTS
-        --------------------------------------*/
+        // Save documents
         if ($request->hasFile('documents')) {
             foreach ($request->file('documents') as $doc) {
                 $filename = uniqid() . '_' . time() . '.' . $doc->getClientOriginalExtension();
@@ -166,9 +154,7 @@ public function submitTask(Request $request, $task_id)
             }
         }
 
-        /*--------------------------------------
-            SAVE TO DATABASE
-        --------------------------------------*/
+        // Save to DB
         UserTaskSubmission::create([
             'user_id'   => $user_id,
             'points'    => $taskPoints->task_points,
@@ -180,18 +166,40 @@ public function submitTask(Request $request, $task_id)
         ]);
 
         return redirect()->route('user.my.submissions')->with([
-    'submission_success' => true,
-    'success_message' => 'Your submission has been uploaded successfully!'
-]);
+            'submission_success' => true,
+            'success_message' => 'Your submission has been uploaded successfully!'
+        ]);
 
+    }
+    catch (\Illuminate\Validation\ValidationException $e) {
+        // Let Laravel display specific validation messages
+        return back()->withErrors($e->validator)->withInput();
+    }
+    catch (\Exception $e) {
 
-    } catch (\Exception $e) {
-        return back()->with([
+        \Log::error('TASK SUBMISSION ERROR: ' . $e->getMessage());
+
+        $errorMessage = 'Something went wrong while processing your submission.';
+
+        if (str_contains($e->getMessage(), 'No such file or directory')) {
+            $errorMessage = 'File upload failed. Please try smaller files or try again.';
+        } elseif (str_contains($e->getMessage(), 'disk') || str_contains($e->getMessage(), 'storage')) {
+            $errorMessage = 'Storage issue detected. Please try again later.';
+        } elseif (str_contains($e->getMessage(), 'timeout')) {
+            $errorMessage = 'The upload took too long. Please reduce file size and try again.';
+        } elseif (str_contains($e->getMessage(), 'Permission denied')) {
+            $errorMessage = 'Upload permission failed. Contact support.';
+        } elseif (str_contains($e->getMessage(), 'Undefined')) {
+            $errorMessage = 'A system error occurred. Contact support.';
+        }
+
+        return back()->withInput()->with([
             'submission_failed' => true,
-            'error_message'     => $e->getMessage()
+            'error_message' => $errorMessage
         ]);
     }
 }
+
 
 
     /*----------------------------------------------------------

@@ -31,14 +31,16 @@ class AdminTaskController extends Controller
 
 
     // Approve submission + award points
-    public function approve($id)
+    public function approve(Request $request, $id)
     {
+     
         $submission = UserTaskSubmission::with('task', 'user')->findOrFail($id);
 
         // Update status
         $submission->status = 'approved';
         $submission->badge_icon = $submission->task->badge_icon;
         $submission->badges_name = $submission->task->badge_name;
+        $submission->decision_message = $request->decision_message;
         $submission->save();
 
         // Award task points to user's total points
