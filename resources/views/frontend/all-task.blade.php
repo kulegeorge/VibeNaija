@@ -61,7 +61,7 @@
                     </span>
 
                     <span class="badge bg-light text-dark border">
-                        {{ $task->level->level_name ?? 'Level' }}
+                        {{ $task->task_level ?? 'Level' }}
                     </span>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                 </button>
 
                 @endif
-                <a href="{{ route('task.show', $task->id)}}" class="btn btn-outline-primary btn-sm">
+                <a href="{{ route('task.show', encrypt($task->id))}}" class="btn btn-outline-primary btn-sm">
                    View Task →
                 </a>
             </div>

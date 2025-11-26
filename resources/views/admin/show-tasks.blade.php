@@ -74,7 +74,7 @@
                                         <a href="{{ route('task.show', $task->id) }}" 
                                            class="btn btn-outline-primary btn-sm">View</a>
 
-                                        <a href="{{ route('admin.edit-task', $task->id) }}" 
+                                        <a href="{{ route('admin.edit-task', encrypt($task->id)) }}" 
                                            class="btn btn-warning btn-sm">Edit</a>
 
                                         <button class="btn btn-danger btn-sm delete-task" 
@@ -101,12 +101,13 @@
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script>
 $(document).ready(function() {
-    $('#tasksTable').DataTable();
+    let table = $('#tasksTable').DataTable();
 
-    // Delete task
-    $('.delete-task').click(function(){
+    // Use event delegation for DELETE button
+    $(document).on('click', '.delete-task', function() {
         let taskId = $(this).data('id');
-        if(confirm('Are you sure you want to delete this task?')){
+
+        if(confirm('Are you sure you want to delete this task?')) {
             $.ajax({
                 url: '/admin/tasks/' + taskId,
                 type: 'DELETE',
@@ -115,7 +116,12 @@ $(document).ready(function() {
                 },
                 success: function(response){
                     alert(response.success);
-                    location.reload();
+
+                    // Reload only DataTable (recommended)
+                    table.row($(this).parents('tr')).remove().draw();
+
+                    // OR full page reload (optional)
+                     location.reload();
                 },
                 error: function(err){
                     alert('Error deleting task');
@@ -124,6 +130,7 @@ $(document).ready(function() {
         }
     });
 });
+
 </script>
 
 @endsection

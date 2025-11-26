@@ -78,24 +78,27 @@ class ProfileController extends Controller
         /* ------------------------------
          * 1. Total Earnings
          * ------------------------------ */
-        // $earnings = UserTaskSubmission::where('user_id', $userId)
-        //     ->where('status', 'approved')
-        //     ->sum('earnings_amount'); 
+        $badges = UserTaskSubmission::where('user_id', $userId)
+            ->where('status', 'approved')
+            ->get(); 
+            $taskcompleted =  UserTaskSubmission::where('user_id', $userId)
+            ->where('status', 'approved')
+            ->count(); 
             // Make sure your table has earnings_amount column
 
 
         /* ------------------------------
          * 2. Total Points (XP)
          * ------------------------------ */
-        $totalPoints = $user->points;
+    
 
 
         /* ------------------------------
          * 3. Completed Tasks
          * ------------------------------ */
-        $completedTasks = UserTaskSubmission::where('user_id', $userId)
-            ->where('status', 'approved')
-            ->count();
+        // $completedTasks = UserTaskSubmission::where('user_id', $userId)
+        //     ->where('status', 'approved')
+        //     ->count();
 
 
         /* ------------------------------
@@ -135,34 +138,27 @@ class ProfileController extends Controller
         /* ------------------------------
          * 6. Leaderboard (Top 10)
          * ------------------------------ */
-        // $leaderboard = User::leftJoin('user_task_submissions', 'users.id', '=', 'user_task_submissions.user_id')
-        //     ->select(
-        //         'users.id',
-        //         'users.name',
-        //         'users.avatar',
-        //         DB::raw('SUM(user_task_submissions.points) as total_points')
-        //     )
-        //     ->groupBy('users.id', 'users.name', 'users.avatar')
-        //     ->orderByDesc('total_points')
-        //     ->limit(10)
-        //     ->get();
-
+         $leaders = User::select('id', 'name', 'points', 'photo')
+        ->orderByDesc('points')
+        ->get();
 
         /* ------------------------------
          * Pass To View
          * ------------------------------ */
-        return view('user.profile', [
-            'user' => $user,
-            'earnings' => $earnings,
-            'totalPoints' => $totalPoints,
-            'completedTasks' => $completedTasks,
-            'level' => $level,
-            'nextLevel' => $nextLevel->name ?? 'Max',
-            'percentageToNextLevel' => min($percentageToNextLevel, 100),
-            'xpNeeded' => $xpNeeded,
-            'badges' => $badges,
-            'leaderboard' => $leaderboard,
-        ]);
+        // return view('user.profile', [
+        //     'user' => $user,
+        //     'earnings' => $earnings,
+        //     'totalPoints' => $totalPoints,
+        //     'completedTasks' => $completedTasks,
+        //     'level' => $level,
+        //     'nextLevel' => $nextLevel->name ?? 'Max',
+        //     'percentageToNextLevel' => min($percentageToNextLevel, 100),
+        //     'xpNeeded' => $xpNeeded,
+        //     'badges' => $badges,
+        //     'leaderboard' => $leaderboard,
+        // ]);
+
+        return view('frontend.user_earnings', compact('user','badges','taskcompleted','leaders'));
     }
 }
 

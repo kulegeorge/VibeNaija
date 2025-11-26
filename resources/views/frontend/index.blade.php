@@ -345,7 +345,7 @@ The long-term vision is to create a global online community of young Nigerians w
             <div class="task-badges">
     <span class="task-badge star">⭐ {{ $task->task_points }} pts</span>
     <span class="task-badge">{{ $task->badge_name ?? 'Badge' }}</span>
-    <span class="task-badge">{{ $task->level->level_name ?? 'Level' }}</span>
+    <span class="task-badge">{{ $task->task_level ?? 'Level' }}</span>
 </div>
 
         </div>

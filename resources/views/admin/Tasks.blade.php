@@ -114,8 +114,8 @@
                                 <div class="form-check">
                                     <input type="radio" 
                                            id="level_{{ $levels->id }}" 
-                                           name="level_id" 
-                                           value="{{ $levels->id }}" 
+                                           name="task_level" 
+                                           value="{{ $levels->level_name }}" 
                                            class="form-check-input"
                                            @if($index == 0) checked @endif>
 

@@ -35,7 +35,7 @@ class TasksController extends Controller
             'badge_name' => 'required|string',
             'badge_image' => 'array',
 
-            'level_id' => 'required|string',
+            'task_level' => 'required|string',
             'level_image' => 'array',
 
             'duration' => 'required|string',
@@ -88,7 +88,7 @@ class TasksController extends Controller
         $task->badge_name = $request->badge_name;
         $task->badge_icon = $request->badge_image[$request->badge_name] ?? null;
 
-        $task->task_level = $request->level_id;
+        $task->task_level = $request->task_level;
         $task->level_image = $request->level_image[$request->level_name] ?? null;
 
         $task->duration = $request->duration;
@@ -113,8 +113,8 @@ class TasksController extends Controller
     }
 
 //Task Listing
-   public function editTask($id){
-    
+   public function editTask($encryptedId){
+    $id = $id = decrypt($encryptedId);
  $task = Tasks::findOrFail($id);
   $badge = DB::table('badges')->get();
   $level = DB::table('levels')->get();
@@ -169,7 +169,7 @@ public function updateTask(Request $request, $id)
         'category' => 'required|string|max:255',
         'task_points' => 'required|numeric',
         'badge_name' => 'required|string',
-        'task_level' => 'required|integer',
+        'task_level' => 'required|string',
         'duration' => 'required|string',
         'url' => 'nullable|string|max:255',
         'submission_instruction' => 'nullable|string',

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('category')->nullable();
             $table->string('duration')->nullable();
             $table->integer('task_points')->nullable();
-            $table->integer('task_level')->nullable();
+            $table->string('task_level')->nullable();
             $table->text('level_image')->nullable();
             $table->longText('submission_instruction');
             $table->integer('badge_point')->nullable();

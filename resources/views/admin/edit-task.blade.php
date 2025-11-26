@@ -105,9 +105,9 @@
     <input type="radio" 
            id="level_{{ $levels->id }}" 
            name="task_level" 
-           value="{{ $levels->id }}" 
+           value="{{ $levels->level_name }}" 
            class="form-check-input"
-           @if($task->task_level == $levels->id) checked @endif>
+           @if($task->task_level == $levels->level_name) checked @endif>
 
     <label class="form-check-label" for="level_{{ $levels->id }}">
         {{ $levels->level_name }}

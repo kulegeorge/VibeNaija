@@ -32,8 +32,9 @@ class UserTaskController extends Controller
     /*----------------------------------------------------------
         SHOW TASK PREVIEW
     ----------------------------------------------------------*/
-    public function showTask($id)
+    public function showTask($encryptedId)
 {
+    $id = decrypt($encryptedId);
     $task = Tasks::findOrFail($id);
 
     $topic = Topic::find($task->topic_id); // avoids crash if missing
