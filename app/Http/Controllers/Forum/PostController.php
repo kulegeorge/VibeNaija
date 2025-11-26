@@ -12,8 +12,9 @@ class PostController extends Controller
 {
     public function __construct() { $this->middleware('auth'); }
 
-    public function store(StorePostRequest $request)
+    public function store(StorePostRequest $request, ForumThread $thread)
     {
+        
         $data = $request->validated();
         $data['user_id'] = auth()->id();
         $post = ForumPost::create($data);

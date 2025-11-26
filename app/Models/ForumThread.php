@@ -10,19 +10,38 @@ class ForumThread extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['category_id','user_id','title','slug','body','is_locked','is_pinned','views'];
+    protected $fillable = [
+        'category_id','user_id','title','slug','body','is_locked',
+        'is_pinned','views'
+    ];
 
     protected static function booted()
     {
         static::creating(function ($thread) {
             if (empty($thread->slug)) {
-                $thread->slug = Str::slug($thread->title) . '-' . Str::random(6);
+                $thread->slug = Str::slug($thread->title).'-'.Str::random(6);
             }
         });
     }
 
-    public function category() { return $this->belongsTo(ForumCategory::class); }
-    public function user() { return $this->belongsTo(\App\Models\User::class); }
-    public function posts() { return $this->hasMany(ForumPost::class)->orderBy('created_at','asc'); }
-    public function latestPost() { return $this->hasOne(ForumPost::class)->latestOfMany(); }
+    public function category()
+    {
+        return $this->belongsTo(ForumCategory::class, 'category_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'user_id');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(ForumPost::class, 'thread_id')
+                    ->orderBy('created_at', 'asc');
+    }
+
+    public function latestPost()
+    {
+        return $this->hasOne(ForumPost::class, 'thread_id')->latestOfMany();
+    }
 }

@@ -147,19 +147,24 @@ class AdminController extends Controller
     }// End method
 
     //store Admin profile update
+    
     public function adminProfileStore(Request $request){
         $id = auth::User()->id;
         $data = User::find($id);
 
         $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required',
+             'name' => 'required|string|max:255',
+             'address' => 'required|string|max:555',
+             'phone' => 'required|string|max:255',
+           
             ]);
+
         $data->name = $request->name;
         $data->address = $request->address;
         $data->phone = $request->phone;
-        $data->location = $request->location;
+     
         $data->title = $request->title;
+     
         if($request->file('photo')){
             $file = $request->file('photo');
             $fileExt = $file->getClientOriginalExtension();
@@ -183,8 +188,8 @@ class AdminController extends Controller
                 );
                 return redirect()->back()->with($notification);
             }
-            $file->move(public_path('upload/admin_images'),$filename);
-            @unlink(public_path('upload/admin_images/'.$data->photo));
+            $file->move(public_path('upload/'),$filename);
+            @unlink(public_path('upload/'.$data->photo));
             $data['photo'] = $filename;
 
         }

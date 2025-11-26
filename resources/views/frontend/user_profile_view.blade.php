@@ -60,14 +60,14 @@
             <div class="card">
               <div class="card-body">
              
-                <h6 class="card-title">Update Profile</h6>
+								<h6 class="card-title">Update Profile</h6>
 
-                <form method="POST" action="{{route('admin.profile.store') }}" class="forms-sample" enctype="multipart/form-data">
+								<form method="POST" action="{{route('user.profile.store') }}" class="forms-sample" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
-                      <div class="col-sm-3">
+											<div class="col-sm-3">
                                             <div class="mb-3">
-                    <label for="exampleInputUsername1" class="form-label">Title</label>
+										<label for="exampleInputUsername1" class="form-label">Title</label>
                                         <select name="title" id="exampleInputUsername1" class="form-control">
               <option value="MR">Mr.</option>
 <option value="MRS">Mrs.</option>
@@ -90,28 +90,28 @@
 <option value="SEN">Sen.</option>
 <option value="SIR">Sir.</option>
 <option value="SIS">Sis.</option>
-</select> </div>
+</select>	</div>
 
-                      </div><!-- Col -->
-                      <div class="col-sm-9">
+											</div><!-- Col -->
+											<div class="col-sm-9">
                                             <div class="mb-3">
-                    <label for="exampleInputUsername1" class="form-label">Name</label>
-                    <input type="text" name="name" class="form-control" id="exampleInputUsername1" autocomplete="off" value="{{$profileData->name}}">
-                  </div>
-                      </div><!-- Col -->
-                    </div>
+										<label for="exampleInputUsername1" class="form-label">Name</label>
+										<input type="text" name="name" class="form-control" id="exampleInputUsername1" autocomplete="off" value="{{$profileData->name}}">
+									</div>
+											</div><!-- Col -->
+										</div>
                                     
                                        
 
                                         <div class="row">
-                      <div class="col-sm-12">
+											<div class="col-sm-12">
                                             <div class="mb-3">
-                    <label for="exampleInputUsername1" class="form-label">Address</label>
-                    <input type="text" name="address" class="form-control" id="exampleInputUsername1" autocomplete="off" value="{{$profileData->address}}">
-                  </div>
-                      </div><!-- Col -->
-                    
-                    </div>
+										<label for="exampleInputUsername1" class="form-label">Address</label>
+										<input type="text" name="address" class="form-control" id="exampleInputUsername1" autocomplete="off" value="{{$profileData->address}}">
+									</div>
+											</div><!-- Col -->
+										
+										</div>
 
                      <div class="row">
                     
@@ -123,19 +123,19 @@
                       </div><!-- Col -->
                     </div>
 
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Photo</label>
-                    <input type="file" name="photo" class="form-control" id="image">
-                  </div>
+									<div class="mb-3">
+										<label for="exampleInputPassword1" class="form-label">Photo</label>
+										<input type="file" name="photo" class="form-control" id="image">
+									</div>
                                     <div class="mb-3">
-                    
+										
                                     <img class="wd-70 rounded-circle" id="showImage" src="{{ (!empty($profileData->photo)) ? url('upload/'.$profileData->photo) : url('upload/no_image.jpg'); }}" alt="profile">
                 
-                  </div>
-                  
-                  <button type="submit" class="btn btn-primary me-2">Save Changes</button>
-                
-                </form>
+									</div>
+									
+									<button type="submit" class="btn btn-primary me-2">Save Changes</button>
+								
+								</form>
 
               </div>
             </div>
@@ -146,7 +146,7 @@
          
         </div>
 
-      </div>
+			</div>
 <script>
     $(document).ready( function() {
         $('#image').change(function(e){

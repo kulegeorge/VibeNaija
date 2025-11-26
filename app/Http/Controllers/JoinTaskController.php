@@ -11,8 +11,9 @@ use DB;
 class JoinTaskController extends Controller
 {
     //Enrol for Task
-    public function enrolTask($id)
+    public function enrolTask($encryptedId)
 {
+    $id = decrypt($encryptedId);
     $userID = Auth::id();
 
     // 1. Verify that the task exists

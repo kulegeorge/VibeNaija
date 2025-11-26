@@ -142,22 +142,7 @@ class ProfileController extends Controller
         ->orderByDesc('points')
         ->get();
 
-        /* ------------------------------
-         * Pass To View
-         * ------------------------------ */
-        // return view('user.profile', [
-        //     'user' => $user,
-        //     'earnings' => $earnings,
-        //     'totalPoints' => $totalPoints,
-        //     'completedTasks' => $completedTasks,
-        //     'level' => $level,
-        //     'nextLevel' => $nextLevel->name ?? 'Max',
-        //     'percentageToNextLevel' => min($percentageToNextLevel, 100),
-        //     'xpNeeded' => $xpNeeded,
-        //     'badges' => $badges,
-        //     'leaderboard' => $leaderboard,
-        // ]);
-
+       
         return view('frontend.user_earnings', compact('user','badges','taskcompleted','leaders'));
     }
 }

@@ -57,8 +57,9 @@ class UserTaskController extends Controller
     /*----------------------------------------------------------
         SHOW SUBMISSION PAGE
     ----------------------------------------------------------*/
-    public function showSubmitPage($taskID)
+    public function showSubmitPage($encryptedId)
     {
+        $taskID = decrypt($encryptedId);
         $user_id = Auth::id();
         $task = Tasks::findOrFail($taskID);
         $checkAlreadySubmitted = DB::table('user_task_submissions')
@@ -222,10 +223,10 @@ public function submitTask(Request $request, $task_id)
     /*----------------------------------------------------------
         EDIT SUBMISSION PAGE
     ----------------------------------------------------------*/
-    public function editSubmission($submission_id)
+    public function editSubmission($encryptedId)
     {
         $userID = Auth::id();
-
+        $submission_id = decrypt($encryptedId);
         $submission = UserTaskSubmission::where('id', $submission_id)
                         ->where('user_id', $userID)
                         ->firstOrFail();

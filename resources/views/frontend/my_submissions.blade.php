@@ -123,7 +123,7 @@
 
              <!-- EDIT BUTTON (if still pending) -->
                     @if($submission->status == 'pending')
-                    <a href="{{ route('editSubmission.task', $submission->id) }}" 
+                    <a href="{{ route('editSubmission.task', encrypt($submission->id)) }}" 
                        class="btn btn-outline-primary btn-sm rounded-pill">
                         Edit Submission
                     </a>

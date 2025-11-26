@@ -96,7 +96,8 @@
 
     <!-- USER HEADER -->
     <div class="dashboard-card text-center">
-        <img src="https://i.pravatar.cc/150" class="avatar mb-3">
+        <img class="wd-50 ht-50 rounded-circle" src="{{ (!empty($user->photo)) ? url('upload/'.$user->photo) : url('upload/no_image.jpg'); }}" alt="profile Image" />
+
         <h4 class="fw-bold">{{ $user->name }}</h4>
         <p class="text-muted mb-1">{{ $user->email }}</p>
         <p class="text-muted mb-1">Total Points • {{ $user->points }} </p>
@@ -125,7 +126,7 @@
         <div class="col-md-4">
             <div class="dashboard-card bg-light">
                 <h6 class="fw-bold mb-2">Completed Tasks</h6>
-                <div class="stat-number text-warning">{{ $taskcompleted }}</div>
+                <div class="stat-number text-dark">{{ $taskcompleted }}</div>
                 <p class="text-muted small">Task(s) successfully approved</p>
             </div>
         </div>
@@ -236,7 +237,7 @@
 
                 <div class="rank-number me-3">{{ $index + 1 }}</div>
 
-                <img src="{{ $leader->photo }}" class="avatar me-3" style="width:50px;height:50px;">
+                <img class="wd-50 ht-50 rounded-circle" src="{{ (!empty($leader->photo)) ? url('upload/'.$leader->photo) : url('upload/no_image.jpg'); }}" alt="profile Image" />
 
                  <div class="flex-grow-1">
                     <div class="fw-semibold">{{ $leader->name }}</div>

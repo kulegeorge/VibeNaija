@@ -101,7 +101,7 @@
         </div>
     @else
         <div class="border card p-3">
-            <a href="{{ route('enrol.task', $task->id) }}" class="btn bg-light float-end">
+            <a href="{{ route('enrol.task', encrypt($task->id)) }}" class="btn bg-light float-end">
                 <strong>Join Challenge</strong>
             </a>
         </div>
@@ -318,7 +318,7 @@
         <i class="fas fa-arrow-left"></i> Back
     </a>
     @if($joinedAlready)
-    <a href="{{route('task.submit.page', $task->id)}}" 
+    <a href="{{route('task.submit.page', encrypt($task->id))}}" 
                                                class="btn btn-sm btn-secondary me-1">
                                                  Submit Task <i class="fa fa-paper-plane"></i>
                                             </a>
@@ -326,7 +326,7 @@
    
 <!-- View Topic -->
 @if($task->topic_id >= 1)
-                                            <a href="{{route('cbt.start', $task->topic_id)}}" 
+                                            <a href="{{route('cbt.start', $task->encrpt(topic_id))}}" 
                                                class="btn btn-sm btn-info me-1 text-white">
                                                 <i class="fa-solid fa-play"></i>  Start Quiz
                                             </a>

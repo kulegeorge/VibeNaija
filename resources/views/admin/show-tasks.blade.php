@@ -71,7 +71,7 @@
                                     </td>
 
                                     <td class="action-buttons">
-                                        <a href="{{ route('task.show', $task->id) }}" 
+                                        <a href="{{ route('task.show', encrypt($task->id)) }}" 
                                            class="btn btn-outline-primary btn-sm">View</a>
 
                                         <a href="{{ route('admin.edit-task', encrypt($task->id)) }}" 

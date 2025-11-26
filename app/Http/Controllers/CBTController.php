@@ -10,8 +10,9 @@ use Illuminate\Http\Request;
 
 class CBTController extends Controller
 {
-   public function start(Topic $topic)
+   public function start(Topic $encryptedId)
 {
+    $topic = decrypt($encryptedId);
     // Prevent re-opening exam after attempt
     $attempted = UserAnswer::where('user_id', auth()->id())
         ->whereIn('question_id', $topic->questions->pluck('id'))

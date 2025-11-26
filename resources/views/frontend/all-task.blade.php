@@ -5,7 +5,7 @@
 @foreach($tasks as $task)
 <div class="col-md-4 col-sm-6 mb-4">
 
-    <a href="{{ route('task.show', $task->id) }}"class="text-decoration-none text-dark">
+    <a href="{{ route('task.show', encrypt($task->id)) }}"class="text-decoration-none text-dark">
         <div class="card shadow-sm border rounded-3 h-100">
 
             <!-- CARD HEADER -->

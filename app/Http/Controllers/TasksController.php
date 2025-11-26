@@ -169,6 +169,7 @@ public function updateTask(Request $request, $id)
         'category' => 'required|string|max:255',
         'task_points' => 'required|numeric',
         'badge_name' => 'required|string',
+        'badge_icon' => 'required|string',
         'task_level' => 'required|string',
         'duration' => 'required|string',
         'url' => 'nullable|string|max:255',
@@ -185,7 +186,7 @@ public function updateTask(Request $request, $id)
     $task->task_level = $request->task_level;
     $task->duration = $request->duration;
     $task->topic_id = $request->topic_id;
-    $task->badge_icon = $request->badge_image;
+    $task->badge_icon = $request->badge_icon;
     $task->url = $request->url;
     $task->submission_instruction = $request->submission_instruction;
 

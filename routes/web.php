@@ -48,6 +48,11 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('/dashboard', [ProfileController::class, 'task'])->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+
+    Route::post('/user/profile/store', [HomeController::class, "userProfileStore"])->name('user.profile.store');
+//User Profile Image
+    Route::get('/user/profile', [HomeController::class, 'userProfile'])->name('user.profile');
+
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('logout', [AuthenticatedSessionController::class, "destroy"])->name('logout');
@@ -76,7 +81,7 @@ Route::middleware('auth', 'verified')->group(function () {
     //update edited user submission
     Route::post('/update/editSubmission/{id}', [UserTaskController::class, 'updateSubmission'])->name('update.submission');
 //CBT User
-Route::get('/cbt/{topic}', [CBTController::class, 'start'])->name('cbt.start');
+Route::get('/cbt/start/{topic}', [CBTController::class, 'start'])->name('cbt.start');
 Route::post('/cbt/submit', [CBTController::class, 'submit'])->name('cbt.submit');
 Route::get('/cbt/{topic}/result', [CBTController::class, 'result'])->name('cbt.result');
 

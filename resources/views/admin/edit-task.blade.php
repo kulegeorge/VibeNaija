@@ -75,7 +75,7 @@
                                 <label class="form-label">Badges & Points</label>
                                 <small class="form-text text-muted"><i>Badge earned After Task completion</i></small>
 {{-- Hidden: store the selected badge image filename (hidden from user) --}}
-<input type="hidden" name="badge_image" id="badge_image" value="{{ old('badge_image', $task->badge_image) }}">
+<input type="hidden" name="badge_icon" id="badge_icon" value="{{ old('badge_icon', $task->badge_icon) }}">
 
                                @foreach($badge as $badges)
 <div class="form-check">
@@ -236,7 +236,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Badges
     const badgeRadios = document.querySelectorAll('.badge-radio');
-    const badgeImageField = document.getElementById('badge_image');
+    const badgeImageField = document.getElementById('badge_icon');
 
     badgeRadios.forEach(radio => {
         radio.addEventListener('change', function () {
