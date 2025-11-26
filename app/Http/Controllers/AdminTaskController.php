@@ -33,7 +33,7 @@ class AdminTaskController extends Controller
     // Approve submission + award points
     public function approve(Request $request, $id)
     {
-     
+   
         $submission = UserTaskSubmission::with('task', 'user')->findOrFail($id);
 
         // Update status
@@ -58,10 +58,13 @@ class AdminTaskController extends Controller
 
 
     // Reject submission
-    public function reject($id)
+    public function reject(Request $request, $id)
     {
+        
         $submission = UserTaskSubmission::findOrFail($id);
         $submission->status = 'rejected';
+
+        $submission->decision_message = $request->decision_message;
         $submission->save();
 $notification = array(
                     'message' => 'Submission rejected.',

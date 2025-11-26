@@ -150,17 +150,15 @@
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapsed" href="#tables" role="button" aria-expanded="false" aria-controls="tables">
               <i class="link-icon" data-feather="layout"></i>
-              <span class="link-title">Table</span>
+              <span class="link-title">Forum</span>
               <i class="link-arrow" data-feather="chevron-down"></i>
             </a>
             <div class="collapsed" id="tables">
               <ul class="nav sub-menu">
                 <li class="nav-item">
-                  <a href="pages/tables/basic-table.html" class="nav-link">Basic Tables</a>
+                  <a href="/forum" class="nav-link">Join Forum</a>
                 </li>
-                <li class="nav-item">
-                  <a href="pages/tables/data-table.html" class="nav-link">Data Table</a>
-                </li>
+               
               </ul>
             </div>
           </li>

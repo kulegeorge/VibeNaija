@@ -19,6 +19,8 @@ class UserTaskSubmission extends Model
         'images',        // JSON array
         'documents',     // JSON array
         'decision_message',
+        'badges_name',
+        'badge_icon',
         'points',     // integer
         'status',        // pending / approved / rejected
     ];

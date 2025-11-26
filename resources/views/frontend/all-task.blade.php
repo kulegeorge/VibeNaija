@@ -75,9 +75,9 @@
                 </button>
 
                 @endif
-                <button class="btn btn-outline-primary btn-sm">
-                    View Task →
-                </button>
+                <a href="{{ route('task.show', $task->id)}}" class="btn btn-outline-primary btn-sm">
+                   View Task →
+                </a>
             </div>
 
         </div>

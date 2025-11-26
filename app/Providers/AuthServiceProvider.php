@@ -13,8 +13,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        //
-    ];
+    \App\Models\ForumThread::class => \App\Policies\ThreadPolicy::class,
+    \App\Models\ForumPost::class => \App\Policies\PostPolicy::class,
+];
 
     /**
      * Register any authentication / authorization services.

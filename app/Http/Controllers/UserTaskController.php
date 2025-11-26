@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Tasks;
 use App\Models\JoinTask;
 use App\Models\Topic;
+use App\Models\Result;
 use App\Models\UserTaskSubmission;
 
 class UserTaskController extends Controller
@@ -23,6 +24,7 @@ class UserTaskController extends Controller
         $enrolled = DB::table('join_tasks')
                 ->where('userID', $user_id)
                 ->pluck('taskID');   // VERY IMPORTANT
+  // VERY IMPORTANT
 
         return view('frontend.all-task', compact('tasks','enrolled'));
     }
@@ -45,6 +47,7 @@ class UserTaskController extends Controller
             ->where('taskID', $id)
             ->exists();
     }
+    
 
     return view('frontend.preview', compact('task', 'topic', 'joinedAlready'));
 }
@@ -211,7 +214,7 @@ public function submitTask(Request $request, $task_id)
                         ->with('task')
                         ->latest()
                         ->get();
-
+        //$cbtCheck = Result::where('user_id', Auth::id())
         return view('frontend.my_submissions', compact('submissions'));
     }
 

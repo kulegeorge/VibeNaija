@@ -31,6 +31,7 @@ return new class extends Migration {
             $table->integer('points')->nullable();
             $table->longText('decision_message')->nullable();
             $table->longText('badge_icon')->nullable();
+            $table->string('badges_name')->nullable();
 
             // Submission status
             $table->enum('status', ['pending', 'approved', 'rejected'])

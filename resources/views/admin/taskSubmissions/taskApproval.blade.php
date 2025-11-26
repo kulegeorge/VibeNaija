@@ -15,7 +15,7 @@
 
     @foreach ($submissions as $submission)
 
-    <div class="card shadow-sm border-0 mb-5 rounded-3 overflow-hidden">
+    <div class="card card shadow-sm  border-1 border-secondary  mb-4 overflow-hidden">
 
         <!-- HEADER -->
         <div class="card-header bg-primary text-white py-3 d-flex justify-content-between align-items-center">
@@ -122,43 +122,46 @@
                     <span class="fw-bold">Points</span>
                 </div>
             </div>
- <form action="{{ route('admin.approve.submission', $submission->id) }}"
-                          method="POST" class="d-inline">
-                        @csrf
-             <div class="mb-4">
-                <h6 class="fw-bold text-uppercase text-secondary small"><strong>Approval or Rejection Messaget</h6></strong>
-                <div class="p-3 bg-white border rounded text-center">
-                    
-                   <textarea type="text" name="decision_message" class="form-control" placeholder="Write a message for {{ $submission->user->name ?? 'Unknown User' }}" >{{ old('decision_message') }}</textarea>
-                </div>
+ <form id="decisionForm" method="POST">
+    @csrf
+
+    <div class="mb-4">
+        <h6 class="fw-bold text-uppercase text-secondary small">
+            <strong>Approval or Rejection Messages</strong>
+        </h6>
+        <div class="p-3 bg-white border rounded text-center">
+            <textarea name="decision_message" class="form-control"
+                placeholder="Write a message for {{ $submission->user->name ?? 'Unknown User' }}">
+                {{ old('decision_message') }}
+            </textarea>
+        </div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="text-center mt-4">
+
+        @if(($submission->status ?? 'pending') == 'pending')
+
+            <button type="submit"
+                    class="btn btn-success px-4 py-2 rounded-pill shadow-sm"
+                    onclick="submitToRoute('{{ route('admin.approve.submission', $submission->id) }}')">
+                ✔ Approve Submission
+            </button>
+
+            <button type="submit"
+                    class="btn btn-danger px-4 py-2 rounded-pill shadow-sm ms-2"
+                    onclick="submitToRoute('{{ route('admin.reject.submission', $submission->id) }}')">
+                ✖ Reject Submission
+            </button>
+
+        @else
+            <div class="alert alert-info mt-3 fw-bold">
+                This submission has already been {{ $submission->status }}.
             </div>
+        @endif
 
-            <!-- ACTION BUTTONS -->
-            <div class="text-center mt-4">
-
-                @if(($submission->status ?? 'pending') == 'pending')
-
-                   
-                        <button class="btn btn-success px-4 py-2 rounded-pill shadow-sm">
-                            ✔ Approve Submission
-                        </button>
-                    </form>
-
-                    <form action="{{ route('admin.reject.submission', $submission->id) }}"
-                          method="POST" class="d-inline ms-2">
-                        @csrf
-                        <button class="btn btn-danger px-4 py-2 rounded-pill shadow-sm">
-                            ✖ Reject Submission
-                        </button>
-                    </form>
-
-                @else
-                    <div class="alert alert-info mt-3 fw-bold">
-                        This submission has already been {{ $submission->status }}.
-                    </div>
-                @endif
-
-            </div>
+    </div>
+</form>
 
         </div>
 
@@ -167,6 +170,10 @@
     @endforeach
 
 </div>
-
+<script>
+function submitToRoute(route) {
+    document.getElementById('decisionForm').action = route;
+}
+</script>
 
 @endsection

@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title> Naija Vibe MVP</title>
+	<title>Vibe NIgeria</title>
 
 	<meta name="author" content="shiftthemes">
 	<meta name="description" content="VibeNaija is an online cultural immersion platform designed to help Nigerian teenagers and young adults in the diaspora and at home, reconnect with their roots through interactive social and cultural challenges.
@@ -35,8 +35,57 @@ The long-term vision is to create a global online community of young Nigerians w
 	<link rel="stylesheet" href="{{ asset('Frontend/css/style.css') }}">
 	
 
+<style>
+    /* FORCE ALL TASK IMAGES TO BE SAME SIZE */
+    .task-img {
+        width: 100%;
+        height: 220px;            /* fixed height for equal cards */
+        object-fit: cover;        /* crop perfectly */
+        border-radius: 10px;
+        display: block;
+    }
 
-	
+    /* FIX LABELS (TAG / BADGE STYLES) */
+    .task-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .task-badge {
+        background: #f7f7f7;
+        border: 1px solid #ddd;
+        padding: 6px 10px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .task-badge.star {
+        background: #ffe28a;
+        border-color: #d6b85a;
+    }
+
+    .image-wrapper {
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.task-thumb {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform .35s ease;
+}
+
+.task-thumb:hover {
+    transform: scale(1.08);
+}
+
+</style>
+
 
 	
 
@@ -61,8 +110,8 @@ The long-term vision is to create a global online community of young Nigerians w
 				<div class="row">
 					<div class="col-sm-6">
 						<ul class="top-menu">
-							<li><a href="#">About</a></li>
-							<li><a href="#">Features</a></li>
+							<li><a href="#aboutus">About</a></li>
+						
 							<li><a href="/login">Login</a></li>
 							<li><a href="/register">Sign Up</a></li>
 						</ul>
@@ -155,7 +204,7 @@ The long-term vision is to create a global online community of young Nigerians w
 			</div>
 		</div>
 
-		<div class="section-caption">
+		<div class="section-caption" id="aboutus">
 			<div class="container">
 				<div class="row col-p0">
 					<div class="col-sm-5 col-sm-offset-7 get-height">
@@ -183,145 +232,208 @@ The long-term vision is to create a global online community of young Nigerians w
 			</div>
 		</div>
 	</section>
-	<section class="section-bg section-large section-dark mt20">
-		<div class="container">
-			<div class="row col-p30">
-				<div class="col-sm-4 xs-box2">
-					<i class="icon_box-checked color-on-dark fa-4x op8"></i>
-					<h3 class="title-uppercased color-on-dark title-shadow-a mt20 mb10">We do this</h3>
-					<div class="br-bottom mb20"></div>
-					<p class="color-on-dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, ipsa, itaque. Vel dolorem voluptate quae.</p>
-				</div>
-				<div class="col-sm-4 xs-box2">
-					<i class="icon_piechart color-on-dark fa-4x op8"></i>
-					<h3 class="title-uppercased color-on-dark title-shadow-a mt20 mb10">We did that</h3>
-					<div class="br-bottom mb20"></div>
-					<p class="color-on-dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, ipsa, itaque. Vel dolorem voluptate quae.</p>
-				</div>
-				<div class="col-sm-4">
-					<i class="icon_tags_alt color-on-dark fa-4x op8"></i>
-					<h3 class="title-uppercased color-on-dark title-shadow-a mt20 mb10">We will do these</h3>
-					<div class="br-bottom mb20"></div>
-					<p class="color-on-dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, ipsa, itaque. Vel dolorem voluptate quae.</p>
-				</div>
-			</div>
-		</div>
-	</section>
+	<section class="section-bg section-large section-dark mt20" id="advantages">
+    <div class="container">
+        <div class="row text-center mb40">
+            <h2 class="color-on-dark title-shadow-a">What Makes Us Different</h2>
+            <div class="br-bottom mx-auto mb20" style="width:70px;"></div>
+            <p class="color-on-dark lead">
+                VibeNaija is designed to inspire creativity, build confidence, and bring young people together through fun challenges and meaningful experiences.
+            </p>
+        </div>
+
+        <div class="row col-p30">
+
+            <!-- INTERACTIVE LEARNING -->
+            <div class="col-sm-4 xs-box2">
+                <i class="icon_lightbulb_alt color-on-dark fa-4x op8"></i>
+                <h3 class="title-uppercased color-on-dark title-shadow-a mt20 mb10">Interactive Learning</h3>
+                <div class="br-bottom mb20"></div>
+                <p class="color-on-dark">
+                    We create exciting tasks that teach new skills, encourage curiosity, 
+                    and make personal development simple, fun, and rewarding for young people everywhere.
+                </p>
+            </div>
+
+            <!-- COMMUNITY AND CONNECTIVITY -->
+            <div class="col-sm-4 xs-box2">
+                <i class="icon_chat_alt color-on-dark fa-4x op8"></i>
+                <h3 class="title-uppercased color-on-dark title-shadow-a mt20 mb10">Community & Connection</h3>
+                <div class="br-bottom mb20"></div>
+                <p class="color-on-dark">
+                    Our platform connects young people with shared interests, allowing them 
+                    to express themselves, share their progress, and build lasting friendships.
+                </p>
+            </div>
+
+            <!-- GROWTH & MOTIVATION -->
+            <div class="col-sm-4">
+                <i class="icon_adjust-vert color-on-dark fa-4x op8"></i>
+                <h3 class="title-uppercased color-on-dark title-shadow-a mt20 mb10">Growth & Motivation</h3>
+                <div class="br-bottom mb20"></div>
+                <p class="color-on-dark">
+                    With points, badges, and levels, we motivate users to stay engaged, challenge themselves,
+                    celebrate milestones, and track their progress in a simple gamified system.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
 
 
 
-	<section class="section">
+
+	<section class="section" id="tasks">
 		<div class="container">
 			<div class="row col-p20">
 				<h3 class="title-medium color-on-dark">Some Recent Task</h3>
 							<div class="br-bottom mb20"></div>
+				
+		@if(!empty($tasks))
+								<!-- IMAGE -->
+         
+					@foreach($tasks as $task)
+								   @php
+                $thumb = null;
+
+                if ($task->images) {
+                    $images = json_decode($task->images);
+                    if (!empty($images)) {
+                        $thumb = asset('uploads/tasks/' . $images[0]);
+                    }
+                }
+
+                if (!$thumb && $task->url) {
+                    preg_match(
+                        '/(?:youtu\\.be\\/|youtube\\.com\\/(?:embed\\/|v\\/|watch\\?v=|watch\\?.+&v=))([A-Za-z0-9_-]{11})/',
+                        $task->url,
+                        $matches
+                    );
+                    if (!empty($matches[1])) {
+                        $youtubeId = $matches[1];
+                        $thumb = "https://img.youtube.com/vi/$youtubeId/hqdefault.jpg";
+                    }
+                }
+
+                if (!$thumb) {
+                    $thumb = asset('images/default-task.jpg');
+                }
+            @endphp
 				<div class="col-sm-6 col-md-4 xs-box3">
-					<div class="box-services-f">
-						<!-- Image popup -->
-						<div class="portfolio-text portfolio-center mb20">
-							<div class="view">
-                            	<img src="{{ asset('Frontend/images/demo/office1.jpg') }}" class="br2" alt="Image Popup">
-                            	<div class="mask">
-									<a href="{{ asset('Frontend/images/demo/office1.jpg') }}" title="Image title here" class="init-popup image-popup portfolio-middle"><i class="fa fa-search"></i></a>
-                            	</div>
-							</div>
-						</div> <!-- END Image Popup -->
-						<div class="content">
-							<h3 class="title-uppercased br-bottom">Yorùbá Language Challenge<a href="page_services_4.html#" class="link-read-more">read more</a></h3>
-							<p>A gamified weekly challenge where users learn and speak Yorùbá phrases. Over 3,000 teens participated, earning digital badges and sharing audio clips to celebrate Nigerian language.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-4">
-					<div class="box-services-f">
-						<!-- Image popup -->
-						<div class="portfolio-text portfolio-center mb20">
-							<div class="view">
-                            	<img src="{{ asset('Frontend/images/demo/office2.jpg') }}" class="br2" alt="Image Popup">
-                            	<div class="mask">
-									<a href="{{ asset('Frontend/images/demo/office2.jpg') }}" title="Image title here" class="init-popup image-popup portfolio-middle"><i class="fa fa-search"></i></a>
-                            	</div>
-							</div>
-						</div> <!-- END Image Popup -->
-						<div class="content">
-							<h3 class="title-uppercased br-bottom">Naija Cultural Quests <a href="page_services_4.html#" class="link-read-more">read more</a></h3>
-							<p>Monthly online quests exploring Nigerian traditions—food, attire, and folklore—connecting the diaspora and home communities through interactive storytelling and quizzes.</p>
-						</div>
-					</div>
-				</div>
-				<div class="hidden-sm col-md-4">
-					<div class="box-services-f">
-						<!-- Image popup -->
-						<div class="portfolio-text portfolio-center mb20">
-							<div class="view">
-                            	<img src="{{ asset('Frontend/images/demo/office3.jpg') }}" class="br2" alt="Image Popup">
-                            	<div class="mask">
-									<a href="{{ asset('Frontend/images/demo/office3.jpg') }}" title="Image title here" class="init-popup image-popup portfolio-middle"><i class="fa fa-search"></i></a>
-                            	</div>
-							</div>
-						</div> <!-- END Image Popup -->
-						<div class="content">
-							<h3 class="title-uppercased br-bottom">Afrobeats Remix Battle <a href="page_services_4.html#" class="link-read-more">read more</a></h3>
-							<p>A music contest inviting users to remix classic and contemporary Afrobeats, promoting Nigerian music heritage and creativity. Winners receive special badges and community recognition.</p>
-						</div>
-					</div>
-				</div>
+    <div class="box-services-f">
+
+        <!-- Image -->
+        <div class="portfolio-text portfolio-center mb20">
+            <div class="view">
+        <div class="image-wrapper">
+    <img src="{{ $thumb }}" class="task-thumb" alt="">
+</div>
+
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <h3 class="title-uppercased br-bottom">
+                {{ $task->taskname}}
+                <a href="/register" class="link-read-more">sign up</a>
+            </h3>
+
+            <p>{{ Str::limit($task->task_description, 150) }}</p>
+
+            <div class="task-badges">
+    <span class="task-badge star">⭐ {{ $task->task_points }} pts</span>
+    <span class="task-badge">{{ $task->badge_name ?? 'Badge' }}</span>
+    <span class="task-badge">{{ $task->level->level_name ?? 'Level' }}</span>
+</div>
+
+        </div>
+
+    </div>
+</div>
+
+				@endforeach
+
+			@endif
 			</div>
 		</div>
 	</section>
 
 	<section class="section p0">
-		<div class="row col-p0 max_height xs_max_height">
-			<div class="col-sm-6 col-md-3">
-				<div class="box-services-d box-services-e el_max_height">
-					<div class="bg-overlay"></div>
-					<div class="row col-p0">
-						<div class="col-sm-12">
-							<h3 class="title-uppercased title-shadow-a">customizable</h3>
-							<p class="mb0 ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum recusandae sequi dolorum ispum asodea ipsum dolor.</p>
-							<i class="fa icon_tools"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3">
-				<div class="box-services-d box-services-e dark el_max_height">
-					<div class="bg-overlay"></div>
-					<div class="row col-p0">
-						<div class="col-sm-12">
-							<h3 class="title-uppercased title-shadow-a">easy to use</h3>
-							<p class="mb0 ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum recusandae sequi dolorum ispum asodea ipsum dolor.</p>
-							<i class="fa icon_lightbulb_alt"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3">
-				<div class="box-services-d box-services-e green el_max_height">
-					<div class="bg-overlay"></div>
-					<div class="row col-p0">
-						<div class="col-sm-12">
-							<h3 class="title-uppercased title-shadow-a">clean code</h3>
-							<p class="mb0 ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum recusandae sequi dolorum ispum asodea ipsum dolor.</p>
-							<i class="fa icon_tag_alt"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3">
-				<div class="box-services-d box-services-e orange el_max_height">
-					<div class="bg-overlay"></div>
-					<div class="row col-p0">
-						<div class="col-sm-12">
-							<h3 class="title-uppercased title-shadow-a">reliable</h3>
-							<p class="mb0 ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum recusandae sequi dolorum ispum asodea ipsum dolor.</p>
-							<i class="fa icon_shield"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <div class="row col-p0 max_height xs_max_height">
+
+        <!-- POINTS SYSTEM -->
+        <div class="col-sm-6 col-md-3">
+            <div class="box-services-d box-services-e el_max_height">
+                <div class="bg-overlay"></div>
+                <div class="row col-p0">
+                    <div class="col-sm-12">
+                        <h3 class="title-uppercased title-shadow-a">earn points</h3>
+                        <p class="mb0">
+                            Complete tasks, take challenges, and stay active to earn points that boost your
+                            ranking and unlock exciting rewards.
+                        </p>
+                        <i class="fa icon_tools"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BADGES -->
+        <div class="col-sm-6 col-md-3">
+            <div class="box-services-d box-services-e dark el_max_height">
+                <div class="bg-overlay"></div>
+                <div class="row col-p0">
+                    <div class="col-sm-12">
+                        <h3 class="title-uppercased title-shadow-a">unlock badges</h3>
+                        <p class="mb0">
+                            Hit milestones and show off your achievements with beautifully designed 
+                            badges that reflect your progress and skills.
+                        </p>
+                        <i class="fa icon_lightbulb_alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LEVELS -->
+        <div class="col-sm-6 col-md-3">
+            <div class="box-services-d box-services-e green el_max_height">
+                <div class="bg-overlay"></div>
+                <div class="row col-p0">
+                    <div class="col-sm-12">
+                        <h3 class="title-uppercased title-shadow-a">climb levels</h3>
+                        <p class="mb0">
+                            The more you engage, the higher you go. Level up to unlock harder challenges 
+                            and exclusive platform features.
+                        </p>
+                        <i class="fa icon_tag_alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- REWARDS -->
+        <div class="col-sm-6 col-md-3">
+            <div class="box-services-d box-services-e orange el_max_height">
+                <div class="bg-overlay"></div>
+                <div class="row col-p0">
+                    <div class="col-sm-12">
+                        <h3 class="title-uppercased title-shadow-a">get rewards</h3>
+                        <p class="mb0">
+                            Complete streaks, join weekly missions, and participate in community events 
+                            to earn exciting digital and real-world rewards.
+                        </p>
+                        <i class="fa icon_shield"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
 
 	<section class="section p0 mb50 max_height xs_max_height">
 		<div class="row col-p0">

@@ -8,7 +8,7 @@
 				   <img src="{{ asset('Frontend/images/demo/bg11.jpg')}}" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat" alt="">
 
 				   <!-- Include bg-overlay class if you want some background overlay over the image -->
-				   <!-- Recomend to include it to have a dark overlay and change the opacity (op6, op4, op8 etc) so that the content inside to be visible and readalbe (text is white) -->
+				   <!-- Recomend to include it to have a dark overlay and change the opacity (op6, op4, op8 etc) so that the content inside to be visible and readalble (text is white) -->
 				   <div class="bg-overlay op6"></div>
 
 
@@ -19,7 +19,7 @@
 						data-endspeed="400" data-end="7900"
 						data-easing="Power3.easeInOut" data-endeasing=""
 						style="z-index: 4">
-						<h3 class="title-slider-small uppercased mb10">create stunning websites with palas</h3>
+						<h3 class="title-slider-small uppercased mb10">Reconnect · Learn · Compete</h3>
 					</div>
 
 					<div class="tp-caption sfb stt"
@@ -29,7 +29,7 @@
 						data-endspeed="500" data-end="7950"
 						data-easing="Power3.easeInOut" data-endeasing=""
 						style="z-index: 4">
-						<h2 class="title-slider-large">All you need<br> just one template</h2>
+						<h2 class="title-slider-large">Join weekly challenges<br>and celebrate your vibe</h2>
 					</div>
 
 					<div class="tp-caption sfb stt"
@@ -39,7 +39,7 @@
 						data-endspeed="600" data-end="8000"
 						data-easing="Power3.easeInOut" data-endeasing=""
 						style="z-index: 4">
-						<a href="#" class="btn-slider">Purchase</a>
+						<a href="/register" class="btn-slider">Get Started</a>
 					</div>
 
 					
@@ -48,7 +48,7 @@
 				<!-- SLIDE 2 -->
 				<li data-transition="fade" data-slotamount="7" data-delay="8000" data-title="Slide 2">
 					<!-- Background Image -->
-				   <img src="{{ asset('Frontend/images/demo/bg14.jpg')}}" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat" alt="">
+				   <img src="{{ asset('Frontend/images/demo/bg14.jpeg')}}" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat" alt="">
 				   <div class="bg-overlay op5"></div>
 
 				   
@@ -59,7 +59,7 @@
 						data-endspeed="400" data-end="7800"
 						data-easing="Power3.easeInOut" data-endeasing=""
 						style="z-index: 4">
-						<h2 class="title-slider-large mb20">Customizable <br> and Easy to Use</h2>
+						<h2 class="title-slider-large mb20">Personalized Challenges <br>Built For You</h2>
 						<div class="br-bottom"></div>
 					</div>
 
@@ -70,7 +70,7 @@
 						data-endspeed="400" data-end="7900"
 						data-easing="Power3.easeInOut" data-endeasing=""
 						style="z-index: 4">
-						<h4 class="title-slider-small">It could take you a few minutes to customize it!</h4>
+						<h4 class="title-slider-small">Pick your interests, set your pace, and start earning points in minutes.</h4>
 					</div>
 					
 				</li>
@@ -78,7 +78,7 @@
 				<!-- SLIDE 3 -->
 				<li data-transition="fade" data-slotamount="7" data-delay="8000" data-title="Slide 3">
 					<!-- Background Image -->
-				   <img src="{{ asset('Frontend/images/demo/bg15.jpg')}}" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat" alt="">
+				   <img src="{{ asset('Frontend/images/demo/bg18.jpg')}}" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat" alt="">
 				   <div class="bg-overlay op5"></div>
 
 				   
@@ -89,7 +89,7 @@
 						data-endspeed="400" data-end="7800"
 						data-easing="Power3.easeInOut" data-endeasing=""
 						style="z-index: 4">
-						<h2 class="title-slider-large">Free updates <br> Top notch Support</h2>
+						<h2 class="title-slider-large">Community Feedback <br>Real Support</h2>
 					</div>
 
 					<div class="tp-caption sfl stl"
@@ -99,7 +99,7 @@
 						data-endspeed="400" data-end="7900"
 						data-easing="Power3.easeInOut" data-endeasing=""
 						style="z-index: 4">
-						<h3 class="title-slider-small uppercased">and so much more ...</h3>
+						<h3 class="title-slider-small uppercased">Share entries, get tips, and grow together</h3>
 					</div>
 
 
@@ -110,7 +110,7 @@
 						data-endspeed="600" data-end="7950"
 						data-easing="Power3.easeInOut" data-endeasing=""
 						style="z-index: 4">
-						<a href="#" class="btn-slider reversed">see features</a>
+						<a href="/challenges" class="btn-slider reversed">Explore Challenges</a>
 					</div>
 					
 				</li>
@@ -119,7 +119,7 @@
 				<!-- SLIDE 4 -->
 				<li data-transition="fade" data-slotamount="7" data-delay="8000" data-title="Slide 4">
 					<!-- Background Image -->
-				   <img src="{{ asset('Frontend/images/demo/bg17.jpg')}}" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat" alt="">
+				   <img src="{{ asset('Frontend/images/demo/bg17.jpeg')}}" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat" alt="">
 				   <div class="bg-overlay op5"></div>
 
 				   
@@ -130,7 +130,7 @@
 						data-endspeed="400" data-end="7980"
 						data-easing="Power3.easeInOut" data-endeasing=""
 						style="z-index: 4">
-						<h2 class="title-slider-large text-right">Premium Plugins</h2>
+						<h2 class="title-slider-large text-right">Play · Earn · Lead</h2>
 					</div>
 
 					<div class="tp-caption sfr stb"
@@ -141,11 +141,9 @@
 						data-easing="Power3.easeInOut" data-endeasing=""
 						style="z-index: 4">
 						<h4 class="title-slider-small uppercased text-right">
-						Bootstrap based <span class="py10"></span>
-						responsive design <span class="py10"></span>
-						clean code<br>
-						working widgets  <span class="py10"></span>
-						ajax contact form
+						Points • Badges • Levels<br>
+						Leaderboards • Weekly Missions<br>
+						Community events & rewards
 						</h4>
 					</div>
 
@@ -153,4 +151,4 @@
 
 			</ul>
 		</div>
-	</div> 
+	</div>

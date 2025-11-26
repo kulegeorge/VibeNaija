@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Topic;
 use App\Models\Question;
 use App\Models\UserAnswer;
+use App\Models\Result;
 use Illuminate\Http\Request;
 
 class CBTController extends Controller
@@ -57,18 +58,35 @@ class CBTController extends Controller
 
 
     public function result(Topic $topic)
-    {
-        $questionIDs = $topic->questions()->pluck('id');
+{
+    $userId = auth()->id();
+    $questionIDs = $topic->questions()->pluck('id');
 
-        $total = $questionIDs->count();
+    $total = $questionIDs->count();
 
-        $score = UserAnswer::where('user_id', auth()->id())
-                           ->whereIn('question_id', $questionIDs)
-                           ->where('is_correct', true)
-                           ->count();
+    $score = UserAnswer::where('user_id', $userId)
+                       ->whereIn('question_id', $questionIDs)
+                       ->where('is_correct', true)
+                       ->count();
 
-        $percentage = $total ? ($score / $total) * 100 : 0;
+    $percentage = $total ? ($score / $total) * 100 : 0;
 
-        return view('admin.cbt.result', compact('topic', 'score', 'total', 'percentage'));
+    // 🔍 Check if result already exists
+    $existingResult = Result::where('user_id', $userId)
+                            ->where('topic_id', $topic->id)
+                            ->first();
+
+    // 💾 Only store if not already stored
+    if (!$existingResult) {
+        Result::create([
+            'user_id'    => $userId,
+            'topic_id'   => $topic->id,
+            'score'      => $score,
+            'total'      => $total,
+            'percentage' => $percentage,
+        ]);
     }
+
+    return view('admin.cbt.result', compact('topic', 'score', 'total', 'percentage'));
+}
 }

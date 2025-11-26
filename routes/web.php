@@ -22,7 +22,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\CBTController;
+//Forum
 
+use App\Http\Controllers\Forum\ThreadController;
+use App\Http\Controllers\Forum\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,18 +40,18 @@ use App\Http\Controllers\CBTController;
 
 Route::get('/', [HomeController::class, 'homepage']);
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
 
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'verified')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/user/task-profile', [ProfileController::class, 'task'])->name('task.profile');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('logout', [AuthenticatedSessionController::class, "destroy"])->name('logout');
-    Route::get('checkvEmailVerification', [EmailVerificationPromptController::class, "__invoke"]);
+    // Route::get('/checkvEmailVerification', [EmailVerificationPromptController::class, "__invoke"]);
 
     //list Task to all users
     Route::get('/user/all-task', [UserTaskController::class, "Tasklisting"])->name('user.all-task');
@@ -83,6 +86,42 @@ Route::get('/cbt/{topic}/result', [CBTController::class, 'result'])->name('cbt.r
 });
 
 require __DIR__.'/auth.php';
+
+
+/* ---------------------------------------------------
+|  FORUM ROUTES
+|---------------------------------------------------- */
+
+
+Route::prefix('forum')->name('forum.')->group(function () {
+
+    // Threads
+    Route::get('/', [ThreadController::class, 'index'])->name('threads.index');
+    Route::get('/create', [ThreadController::class, 'create'])->middleware('auth')->name('threads.create');
+    Route::post('/', [ThreadController::class, 'store'])->middleware('auth')->name('threads.store');
+    Route::get('/{thread}', [ThreadController::class, 'show'])->name('threads.show');
+    Route::get('/{thread}/edit', [ThreadController::class, 'edit'])->middleware('auth')->name('threads.edit');
+    Route::put('/{thread}', [ThreadController::class, 'update'])->middleware('auth')->name('threads.update');
+    Route::delete('/{thread}', [ThreadController::class, 'destroy'])->middleware('auth')->name('threads.destroy');
+
+    // Posts
+    Route::post('/{thread}/posts', [PostController::class, 'store'])
+        ->middleware('auth')
+        ->name('posts.store');
+
+    Route::put('/posts/{post}', [PostController::class, 'update'])
+        ->middleware('auth')
+        ->name('posts.update');
+
+    Route::delete('/posts/{post}', [PostController::class, 'destroy'])
+        ->middleware('auth')
+        ->name('posts.destroy');
+
+    Route::post('/posts/{post}/like', [PostController::class, 'like'])
+        ->middleware('auth')
+        ->name('posts.like');
+
+});
 
 //route for admin
 Route::middleware(['auth', 'role:Admin'])->group(function(){

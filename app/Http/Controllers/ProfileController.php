@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use DB;
+use App\Models\User;
+use App\Models\Badge;
+use App\Models\Level;
+use App\Models\UserTaskSubmission;
 
 class ProfileController extends Controller
 {
@@ -57,4 +62,108 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+
+    //Task profile
+
+  
+
+
+
+    public function Task()
+    {
+        $user = Auth::user();
+        $userId = $user->id;
+
+        /* ------------------------------
+         * 1. Total Earnings
+         * ------------------------------ */
+        // $earnings = UserTaskSubmission::where('user_id', $userId)
+        //     ->where('status', 'approved')
+        //     ->sum('earnings_amount'); 
+            // Make sure your table has earnings_amount column
+
+
+        /* ------------------------------
+         * 2. Total Points (XP)
+         * ------------------------------ */
+        $totalPoints = $user->points;
+
+
+        /* ------------------------------
+         * 3. Completed Tasks
+         * ------------------------------ */
+        $completedTasks = UserTaskSubmission::where('user_id', $userId)
+            ->where('status', 'approved')
+            ->count();
+
+
+        /* ------------------------------
+         * 4. User Level
+         * ------------------------------ */
+        // $level = Level::where('min_points', '<=', $totalPoints)
+        //     ->where('max_points', '>=', $totalPoints)
+        //     ->first();
+
+        // if (!$level) {
+        //     $level = Level::orderBy('min_points', 'asc')->first();
+        // }
+
+        // $nextLevel = Level::where('min_points', '>', $totalPoints)
+        //     ->orderBy('min_points', 'asc')
+        //     ->first();
+
+        // $percentageToNextLevel = $nextLevel
+        //     ? round(($totalPoints / $nextLevel->min_points) * 100)
+        //     : 100;
+
+        // $xpNeeded = $nextLevel
+        //     ? $nextLevel->min_points - $totalPoints
+        //     : 0;
+
+
+        /* ------------------------------
+         * 5. User Badges
+         * ------------------------------ */
+        // $badges = DB::table('badges')
+        //     ->join('badges', 'badges.id', '=', 'user_badges.badge_id')
+        //     ->where('user_badges.user_id', $userId)
+        //     ->select('badges.*')
+        //     ->get();
+
+
+        /* ------------------------------
+         * 6. Leaderboard (Top 10)
+         * ------------------------------ */
+        // $leaderboard = User::leftJoin('user_task_submissions', 'users.id', '=', 'user_task_submissions.user_id')
+        //     ->select(
+        //         'users.id',
+        //         'users.name',
+        //         'users.avatar',
+        //         DB::raw('SUM(user_task_submissions.points) as total_points')
+        //     )
+        //     ->groupBy('users.id', 'users.name', 'users.avatar')
+        //     ->orderByDesc('total_points')
+        //     ->limit(10)
+        //     ->get();
+
+
+        /* ------------------------------
+         * Pass To View
+         * ------------------------------ */
+        return view('user.profile', [
+            'user' => $user,
+            'earnings' => $earnings,
+            'totalPoints' => $totalPoints,
+            'completedTasks' => $completedTasks,
+            'level' => $level,
+            'nextLevel' => $nextLevel->name ?? 'Max',
+            'percentageToNextLevel' => min($percentageToNextLevel, 100),
+            'xpNeeded' => $xpNeeded,
+            'badges' => $badges,
+            'leaderboard' => $leaderboard,
+        ]);
+    }
 }
+
+

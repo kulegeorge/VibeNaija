@@ -18,25 +18,21 @@
 										
 									</li> <!-- END Home -->
 									<li>
-										<a href="#">About Us</a>
+										<a href="#aboutus">About Us</a>
 										
 									</li> <!-- END About us -->
 									<li>
-										<a href="#">Avantages</a>
+										<a href="#advantages">Avantages</a>
 										
 									</li> <!-- END Features -->
 									<li>
-										<a href="#">Tasks</a>
+										<a href="#tasks">Tasks</a>
 										 <!-- END Mega Menu -->
 									</li> <!-- END Pages -->
 									<li>
 										<a href="#">Blog</a>
 										
 									</li> <!-- END Blog -->
-									<li>
-										<a href="#">Portfolio</a>
-										
-									</li> <!-- END Portfolio -->
 									
 									
 									<li><a class="last btn btn-primary" style="padding-right: 20px !important; color: white !important;" href="#" target="_blank">Join Community</a></li>

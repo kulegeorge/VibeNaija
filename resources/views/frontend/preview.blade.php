@@ -44,7 +44,8 @@
         <div class="card">
 
 <!-- HEADER WITH IMAGES -->
-<div class="card-header bg-primary text-white">
+   <div class="card shadow-sm  border-1 border-secondary  mb-4" style="border 2px solid #dcdcdc;">
+<div class="card-header bg-light text-black">
 
     <div class="row align-items-center gy-3">
 
@@ -60,7 +61,7 @@
             <div class="flex-grow-1">
                 <h4 class="mb-1">{{ $task->taskname }}</h4>
                 <p class="mb-0">
-                    <small class="text-white">
+                    <small class="text-black">
                         {{ $task->category }} | {{ $task->duration }}
                     </small>
                 </p>
@@ -86,7 +87,7 @@
     </div>
 
 </div>
-
+</div>
 
             <div class="card-body">
 
@@ -96,12 +97,12 @@
  <div class="col-lg-12">
     @if($joinedAlready)
         <div class="border card p-3">
-            <button class="btn btn-secondary float-end" disabled>Already Enrolled <i class="fa fa-user-check"></i></button>
+            <button class="btn bg-light float-end" disabled>Already Enrolled <i class="fa fa-user-check"></i></button>
         </div>
     @else
         <div class="border card p-3">
-            <a href="{{ route('enrol.task', $task->id) }}" class="btn btn-primary float-end">
-                Join Challenge
+            <a href="{{ route('enrol.task', $task->id) }}" class="btn bg-light float-end">
+                <strong>Join Challenge</strong>
             </a>
         </div>
     @endif
@@ -211,7 +212,7 @@
             <div class="d-flex justify-content-between mb-2">
                 <div><strong>Points:</strong> <span class="badge bg-success">+{{ $task->task_points }}</span></div>
                 <div><strong>Badge:</strong> <span class="badge bg-warning text-dark">{{ $task->badge_name }}</span></div>
-                <div><strong>Level:</strong> <span class="badge bg-info text-dark">{{ $task->level->level_name ?? 'N/A' }}</span></div>
+                <div><strong>Level:</strong> <span class="badge bg-info text-dark">{{ $task->task_level ?? 'N/A' }}</span></div>
             </div>
 
 
@@ -220,10 +221,10 @@
         <!-- ===================== SKILLS GAINED ===================== -->
 <div class="card shadow-sm p-3 mb-4">
 <h5 class="fw-bold mb-3">Skills You Gain</h5>
-<span class="badge bg-info text-dark me-2 mb-2">Cultural Knowledge</span>
-<span class="badge bg-info text-dark me-2 mb-2">Creativity</span>
-<span class="badge bg-info text-dark me-2 mb-2">Language Skills</span>
-<span class="badge bg-info text-dark me-2 mb-2">Critical Thinking</span>
+<span class="badge bg-light text-dark me-2 mb-2">Cultural Knowledge</span>
+<span class="badge bg-light text-dark me-2 mb-2">Creativity</span>
+<span class="badge bg-light text-dark me-2 mb-2">Language Skills</span>
+<span class="badge bg-light text-dark me-2 mb-2">Critical Thinking</span>
 </div>
 
 
@@ -324,20 +325,12 @@
 
    
 <!-- View Topic -->
+@if($task->topic_id >= 1)
                                             <a href="{{route('cbt.start', $task->topic_id)}}" 
                                                class="btn btn-sm btn-info me-1 text-white">
                                                 <i class="fa-solid fa-play"></i>  Start Quiz
                                             </a>
-
-
-    
-    @else 
-
-    <a class="btn btn-sm btn-warning me-1 disabled">
-            <i class="fa-solid fa-pen-to-square"></i> Submit Task <i class="fa fa-paper-plane"></i></a>
-                                            
-
-        
+                                            @endif
         
     @endif
 </div>

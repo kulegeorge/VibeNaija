@@ -6,9 +6,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-	<meta name="author" content="NobleUI">
-	<meta name="keywords" content="LIMS">
+  <meta name="description" content="VibeNaija is an online cultural immersion platform designed to help Nigerian teenagers and young adults in the diaspora and at home, reconnect with their roots through interactive social and cultural challenges.
+The platform will combine learning, fun, and community through weekly or monthly cultural tasks that promote Nigerian traditions, language, history, music, and lifestyle — all presented in a gamified way (points, badges, and levels).
+The long-term vision is to create a global online community of young Nigerians who celebrate and share their heritage proudly.">
+	<meta name="author" content="VibeNaija">
+	<meta name="keywords" content="VibeNaija">
 
 	<title>Control Panel</title>
 	  <meta name="csrf-token" content="{{ csrf_token() }}" />

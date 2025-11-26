@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Tasks;
 use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
      public function homepage(){
-        return view('frontend.index');
+      $tasks = Tasks::limit(3)->get();
+
+        return view('frontend.index', compact('tasks'));
     }
     
 
