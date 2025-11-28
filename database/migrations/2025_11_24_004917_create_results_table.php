@@ -19,6 +19,7 @@ return new class extends Migration
         $table->integer('total');
         $table->float('percentage');
         $table->timestamps();
+        $table->integer('task_id');
 
         $table->unique(['user_id', 'topic_id']); // Prevent duplicate results for same user/topic
 

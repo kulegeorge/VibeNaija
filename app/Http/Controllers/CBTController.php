@@ -10,9 +10,20 @@ use Illuminate\Http\Request;
 
 class CBTController extends Controller
 {
-   public function start(Topic $encryptedId)
+
+    
+    public function start($encryptedTopicId, $encryptedTaskId)
 {
-    $topic = decrypt($encryptedId);
+
+
+    // First decrypt the IDs
+   $id = decrypt($encryptedTopicId);
+    $taskId  = decrypt($encryptedTaskId);
+     
+ 
+    // Now fetch the topic
+    $topic = Topic::findOrFail($id);
+
     // Prevent re-opening exam after attempt
     $attempted = UserAnswer::where('user_id', auth()->id())
         ->whereIn('question_id', $topic->questions->pluck('id'))
@@ -25,8 +36,9 @@ class CBTController extends Controller
 
     $questions = $topic->questions;
 
-    return view('admin.cbt.start', compact('topic', 'questions'));
+    return view('admin.cbt.start', compact('topic', 'questions','taskId'));
 }
+
 
 
     public function submit(Request $request)
@@ -49,6 +61,7 @@ class CBTController extends Controller
         UserAnswer::create([
             'user_id'        => auth()->id(),
             'question_id'    => $id,
+            'taskId'        => $request->task_id,
             'selected_option'=> $selected,
             'is_correct'     => $selected == $question->correct_option,
         ]);
@@ -70,6 +83,12 @@ class CBTController extends Controller
                        ->where('is_correct', true)
                        ->count();
 
+   $taskId = UserAnswer::where('user_id', $userId)
+                    ->whereIn('question_id', $questionIDs)
+                    ->where('is_correct', true)
+                    ->value('taskId');
+                    
+
     $percentage = $total ? ($score / $total) * 100 : 0;
 
     // 🔍 Check if result already exists
@@ -85,6 +104,7 @@ class CBTController extends Controller
             'score'      => $score,
             'total'      => $total,
             'percentage' => $percentage,
+            'taskId'     => $taskId,
         ]);
     }
 

@@ -60,6 +60,8 @@ Route::middleware('auth', 'verified')->group(function () {
 
     //list Task to all users
     Route::get('/user/all-task', [UserTaskController::class, "Tasklisting"])->name('user.all-task');
+
+     Route::get('/user/enrolled-task', [UserTaskController::class, "enrolled_task"])->name('user.enrolled-task');
     //show preview task
     Route::get('/task/show/{id}', [UserTaskController::class, "showTask"])->name('task.show');
 
@@ -76,12 +78,13 @@ Route::middleware('auth', 'verified')->group(function () {
      Route::get('/my-task-submissions', [UserTaskController::class, 'mySubmissions'])
     ->name('user.my.submissions');
     //edit task submitted
-    Route::get('/task/editSubmission/{id}', [UserTaskController::class, 'editSubmission'])->name('editSubmission.task');
+    Route::get('/edit-submission/{encryptedId}', [UserTaskController::class, 'editSubmission'])->name('editSubmission.task');
 
     //update edited user submission
     Route::post('/update/editSubmission/{id}', [UserTaskController::class, 'updateSubmission'])->name('update.submission');
 //CBT User
-Route::get('/cbt/start/{topic}', [CBTController::class, 'start'])->name('cbt.start');
+Route::get('/cbt/start/{topic}/{task}', [CbtController::class, 'start'])
+     ->name('cbt.start');
 Route::post('/cbt/submit', [CBTController::class, 'submit'])->name('cbt.submit');
 Route::get('/cbt/{topic}/result', [CBTController::class, 'result'])->name('cbt.result');
 
@@ -104,7 +107,7 @@ Route::prefix('forum')->name('forum.')->group(function () {
     Route::get('/', [ThreadController::class, 'index'])->name('threads.index');
     Route::get('/create', [ThreadController::class, 'create'])->middleware('auth')->name('threads.create');
     Route::post('/', [ThreadController::class, 'store'])->middleware('auth')->name('threads.store');
-    Route::get('/{thread}', [ThreadController::class, 'show'])->name('threads.show');
+    Route::get('/thread/{thread}', [ThreadController::class, 'show'])->name('threads.show');
     Route::get('/{thread}/edit', [ThreadController::class, 'edit'])->middleware('auth')->name('threads.edit');
     Route::put('/{thread}', [ThreadController::class, 'update'])->middleware('auth')->name('threads.update');
     Route::delete('/{thread}', [ThreadController::class, 'destroy'])->middleware('auth')->name('threads.destroy');

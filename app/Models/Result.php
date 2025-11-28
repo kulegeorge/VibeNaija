@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Result extends Model
 {
-    protected $fillable = ['user_id', 'topic_id', 'score', 'total', 'percentage'];
+    protected $fillable = ['user_id', 'topic_id', 'taskId','score', 'total', 'percentage'];
 }
 

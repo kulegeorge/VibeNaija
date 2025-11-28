@@ -324,13 +324,17 @@
                                             </a>
 
    
-<!-- View Topic -->
-@if($task->topic_id >= 1)
-                                            <a href="{{route('cbt.start', $task->encrpt(topic_id))}}" 
-                                               class="btn btn-sm btn-info me-1 text-white">
-                                                <i class="fa-solid fa-play"></i>  Start Quiz
-                                            </a>
-                                            @endif
+{{-- View Topic --}}
+@if ($task->topic_id > 0)
+    <a href="{{ route('cbt.start', [
+        'topic' => encrypt($task->topic_id),
+        'task'  => encrypt($task->id)
+    ]) }}"
+       class="btn btn-sm btn-info me-1 text-white">
+        <i class="fa-solid fa-play"></i> Start Quiz
+    </a>
+@endif
+
         
     @endif
 </div>

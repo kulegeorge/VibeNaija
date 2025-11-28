@@ -35,7 +35,7 @@
 									</li> <!-- END Blog -->
 									
 									
-									<li><a class="last btn btn-primary" style="padding-right: 20px !important; color: white !important;" href="#" target="_blank">Join Community</a></li>
+									<li><a href="/forum" class="last btn btn-primary" style="padding-right: 20px !important; color: white !important;" href="#" target="_blank">Join Community</a></li>
 								</ul>
 							</nav>
 						</div>

@@ -15,6 +15,7 @@ return new class extends Migration
           $table->id();
         $table->foreignId('user_id')->constrained()->onDelete('cascade');
         $table->foreignId('question_id')->constrained()->onDelete('cascade');
+         $table->integer('taskId');
         $table->string('selected_option');
         $table->boolean('is_correct')->default(false);
         $table->timestamps();

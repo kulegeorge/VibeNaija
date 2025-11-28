@@ -13,7 +13,7 @@
         <ul class="nav">
           <li class="nav-item nav-category" >Main</li>
           <li class="nav-item">
-            @if(Auth::user()->can('role_management.menu'))
+            @if(Auth::check() && Auth::user()->can('role_management.menu'))
               <a href="{{ route('admin.dashboard') }}" class="nav-link">
               <i class="link-icon" data-feather="box"></i>
               <span class="link-title">Dashboard</span>
@@ -28,7 +28,7 @@
             
           </li>
 
-          @if(Auth::user()->can('role_management.menu'))
+          @if(Auth::check() && Auth::user()->can('role_management.menu'))
           <li class="nav-item nav-category">Badges & Levels Admin</li>
           
 
@@ -54,7 +54,7 @@
           </li>
 @endif
 
-  @if(Auth::user()->can('role_management.menu'))
+  @if(Auth::check() && Auth::user()->can('role_management.menu'))
           <li class="nav-item nav-category">Topics & Questions</li>
           
 
@@ -84,7 +84,7 @@
             </div>
           </li>
 @endif
-@if(Auth::user()->can('role_management.menu'))
+@if(Auth::check() && Auth::user()->can('role_management.menu'))
 
           <li class="nav-item nav-category">Admin Activities</li>
           <li class="nav-item">
@@ -141,7 +141,7 @@
                 </li>
 
                 <li class="nav-item">
-                  <a href="#" class="nav-link">Enrolled Tasks</a>
+                  <a href="{{ route('user.enrolled-task')}}" class="nav-link">Enrolled Tasks</a>
                 </li>
               </ul>
             </div>
@@ -168,7 +168,7 @@
           
          
 
-@if(Auth::user()->can('role_management.menu'))
+@if(Auth::check() && Auth::user()->can('role_management.menu'))
           <li class="nav-item nav-category">Role & Permission</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#rolePages" role="button" aria-expanded="false" aria-controls="errorPages">
@@ -204,7 +204,7 @@
           </li>
 @endif
 
-@if(Auth::user()->can('menu.adminstrators'))
+@if(Auth::check() && Auth::user()->can('role_management.menu'))
           <li class="nav-item nav-category">Admin Management</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#adminPages" role="button" aria-expanded="false" aria-controls="adminPages">

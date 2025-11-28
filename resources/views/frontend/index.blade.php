@@ -112,8 +112,8 @@ The long-term vision is to create a global online community of young Nigerians w
 						<ul class="top-menu">
 							<li><a href="#aboutus">About</a></li>
 						
-							<li><a href="/login">Login</a></li>
-							<li><a href="/register">Sign Up</a></li>
+							<li><a href=" {{ route('login') }}">Login</a></li>
+							<li><a href="{{ route('register') }}">Sign Up</a></li>
 						</ul>
 					</div>
 					<!-- This column is hidden on mobiles -->

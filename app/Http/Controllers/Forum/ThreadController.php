@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ForumThread;
 use App\Models\ForumCategory;
 use App\Http\Requests\StoreThreadRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ThreadController extends Controller
@@ -16,6 +17,9 @@ class ThreadController extends Controller
 
     public function index(Request $request)
     {
+        if(!Auth::check()){
+            return redirect()->route('login');
+        }
         $q = $request->query('q');
         $category = $request->query('category');
         $threads = ForumThread::with(['user','category','latestPost'])

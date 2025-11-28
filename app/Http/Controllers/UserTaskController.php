@@ -29,6 +29,19 @@ class UserTaskController extends Controller
         return view('frontend.all-task', compact('tasks','enrolled'));
     }
 
+//User Enrolled Task
+     public function enrolled_task()
+    {
+        $tasks = Tasks::all();
+        $user_id = Auth::id();
+        $enrolled = DB::table('join_tasks')
+                ->where('userID', $user_id)
+                ->pluck('taskID');   // VERY IMPORTANT
+  // VERY IMPORTANT
+
+        return view('frontend.enrolled_task', compact('tasks','enrolled'));
+    }
+
     /*----------------------------------------------------------
         SHOW TASK PREVIEW
     ----------------------------------------------------------*/
@@ -67,7 +80,7 @@ class UserTaskController extends Controller
                                             ->where('task_id', $taskID)
                                             ->first();
         if($checkAlreadySubmitted){
-            return redirect()->route('editSubmission.task', ['id' => $checkAlreadySubmitted->id]);           
+            return redirect()->route('editSubmission.task',  encrypt($checkAlreadySubmitted->id));           
 
         }
         return view('frontend.submit-task', compact('task'));
@@ -88,8 +101,9 @@ public function submitTask(Request $request, $task_id)
             ->where('task_id', $task_id)
             ->first();
 
-        if ($checkAlreadySubmitted) {
-            return redirect()->route('editSubmission.task', ['id' => $checkAlreadySubmitted->id]);
+        if($checkAlreadySubmitted){
+            return redirect()->route('editSubmission.task',  encrypt($checkAlreadySubmitted->id));           
+
         }
 
         $messages = [
@@ -212,10 +226,29 @@ public function submitTask(Request $request, $task_id)
     ----------------------------------------------------------*/
     public function mySubmissions()
     {
-        $submissions = UserTaskSubmission::where('user_id', Auth::id())
-                        ->with('task')
-                        ->latest()
-                        ->get();
+       $submissions = UserTaskSubmission::where('user_task_submissions.user_id', Auth::id())
+    ->leftJoin('results', function ($join) {
+        $join->on('results.user_id', '=', 'user_task_submissions.user_id')
+             ->on('results.taskId', '=', 'user_task_submissions.task_id');
+    })
+    ->leftJoin('topics', 'topics.id', '=', 'results.topic_id')   // ← JOIN TOPICS HERE
+    ->with('task')  // keep task relationship intact
+    ->select(
+        'user_task_submissions.*',
+        'results.score',
+        'results.total',
+        'results.percentage',
+        'results.topic_id as topic_id',
+        'topics.name as topic_name',
+        'topics.description as topic_description'
+    )
+    ->orderBy('user_task_submissions.id', 'desc')
+    ->get();
+
+
+
+
+
         //$cbtCheck = Result::where('user_id', Auth::id())
         return view('frontend.my_submissions', compact('submissions'));
     }
