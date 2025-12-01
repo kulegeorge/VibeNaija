@@ -19,7 +19,7 @@
                     <a href="{{ route('topics.create') }}" class="btn btn-primary mb-3">
                         <i class="fa-solid fa-plus"></i> Create Topic
                     </a>
-
+<div class="alert alert-warning">Admininstrators should not take quiz from here because every quiz must associated with a Task</div>
                     @foreach ($topics as $topic)
                         <div class="card mb-3 shadow-sm border-0">
                             <div class="card-body d-flex justify-content-between align-items-center">
@@ -28,6 +28,9 @@
                                 <h4 class="mb-0">
                                     <i class="fa-solid fa-folder-open text-warning"></i>
                                     {{ $topic->name }}
+                                    <p class="text-muted" style="font-size:10px;">{{ Str::limit($topic->description, 90) }}
+</p>
+
                                 </h4>
 
                                 <div>
@@ -42,10 +45,15 @@
     $attempted = \App\Models\UserAnswer::where('user_id', auth()->id())
         ->whereIn('question_id', $topic->questions->pluck('id'))
         ->exists();
+
+
 @endphp
 
 @if(!$attempted)
-    <a href="{{ route('cbt.start', $topic->id) }}" class="btn btn-success">
+    <a href="{{ route('cbt.start', [
+        'topic' => encrypt($topic->id),
+        'task'  => encrypt($topic->id)
+    ]) }}" class="btn btn-success">
                                         <i class="fa-solid fa-play"></i> 
         Start CBT
     </a>

@@ -130,7 +130,7 @@
             <div class="form-group mb-3">
                 <div class="form-icon">
                     <i class="fa fa-user"></i>
-                    <input type="text" name="login" required class="form-control"
+                    <input type="text" name="login" required class="form-control" value="{{ old('login')}}"
                            placeholder="Email / Phone / Username">
                 </div>
                 <x-input-error :messages="$errors->get('login')" class="mt-1 text-danger" />

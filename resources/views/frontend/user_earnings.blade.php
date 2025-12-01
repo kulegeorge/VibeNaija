@@ -237,7 +237,10 @@
 
                 <div class="rank-number me-3">{{ $index + 1 }}</div>
 
-                <img class="wd-50 ht-50 rounded-circle" src="{{ (!empty($leader->photo)) ? url('upload/'.$leader->photo) : url('upload/no_image.jpg'); }}" alt="profile Image" />
+                <img class="wd-50 ht-50 rounded-circle"
+     src="{{ url('upload/'.$leader->photo) }}"
+     onerror="this.onerror=null; this.src='{{ url('upload/no_image.jpg') }}';"
+     alt="profile Image">
 
                  <div class="flex-grow-1">
                     <div class="fw-semibold">{{ $leader->name }}</div>

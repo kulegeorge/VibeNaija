@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h3">Community Forum</h1>
         @auth
-        <a href="{{ route('forum.threads.create') }}" class="btn btn-primary">New Thread</a>
+        <a href="{{ route('forum.threads.create') }}" class="btn btn-primary">New Topic</a>
         @endauth
     </div>
 
@@ -46,8 +46,28 @@
             @auth
             <div class="card p-3">
                 <h6>Your stats</h6>
-                <p>Points: {{ auth()->user()->points }}</p>
-                <p>Level: {{ floor(auth()->user()->points / 100) + 1 }}</p>
+                <p>Points: {{ auth()->user()->points }} Pts</p>
+                <p>Current Level:  {{-- BRONZE --}}
+                @if(auth()->user()->points  < 1000)
+                     Bronze            
+
+                {{-- SILVER --}}
+                @elseif(auth()->user()->points  >= 1000 && auth()->user()->points  < 1500)
+
+                   
+
+                    Silver
+
+                {{-- GOLD --}}
+                @elseif(auth()->user()->points  >= 1500 && auth()->user()->points  < 2500)
+
+                     Gold
+                   
+            
+                {{-- DIAMOND --}}
+                @else
+                    Diamond
+                @endif</p>
             </div>
             @endauth
         </div>

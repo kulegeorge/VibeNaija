@@ -42,6 +42,19 @@ class UserTaskController extends Controller
         return view('frontend.enrolled_task', compact('tasks','enrolled'));
     }
 
+    //User completed Task
+     public function completed_task()
+    {
+        $tasks = Tasks::all();
+        $user_id = Auth::id();
+        $completed = DB::table('user_task_submissions')
+                ->where('user_id', $user_id)
+                ->where('status', 'approved')->pluck('task_id');   // VERY IMPORTANT
+  // VERY IMPORTANT
+
+        return view('frontend.completed_task', compact('tasks','completed'));
+    }
+
     /*----------------------------------------------------------
         SHOW TASK PREVIEW
     ----------------------------------------------------------*/

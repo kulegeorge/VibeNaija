@@ -33,7 +33,7 @@
         @foreach($allAdmin as $key=> $admin)
       <tr>
         <td>{{ $key+1 }}</td>
-        <td><img class="wd-80 rounded-circle" src="{{ (!empty($admin->photo)) ? url('upload/admin_images/'.$admin->photo) : url('upload/no_image.jpg'); }}" alt="profile"></td>
+        <td><img class="wd-80 rounded-circle" src="{{ (!empty($profileData->photo)) ? url('upload/'.$profileData->photo) : url('upload/no_image.jpg'); }}" alt="profile"></td>
         <td>{{ $admin->title }} {{ $admin->name }}</td>
         <td>{{ $admin->email }}</td>
         <td>{{ $admin->phone }}</td>

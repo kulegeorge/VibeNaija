@@ -60,8 +60,11 @@ Route::middleware('auth', 'verified')->group(function () {
 
     //list Task to all users
     Route::get('/user/all-task', [UserTaskController::class, "Tasklisting"])->name('user.all-task');
-
+//User Enrolled tasked
      Route::get('/user/enrolled-task', [UserTaskController::class, "enrolled_task"])->name('user.enrolled-task');
+
+     //User Completed tasked
+     Route::get('/user/completed-task', [UserTaskController::class, "completed_task"])->name('user.completed-task');
     //show preview task
     Route::get('/task/show/{id}', [UserTaskController::class, "showTask"])->name('task.show');
 

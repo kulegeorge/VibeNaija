@@ -130,11 +130,9 @@
                   <a href="{{route('user.all-task')}}" class="nav-link">User View All Tasks</a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">User Completed Tasks</a>
+                  <a href="{{ route('user.completed-task')}}" class="nav-link">User Completed Tasks</a>
                 </li>
-                <li class="nav-item">
-                  <a href="pages/forms/editors.html" class="nav-link">User Task Profile</a>
-                </li>
+               
               
                 <li class="nav-item">
                   <a href="{{ route('user.my.submissions')}}" class="nav-link">submited Tasks</a>
