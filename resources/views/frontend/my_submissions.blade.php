@@ -57,7 +57,19 @@
 
 
     @foreach($submissions as $submission)
+@php
+    $duration = $submission->task->duration;
 
+    if ($duration < 7) {
+        $duration_text = $duration . ' day' . ($duration > 1 ? 's' : '');
+    } elseif ($duration < 30) {
+        $weeks = floor($duration / 7);
+        $duration_text = $weeks . ' week' . ($weeks > 1 ? 's' : '');
+    } else {
+        $months = floor($duration / 30);
+        $duration_text = $months . ' month' . ($months > 1 ? 's' : '');
+    }
+@endphp
         <div class="card shadow-sm submission-card mb-4">
 
             <div class="card-header d-flex justify-content-between">
@@ -65,8 +77,16 @@
                     <h5 class="fw-bold">{{ $submission->task->taskname }}</h5>
                     <p class="text-muted mb-2">
                         Submitted on: {{ $submission->created_at->format('d M, Y h:i A') }}
-                    </p>
+                   
+    <strong>
+    <small class="text-muted">
+        Time: {{ $duration_text }}
+        <span id="timer-{{ $submission->task->id }}" data-end="{{ $submission->task->end_time }}"></span>
+    </small>
+</strong>
 
+
+ </p>
                     <!-- STATUS BADGE -->
                     <span class="badge 
                         @if($submission->status == 'approved') bg-success
@@ -263,5 +283,42 @@
         </div>
     </div>
 </div>
+<script>
+    function startCountdown(taskId, endTime) {
+        const timerEl = document.getElementById("timer-" + taskId);
 
+        function updateTimer() {
+            let now = new Date().getTime();
+            let end = new Date(endTime).getTime();
+            let diff = end - now;
+
+            if (diff <= 0) {
+                timerEl.innerHTML = "<span class='text-danger fw-bold'>Expired</span>";
+                return;
+            }
+
+            let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            timerEl.innerHTML =
+                
+                hours + " hours " +
+                minutes + "m " +
+                seconds + "s ";
+        }
+
+        updateTimer();
+        setInterval(updateTimer, 1000);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll("[id^='timer-']").forEach(el => {
+            startCountdown(
+                el.id.replace("timer-", ""),
+                el.dataset.end
+            );
+        });
+    });
+</script>
 @endsection

@@ -8,11 +8,26 @@
 
     <a href="{{ route('task.show', encrypt($task->id)) }}"class="text-decoration-none text-dark">
         <div class="card shadow-sm border rounded-3 h-100">
+@php
+    $duration = $task->duration;
 
+    if ($duration < 7) {
+        $duration_text = $duration . ' day' . ($duration > 1 ? 's' : '');
+    } elseif ($duration < 30) {
+        $weeks = floor($duration / 7);
+        $duration_text = $weeks . ' week' . ($weeks > 1 ? 's' : '');
+    } else {
+        $months = floor($duration / 30);
+        $duration_text = $months . ' month' . ($months > 1 ? 's' : '');
+    }
+@endphp
             <!-- CARD HEADER -->
             <div class="card-header bg-white border-0 pb-0">
                 <h6 class="fw-bold mb-1">{{ $task->taskname }}</h6>
-                <small class="text-muted">{{ $task->category }} • {{ $task->duration }}</small>
+                <small class="text-muted">{{ $task->category }} • <strong>Time: {{ $duration_text }} <span id="timer-{{ $task->id }}" data-end="{{ $task->end_time }}"></span>
+
+                </strong>
+            </small>
             </div>
 
             <!-- IMAGE -->
@@ -74,11 +89,21 @@
                     Enrolled  <i class="fa fa-user-check"></i>
 
                 </button>
+               @php
+    $isExpired = now()->greaterThan($task->end_time);
+@endphp
 
-               
+
+               @if(!$isExpired)
                 <a href="{{ route('task.show', encrypt($task->id))}}" class="btn btn-outline-primary btn-sm">
                    View Task →
                 </a>
+@else
+<a href="{{ route('task.show', encrypt($task->id))}}" class="btn btn-warning btn-sm">
+                   Task Expired →
+                </a>
+                @endif
+               
             </div>
 
         </div>
@@ -160,6 +185,45 @@
 
 
 @endif
+ <script>
+    function startCountdown(taskId, endTime) {
+        const timerEl = document.getElementById("timer-" + taskId);
+
+        function updateTimer() {
+            let now = new Date().getTime();
+            let end = new Date(endTime).getTime();
+            let diff = end - now;
+
+            if (diff <= 0) {
+                timerEl.innerHTML = "<span class='text-danger fw-bold'>Expired</span>";
+                return;
+            }
+
+        
+            let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            timerEl.innerHTML =
+                
+                hours + " hours " +
+                minutes + "m " +
+                seconds + "s ";
+        }
+
+        updateTimer();
+        setInterval(updateTimer, 1000);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll("[id^='timer-']").forEach(el => {
+            startCountdown(
+                el.id.replace("timer-", ""),
+                el.dataset.end
+            );
+        });
+    });
+</script>
 
 
 

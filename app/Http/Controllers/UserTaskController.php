@@ -88,6 +88,16 @@ class UserTaskController extends Controller
         $taskID = decrypt($encryptedId);
         $user_id = Auth::id();
         $task = Tasks::findOrFail($taskID);
+
+        if(now()->greaterThan($task->end_time)) {
+            $notification = array(
+                    'message' => "This task has expired and can no longer be completed.",
+                    'alert-type' => 'error'
+                );
+                return redirect()->back()->with($notification);
+         }
+
+
         $checkAlreadySubmitted = DB::table('user_task_submissions')
                                             ->where('user_id',$user_id )
                                             ->where('task_id', $taskID)
@@ -107,6 +117,14 @@ public function submitTask(Request $request, $task_id)
     try {
 
         $taskPoints = Tasks::findOrFail($task_id);
+
+          if(now()->greaterThan($taskPoints->end_time)) {
+            $notification = array(
+                    'message' => "This task has expired and can no longer be completed.",
+                    'alert-type' => 'error'
+                );
+                return redirect()->back()->with($notification);
+         }
 
         $user_id = Auth::id();
         $checkAlreadySubmitted = DB::table('user_task_submissions')
@@ -278,6 +296,14 @@ public function submitTask(Request $request, $task_id)
                         ->firstOrFail();
 
         $task = Tasks::findOrFail($submission->task_id);
+
+        if(now()->greaterThan($task->end_time)) {
+            $notification = array(
+                    'message' => "This task has expired and can no longer be completed.",
+                    'alert-type' => 'error'
+                );
+                return redirect()->back()->with($notification);
+         }
 
         // Prevent editing if approved or rejected
         if (in_array($submission->status, ['approved', 'rejected'])) {

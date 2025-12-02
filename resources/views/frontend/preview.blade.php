@@ -42,9 +42,21 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="card">
+@php
+    $duration = $task->duration;
 
+    if ($duration < 7) {
+        $duration_text = $duration . ' day' . ($duration > 1 ? 's' : '');
+    } elseif ($duration < 30) {
+        $weeks = floor($duration / 7);
+        $duration_text = $weeks . ' week' . ($weeks > 1 ? 's' : '');
+    } else {
+        $months = floor($duration / 30);
+        $duration_text = $months . ' month' . ($months > 1 ? 's' : '');
+    }
+@endphp
 <!-- HEADER WITH IMAGES -->
-   <div class="card shadow-sm  border-1 border-secondary  mb-4" style="border 2px solid #dcdcdc;">
+   <div class="card shadow-sm    mb-4" style="border 2px solid #dcdcdc;">
 <div class="card-header bg-light text-black">
 
     <div class="row align-items-center gy-3">
@@ -61,9 +73,10 @@
             <div class="flex-grow-1">
                 <h4 class="mb-1">{{ $task->taskname }}</h4>
                 <p class="mb-0">
-                    <small class="text-black">
-                        {{ $task->category }} | {{ $task->duration }}
-                    </small>
+                    <small class="text-muted">{{ $task->category }} • <strong>Time: {{ $duration_text }} <span id="timer-{{ $task->id }}" data-end="{{ $task->end_time }}"></span>
+
+                </strong>
+            </small>
                 </p>
             </div>
 
@@ -88,23 +101,49 @@
 
 </div>
 </div>
+@php
+    $isExpired = now()->greaterThan($task->end_time);
+@endphp
 
-            <div class="card-body">
+        <div class="card-body">
 
 
 <!-- TRIAL PLAN BOX (unchanged) -->
 <div class="row mb-2">
  <div class="col-lg-12">
     @if($joinedAlready)
-        <div class="border card p-3">
+
+    @if($isExpired)
+     <div class="border card p-3">
+            <button class="btn bg-light float-end" disabled>Task Expired <i class="fa fa-exclamation-triangle text-warning"></i>
+            </button>
+        </div>
+   
+
+    @else
+  <div class="border card p-3">
             <button class="btn bg-light float-end" disabled>Already Enrolled <i class="fa fa-user-check"></i></button>
         </div>
+    @endif
+        
     @else
+
+@if($isExpired)
+<div class="border card p-3">
+            <button class="btn bg-light float-end" disabled>Task Expired <i class="fa fa-exclamation-triangle text-warning"></i>
+            </button>
+        </div>
+
+@else
+
+
         <div class="border card p-3">
             <a href="{{ route('enrol.task', encrypt($task->id)) }}" class="btn bg-light float-end">
                 <strong>Join Challenge</strong>
             </a>
         </div>
+    @endif
+
     @endif
 </div>
 
@@ -120,10 +159,7 @@
     <div class="col-lg-8">
         <div class="border card p-3">
             <label class="form-label mb-2 pt-2">Task Description</label>
-            <p class="fw-bold mb-1">Difficulty</p>
-<div class="progress mb-3">
-<div class="progress-bar progress-bar-animate" data-percentage="85" style="width: 85%;"><span>Wordpress 85%</span></div>
-</div>
+            
 
             <div class="task-description-box">
                 {!! nl2br(e($task->task_description)) !!}
@@ -317,8 +353,21 @@
     <a href="{{ route('user.all-task') }}" class="btn btn-outline-secondary me-2">
         <i class="fas fa-arrow-left"></i> Back
     </a>
-    @if($joinedAlready)
-    <a href="{{route('task.submit.page', encrypt($task->id))}}" 
+@if($joinedAlready)
+    @php
+    $isExpired = now()->greaterThan($task->end_time);
+@endphp
+
+
+@if($isExpired)
+     <button class="btn btn-sm btn-secondary me-1">
+                                                 Task Expired <i class="fa fa-exclamation-triangle text-warning"></i>
+
+                                            </button>
+
+@else
+
+ <a href="{{route('task.submit.page', encrypt($task->id))}}" 
                                                class="btn btn-sm btn-secondary me-1">
                                                  Submit Task <i class="fa fa-paper-plane"></i>
                                             </a>
@@ -334,6 +383,8 @@
         <i class="fa-solid fa-play"></i> Start Quiz
     </a>
 @endif
+@endif
+
 
         
     @endif
@@ -342,5 +393,43 @@
 <div class="card-footer text-center">
     Posted on: {{ $task->created_at->format('M d, Y') }}
 </div>
+<script>
+    function startCountdown(taskId, endTime) {
+        const timerEl = document.getElementById("timer-" + taskId);
 
+        function updateTimer() {
+            let now = new Date().getTime();
+            let end = new Date(endTime).getTime();
+            let diff = end - now;
+
+            if (diff <= 0) {
+                timerEl.innerHTML = "<span class='text-danger fw-bold'>Expired</span>";
+                return;
+            }
+
+      
+            let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            timerEl.innerHTML =
+               
+                hours + " hours " +
+                minutes + "m " +
+                seconds + "s ";
+        }
+
+        updateTimer();
+        setInterval(updateTimer, 1000);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll("[id^='timer-']").forEach(el => {
+            startCountdown(
+                el.id.replace("timer-", ""),
+                el.dataset.end
+            );
+        });
+    });
+</script>
 @endsection

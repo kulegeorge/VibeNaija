@@ -22,6 +22,8 @@ class Tasks extends Model
         'badge_name',
         'badge_icon',
         'topic_id', //CBT
+         'start_time',
+         'end_time',
         'level_image',
         'status'
     ];

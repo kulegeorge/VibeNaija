@@ -134,11 +134,22 @@
                                 <label class="form-label">Task Duration</label>
                                 <small class="form-text text-muted"><i>Select how long Task will last</i></small>
 
-                                <select name="duration" class="form-select form-select-sm">
-                                    <option value="Weekly">Weekly</option>
-                                    <option value="Monthly">Monthly</option>
-                                    <option value="Yearly">Yearly</option>
-                                </select>
+                               <select name="duration" class="form-select form-select-sm">
+    
+    <option value="7">1 Week</option>
+    <option value="14">2 Weeks</option>
+    <option value="21">3 Weeks</option>
+    <option value="28">4 Weeks</option>
+    <option value="35">5 Weeks</option>
+    <option value="42">6 Weeks</option>
+    <option value="49">7 Weeks</option>
+    <option value="56">8 Weeks</option>
+    <option value="63">9 Weeks</option>
+    <option value="70">10 Weeks</option>
+    <option value="77">11 Weeks</option>
+    <option value="84">12 Weeks</option>
+</select>
+
 
                                
 <div class="mt-4">

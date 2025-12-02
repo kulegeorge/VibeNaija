@@ -126,10 +126,21 @@
                                 <small class="form-text text-muted"><i>Select how long Task will last</i></small>
 
                                 <select name="duration" class="form-select form-select-sm">
-                                    <option value="Weekly" @if($task->duration == 'Weekly') selected @endif>Weekly</option>
-                                    <option value="Monthly" @if($task->duration == 'Monthly') selected @endif>Monthly</option>
-                                    <option value="Yearly" @if($task->duration == 'Yearly') selected @endif>Yearly</option>
-                                </select>
+    
+
+    <option value="7"  @if($task->duration == 7) selected @endif>1 Week</option>
+    <option value="14" @if($task->duration == 14) selected @endif>2 Weeks</option>
+    <option value="21" @if($task->duration == 21) selected @endif>3 Weeks</option>
+    <option value="28" @if($task->duration == 28) selected @endif>4 Weeks</option>
+    <option value="35" @if($task->duration == 35) selected @endif>5 Weeks</option>
+    <option value="42" @if($task->duration == 42) selected @endif>6 Weeks</option>
+    <option value="49" @if($task->duration == 49) selected @endif>7 Weeks</option>
+    <option value="56" @if($task->duration == 56) selected @endif>8 Weeks</option>
+    <option value="63" @if($task->duration == 63) selected @endif>9 Weeks</option>
+    <option value="70" @if($task->duration == 70) selected @endif>10 Weeks</option>
+    <option value="77" @if($task->duration == 77) selected @endif>11 Weeks</option>
+    <option value="84" @if($task->duration == 84) selected @endif>12 Weeks</option>
+</select>
 
 
                                 <div class="mt-4">

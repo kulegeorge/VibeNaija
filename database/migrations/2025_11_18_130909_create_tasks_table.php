@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('images')->nullable();
             $table->string('url')->nullable();
             $table->string('category')->nullable();
-            $table->string('duration')->nullable();
+            $table->integer('duration')->nullable();
             $table->integer('task_points')->nullable();
             $table->string('task_level')->nullable();
             $table->text('level_image')->nullable();

@@ -38,7 +38,8 @@ class TasksController extends Controller
             'task_level' => 'required|string',
             'level_image' => 'array',
 
-            'duration' => 'required|string',
+            'duration' => 'required|integer',
+            'end_time' => 'required|date|after:start_time',
 
             'submission_instruction' => 'nullable|string',
 
@@ -86,6 +87,8 @@ class TasksController extends Controller
         $task->task_points = $request->task_points;
         $task->topic_id = $request->topic_id;
         $task->badge_name = $request->badge_name;
+         $task->start_time = now();     // <-- Start immediately
+        $task->end_time = now()->addDays($request->duration);
         $task->badge_icon = $request->badge_image[$request->badge_name] ?? null;
 
         $task->task_level = $request->task_level;
@@ -171,7 +174,7 @@ public function updateTask(Request $request, $id)
         'badge_name' => 'required|string',
         'badge_icon' => 'required|string',
         'task_level' => 'required|string',
-        'duration' => 'required|string',
+        'duration' => 'required|integer',
         'url' => 'nullable|string|max:255',
         'submission_instruction' => 'nullable|string',
         'files.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048'
@@ -185,6 +188,8 @@ public function updateTask(Request $request, $id)
     $task->badge_name = $request->badge_name;
     $task->task_level = $request->task_level;
     $task->duration = $request->duration;
+    $task->start_time = now();     // <-- Start immediately
+    $task->end_time = now()->addDays($request->duration);
     $task->topic_id = $request->topic_id;
     $task->badge_icon = $request->badge_icon;
     $task->url = $request->url;
