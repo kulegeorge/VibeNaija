@@ -122,7 +122,9 @@
 
     @else
   <div class="border card p-3">
-            <button class="btn bg-light float-end" disabled>Already Enrolled <i class="fa fa-user-check"></i></button>
+           <a href="{{ route('task.unenroll.form', $task->id) }}" class="btn btn-warning float-end">
+    Un-enroll Task <i class="fa fa-user-slash"></i>
+</a>
         </div>
     @endif
         

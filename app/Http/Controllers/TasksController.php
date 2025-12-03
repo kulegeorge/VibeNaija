@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Auth;
   use App\Notifications\PlatformNotification;
 use App\Models\Tasks;
 use App\Models\Topic;
+use App\Models\UserTaskSubmission;
 use App\Models\User;
+use App\Models\TaskUnenroll;
 use DB;
 
 //Create Task View page
@@ -234,19 +236,6 @@ public function updateTask(Request $request, $id)
 
     $saved = $task->save();
     if($saved){
-$users = User::where('role', 'User')->get(); // change if needed
-
-  foreach ($users as $user) {
-    $users = User::where('role', 'User')->get(); // change if needed
-
-        $user->notify(new PlatformNotification(
-            title: 'Task Updated',
-            message: 'Changes have been make to a task titled "' . $task->taskname . '" . Start now!',
-            url: route('task.show', encrypt($task->id)),
-            type: 'task_update',
-            meta: ['task_id' => $task->id]
-        ));
-    }
 
 
         $notification = array(
@@ -267,16 +256,68 @@ $users = User::where('role', 'User')->get(); // change if needed
 
 //Preview Task
 
-public function previewTask($id){
-    $userid = Auth::id();
-     $task = Tasks::findOrFail($id);
+// public function previewTask($id){
+//     $userid = Auth::id();
+//      $task = Tasks::findOrFail($id);
      
-     $joinedAlready = DB::table('JoinTask')->where('userID',$userid)->where('taskID',$id)->first();
+//      $joinedAlready = DB::table('JoinTask')->where('userID',$userid)->where('taskID',$id)->first();
 
-    return view('admin.preview', compact('task','joinedAlready'));
+//     return view('admin.preview', compact('task','joinedAlready'));
+
+// }
+
+// Show the form
+    public function showUnenrollForm($id)
+    {
+        $task = Tasks::findOrFail($id);
+        return view('frontend.unenroll', compact('task'));
+    }
+
+    // Process unenroll
+    public function unenroll(Request $request, $id)
+    {
+        $request->validate([
+            'reason' => 'required|string|min:5',
+        ]);
+
+        $task = Tasks::findOrFail($id);
+        $userId = Auth::id();
+$exists = UserTaskSubmission::where('task_id', $task->id)
+    ->where('user_id', $userId)
+    ->whereIn('status', ['pending', 'approved', 'rejected'])
+    ->exists();
+     
+    //check is task status is beyound unenrollment
+if (!$exists) {
+    // Optional: store reason
+        TaskUnenroll::create([
+            'task_id' => $task->id,
+            'user_id' => $userId,
+            'reason' => $request->reason
+        ]);
+        $user = Auth::user();
+        $user->notify(new PlatformNotification(
+            title: 'Task Unenrolled',
+            message: 'You have unenrolled from "' . $task->taskname . '" . ',
+            url: route('task.show', encrypt($task->id)),
+            type: 'task_unenrolled',
+            meta: ['task_id' => $task->id]
+        ));
+
+        $notification = array(
+                    'message' => "Task '{$task->taskname}' was successfully unenrolled successfully!",
+                    'alert-type' => 'success'
+                );
+                return redirect()->route('task.show', encrypt($task->id))->with($notification);
+
 
 }
-
-
+        
+$notification = array(
+                    'message' => "Sorry! Your Task '{$task->taskname}' is already submitted",
+                    'alert-type' => 'error'
+                );
+        return redirect()->route('task.show', encrypt($task->id))->with($notification);
+    }
 
 }

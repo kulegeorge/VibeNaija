@@ -46,6 +46,8 @@ Route::get('/', [HomeController::class, 'homepage']);
 
 Route::middleware('auth', 'verified')->group(function () {
     // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/task/{id}/unenroll', [TasksController::class, 'showUnenrollForm'])->name('task.unenroll.form');
+Route::post('/task/{id}/unenroll', [TasksController::class, 'unenroll'])->name('task.unenroll');
 
    // View all notifications
  Route::prefix('notifications')->group(function () {
@@ -179,7 +181,7 @@ Route::get('/admin/Tasks', [TasksController::class, "createTasks"])->name('admin
 Route::post('/admin/store-task', [TasksController::class, 'store'])->name('store-task');
 
 //List all tasks
-Route::get('/admin/show-task', [TasksController::class, 'showTask'])->name('admin.showTask');
+// Route::get('/admin/show-task', [TasksController::class, 'showTask'])->name('admin.showTask');
 //edit task view page
 Route::get('/admin/edit-task/{id}', [TasksController::class, 'editTask'])->name('admin.edit-task');
 //upadte task
