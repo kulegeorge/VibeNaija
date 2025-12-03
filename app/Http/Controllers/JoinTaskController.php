@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+  use App\Notifications\PlatformNotification;
 use App\Models\JoinTask;
 use App\Models\Tasks;
 use DB;
@@ -53,6 +54,17 @@ class JoinTaskController extends Controller
     $join->status = 1;
 
     if ($join->save()) {
+       
+    $user = Auth::user(); // change if needed
+
+        $user->notify(new PlatformNotification(
+            title: 'Task Enrolled',
+            message: 'You have enrolled to a task titled "' . $task->taskname . '" . Start now!',
+            url: route('task.show', encrypt($task->id)),
+            type: 'task_update',
+            meta: ['task_id' => $task->id]
+        ));
+   
         return redirect()->route('user.all-task')->with('enrolled', true);
     } else {
         return redirect()->route('user.all-task')->with('enroll_failed', true);

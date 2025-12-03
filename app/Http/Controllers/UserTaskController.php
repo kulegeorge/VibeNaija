@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
+  use App\Notifications\PlatformNotification;
 use App\Models\Tasks;
 use App\Models\JoinTask;
 use App\Models\Topic;
@@ -214,7 +215,14 @@ public function submitTask(Request $request, $task_id)
             'images'    => json_encode($imagePaths),
             'documents' => json_encode($documentPaths),
         ]);
-
+$user = Auth::user();
+$user->notify(new PlatformNotification(
+    title: 'Task Submission',
+    message: ' Your Task has been submitted',
+    url: route('task.show', encrypt($task_id)),
+    type: 'task_submission',
+    meta: ['task_id' => $task_id],
+));
         return redirect()->route('user.my.submissions')->with([
             'submission_success' => true,
             'success_message' => 'Your submission has been uploaded successfully!'
@@ -418,6 +426,14 @@ public function updateSubmission(Request $request, $submission_id)
         'documents'  => $newDocs,     // Stored as array
     ]);
 
+$user = Auth::user();
+$user->notify(new PlatformNotification(
+    title: 'Task update submission',
+    message: ' Your submission has been updated',
+    url: route('task.show', encrypt($submission->task_id)),
+    type: 'task_update',
+    meta: ['task_id' => $submission->task_id],
+));
    return redirect()
         ->back()
         ->with('message', 'Submission updated successfully!')

@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Badges;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+  use App\Notifications\PlatformNotification;
 use App\Models\Tasks;
 use App\Models\Topic;
+use App\Models\User;
 use DB;
 
+//Create Task View page
 class TasksController extends Controller
 {
     public function createTasks(){
@@ -18,7 +22,7 @@ class TasksController extends Controller
 
         return view('Admin.Tasks', compact('badge','level','topics'));
     }
-
+//Store Task
     public function store(Request $request)
     {
         
@@ -103,6 +107,17 @@ class TasksController extends Controller
 
         $task->save();
 
+$users = User::where('role', 'User')->get(); // change if needed
+
+    foreach ($users as $user) {
+        $user->notify(new PlatformNotification(
+            title: 'New Task Available',
+            message: 'A new task titled "' . $task->taskname . '" has been added. Start now!',
+            url: route('task.show', encrypt($task->id)),
+            type: 'task_created',
+            meta: ['task_id' => $task->id]
+        ));
+    }
         // -----------------------------
         // 4. SUCCESS NOTIFICATION
         // -----------------------------
@@ -219,6 +234,20 @@ public function updateTask(Request $request, $id)
 
     $saved = $task->save();
     if($saved){
+$users = User::where('role', 'User')->get(); // change if needed
+
+  foreach ($users as $user) {
+    $users = User::where('role', 'User')->get(); // change if needed
+
+        $user->notify(new PlatformNotification(
+            title: 'Task Updated',
+            message: 'Changes have been make to a task titled "' . $task->taskname . '" . Start now!',
+            url: route('task.show', encrypt($task->id)),
+            type: 'task_update',
+            meta: ['task_id' => $task->id]
+        ));
+    }
+
 
         $notification = array(
                     'message' => "Task '{$task->taskname}' was successfully updated!",

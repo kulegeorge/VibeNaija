@@ -11,6 +11,7 @@ use App\Models\Activities;
 use App\Models\Expenses;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+  use App\Notifications\PlatformNotification;
 
 
 class AdminController extends Controller

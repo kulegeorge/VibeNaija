@@ -145,6 +145,26 @@ The long-term vision is to create a global online community of young Nigerians w
  @endif 
 </script>
 
+<!-- Laravel Echo + Pusher -->
+<script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 
+<script>
+    Echo.private('notifications.{{ Auth::id() }}')
+        .listen('NewNotificationEvent', (e) => {
+            console.log('Notification received:', e);
+
+            // OPTIONAL: Update your notification bell dropdown
+            let count = document.getElementById('notif-count');
+            if (count) count.textContent = parseInt(count.textContent) + 1;
+
+            // Optional: append to dropdown
+            let list = document.getElementById('notif-list');
+            if (list) {
+                list.innerHTML =
+                    `<li class="dropdown-item">${e.title}</li>` + list.innerHTML;
+            }
+        });
+</script>
 </body>
 </html>    

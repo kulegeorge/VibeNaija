@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+  use App\Notifications\PlatformNotification;
 use Illuminate\View\View;
 use DB;
 use App\Models\User;
@@ -38,6 +39,13 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
+        $user = Auth::user();
+         $user->notify(new PlatformNotification(
+            title: 'Profile Updated',
+            message: 'Changes have been make to your profile',
+            type: 'profile_updated',
+           
+        ));
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
@@ -65,11 +73,6 @@ class ProfileController extends Controller
 
 
     //Task profile
-
-  
-
-
-
     public function Task()
     {
         $user = Auth::user();
@@ -84,57 +87,7 @@ class ProfileController extends Controller
             $taskcompleted =  UserTaskSubmission::where('user_id', $userId)
             ->where('status', 'approved')
             ->count(); 
-            // Make sure your table has earnings_amount column
-
-
-        /* ------------------------------
-         * 2. Total Points (XP)
-         * ------------------------------ */
-    
-
-
-        /* ------------------------------
-         * 3. Completed Tasks
-         * ------------------------------ */
-        // $completedTasks = UserTaskSubmission::where('user_id', $userId)
-        //     ->where('status', 'approved')
-        //     ->count();
-
-
-        /* ------------------------------
-         * 4. User Level
-         * ------------------------------ */
-        // $level = Level::where('min_points', '<=', $totalPoints)
-        //     ->where('max_points', '>=', $totalPoints)
-        //     ->first();
-
-        // if (!$level) {
-        //     $level = Level::orderBy('min_points', 'asc')->first();
-        // }
-
-        // $nextLevel = Level::where('min_points', '>', $totalPoints)
-        //     ->orderBy('min_points', 'asc')
-        //     ->first();
-
-        // $percentageToNextLevel = $nextLevel
-        //     ? round(($totalPoints / $nextLevel->min_points) * 100)
-        //     : 100;
-
-        // $xpNeeded = $nextLevel
-        //     ? $nextLevel->min_points - $totalPoints
-        //     : 0;
-
-
-        /* ------------------------------
-         * 5. User Badges
-         * ------------------------------ */
-        // $badges = DB::table('badges')
-        //     ->join('badges', 'badges.id', '=', 'user_badges.badge_id')
-        //     ->where('user_badges.user_id', $userId)
-        //     ->select('badges.*')
-        //     ->get();
-
-
+            
         /* ------------------------------
          * 6. Leaderboard (Top 10)
          * ------------------------------ */

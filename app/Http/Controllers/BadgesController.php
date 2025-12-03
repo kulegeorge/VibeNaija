@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Models\Badges;
+  use App\Notifications\PlatformNotification;
 use DB;
 
 class BadgesController extends Controller

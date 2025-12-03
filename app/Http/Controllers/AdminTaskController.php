@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\UserTaskSubmission;
 use App\Models\User;
+  use App\Notifications\PlatformNotification;
+  use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -48,6 +50,15 @@ class AdminTaskController extends Controller
         $user->points += $submission->task->task_points;
 
         $user->save();
+
+
+$user->notify(new PlatformNotification(
+    title: 'Task Approved',
+    message: 'Congratulations! Your '.$submission->task->taskname.' has been approved!',
+    url: route('task.show', encrypt($submission->task->id)),
+    type: 'task_approved',
+    meta: ['task_id' => $submission->task->id],
+));
          $notification = array(
                     'message' => 'Submission approved and points awarded!',
                     'alert-type' => 'success'
@@ -66,6 +77,15 @@ class AdminTaskController extends Controller
 
         $submission->decision_message = $request->decision_message;
         $submission->save();
+// Get the user who submitted it
+    $user = $submission->user; // <-- FIXED HERE
+$user->notify(new PlatformNotification(
+    title: 'Task Rejected',
+    message: 'Sorry! Your '.$submission->task->taskname.' has been rejected!',
+    url: route('task.show', encrypt($submission->task_id)),
+    type: 'task_rejected',
+    meta: ['task_id' => $submission->task_id],
+));
 $notification = array(
                     'message' => 'Submission rejected.',
                     'alert-type' => 'success'

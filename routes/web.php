@@ -22,6 +22,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\CBTController;
+use App\Http\Controllers\NotificationController;
 //Forum
 
 use App\Http\Controllers\Forum\ThreadController;
@@ -45,6 +46,16 @@ Route::get('/', [HomeController::class, 'homepage']);
 
 Route::middleware('auth', 'verified')->group(function () {
     // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+   // View all notifications
+ Route::prefix('notifications')->group(function () {
+    Route::get('/', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::get('/{id}', [NotificationController::class, 'show'])->name('notifications.show');
+    Route::post('/mark-all-read', [NotificationController::class, 'markAllRead'])->name('notifications.markAllRead');
+    Route::post('/clear', [NotificationController::class, 'clear'])->name('notifications.clear');
+});
+
+
     Route::get('/dashboard', [ProfileController::class, 'task'])->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
