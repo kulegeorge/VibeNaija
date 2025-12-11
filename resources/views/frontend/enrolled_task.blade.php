@@ -1,3 +1,4 @@
+@section('title', 'Vibe Nigeria- All Enrolled Task')
 @extends('admin.admin_dashboard')
 @section('admin')
 <div class="container" style="padding-top:80px;">

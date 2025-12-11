@@ -1,3 +1,6 @@
+@section('title')
+  Create Questions
+@endsection
 @extends('admin.admin_dashboard')
 @section('admin')
 

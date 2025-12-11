@@ -1,3 +1,6 @@
+@section('title')
+  Edit Badges
+@endsection
 @extends('admin.admin_dashboard')
 @section('admin')
 

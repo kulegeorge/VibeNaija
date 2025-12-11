@@ -1,3 +1,6 @@
+@section('title')
+  Edit - {{ old('taskname', $task->taskname) }}
+@endsection
 @extends('admin.admin_dashboard')
 @section('admin')
 

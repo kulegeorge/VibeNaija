@@ -27,6 +27,11 @@
             @endif
             
           </li>
+              <li class="nav-item">
+                <a href="/" class="nav-link">
+            
+              <span class="link-title">Home Page</span>
+            </a></li>
 
           @if(Auth::check() && Auth::user()->can('role_management.menu'))
           <li class="nav-item nav-category">Badges & Levels Admin</li>
@@ -148,13 +153,13 @@
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapsed" href="#tables" role="button" aria-expanded="false" aria-controls="tables">
               <i class="link-icon" data-feather="layout"></i>
-              <span class="link-title">Forum</span>
+              <span class="link-title">Community</span>
               <i class="link-arrow" data-feather="chevron-down"></i>
             </a>
             <div class="collapsed" id="tables">
               <ul class="nav sub-menu">
                 <li class="nav-item">
-                  <a href="/forum" class="nav-link">Join Forum</a>
+                  <a href="/forum" class="nav-link">Join Community</a>
                 </li>
                
               </ul>

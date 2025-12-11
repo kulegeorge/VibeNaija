@@ -1,3 +1,4 @@
+@section('title', 'Vibe Nigeria- Create New Topics')
 @extends('admin.admin_dashboard')
 @section('admin')
 

@@ -1,3 +1,7 @@
+
+@section('title')
+  Create New Levels
+@endsection
 @extends('admin.admin_dashboard')
 @section('admin')
 

@@ -1,3 +1,4 @@
+@section('title', 'Vibe Nigeria- Completed Task')
 @extends('admin.admin_dashboard')
 @section('admin')
 

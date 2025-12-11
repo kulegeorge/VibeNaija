@@ -1,3 +1,4 @@
+@section('title', 'Vibe Nigeria- Quiz page')
 @extends('admin.admin_dashboard')
 @section('admin')
 

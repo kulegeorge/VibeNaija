@@ -1,3 +1,7 @@
+@section('title')
+  Vibe Nigeria-  {{ $topic->name }}
+@endsection
+
 @extends('admin.admin_dashboard')
 @section('admin')
 

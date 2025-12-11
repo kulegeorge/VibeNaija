@@ -165,8 +165,7 @@
 
         <p class="text-center">Or continue with</p>
 
-        <button class="btn btn-primary social-btn"><i class="fa fa-facebook"></i> &nbsp; Continue with Facebook</button>
-        <button class="btn btn-info social-btn"><i class="fa fa-twitter"></i> &nbsp; Continue with Twitter</button>
+        
         <button class="btn btn-danger social-btn"><i class="fa fa-google-plus"></i> &nbsp; Continue with Google</button>
 
     </div>

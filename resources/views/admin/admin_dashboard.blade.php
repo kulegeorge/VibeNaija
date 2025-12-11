@@ -12,7 +12,8 @@ The long-term vision is to create a global online community of young Nigerians w
 	<meta name="author" content="VibeNaija">
 	<meta name="keywords" content="VibeNaija">
 
-	<title>Control Panel</title>
+	<title>@yield('title') | Vibe Nigeria</title>
+
 	  <meta name="csrf-token" content="{{ csrf_token() }}" />
 
   <!-- Fonts -->

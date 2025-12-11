@@ -1,3 +1,4 @@
+@section('title', 'Vibe Nigeria- Task Preview')
 @extends('admin.admin_dashboard')
 @section('admin')
 
@@ -160,7 +161,7 @@
     <!-- TASK DESCRIPTION -->
     <div class="col-lg-8">
         <div class="border card p-3">
-            <label class="form-label mb-2 pt-2">Task Description</label>
+           <h5 class="card-title">Task Description</h5>
             
 
             <div class="task-description-box">
@@ -174,7 +175,7 @@
 
             <div class="card shadow-sm p-3 mb-4">
 <h5 class="fw-bold">Estimated Completion Time</h5>
-<p class="text-muted">Task Category: <strong>{{ $task->category }} </strong>Approximately <strong> {{ $task->duration }}</strong> Required to complete this Task</p>
+<p class="text-muted">Task Category: <strong>{{ $task->category }} </strong>Approximately <strong> {{ $duration_text }} <span id="timer-{{ $task->id }}" data-end="{{ $task->end_time }}"></strong> Before Task expiration</p>
 </div>
 
 
@@ -230,10 +231,10 @@
     <div class="card mt-3 border-info">
         <div class="card-body">
             <h5 class="card-title">You have a Quiz</h5>
-            <a href="#" target="_blank" class="text-primary">
-                 {{ $topic->name }}
-                <p> {{ $topic->description }}</p>
-            </a>
+              <div class="text-muted">
+                 <p><i>{{ $topic->name }}</i></p>
+                {{ $topic->description }}</div>
+            
         </div>
     </div>
 
@@ -275,7 +276,7 @@
                 <h5>Accepted Submission Formats</h5>
               </div>
               <div class="card-body pc-component">
-                <div class="d-flex gap-3">
+                <div class="d-flex gap-2">
 <span class="badge bg-dark p-2">📹 Video</span>
 <span class="badge bg-dark p-2">📝 Text</span>
 <span class="badge bg-dark p-2">📸 Photo</span>

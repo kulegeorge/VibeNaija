@@ -1,3 +1,6 @@
+@section('title')
+  Available Task
+@endsection
 @extends('admin.admin_dashboard')
 @section('admin')
 

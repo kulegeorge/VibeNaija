@@ -1,3 +1,6 @@
+@section('title')
+  Create New Badges
+@endsection
 @extends('admin.admin_dashboard')
 @section('admin')
 <div class="container" style="padding-top:80px;">

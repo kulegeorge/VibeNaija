@@ -9,7 +9,7 @@
 	<meta name="author" content="NobleUI">
 	<meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-	<title>Admin Login- LIMS</title>
+	<title>Admin Login- Vibe Nigeria</title>
     <style>
         .authlogin-side-wrapper{
             width:100%;

@@ -19,16 +19,20 @@ class UserTaskController extends Controller
         LIST ALL TASKS
     ----------------------------------------------------------*/
     public function Tasklisting()
-    {
-        $tasks = Tasks::all();
-        $user_id = Auth::id();
-        $enrolled = DB::table('join_tasks')
-                ->where('userID', $user_id)
-                ->pluck('taskID');   // VERY IMPORTANT
-  // VERY IMPORTANT
+{
+    // Paginate tasks instead of loading all
+    $tasks = Tasks::latest()->paginate(8); // 12 per page — adjust as needed
 
-        return view('frontend.all-task', compact('tasks','enrolled'));
-    }
+    $user_id = Auth::id();
+
+    // Get enrolled task IDs
+    $enrolled = DB::table('join_tasks')
+            ->where('userID', $user_id)
+            ->pluck('taskID');
+
+    return view('frontend.all-task', compact('tasks','enrolled'));
+}
+
 
 //User Enrolled Task
      public function enrolled_task()
@@ -61,24 +65,30 @@ class UserTaskController extends Controller
     ----------------------------------------------------------*/
     public function showTask($encryptedId)
 {
+    // Decrypt ID
     $id = decrypt($encryptedId);
+
+    // Fetch task or fail
     $task = Tasks::findOrFail($id);
 
-    $topic = Topic::find($task->topic_id); // avoids crash if missing
+    // Fetch topic or abort 404 if not found
+    $topic = Topic::findOrFail($task->topic_id);
 
+    // Get current user ID
     $userId = Auth::id();
 
+    // Check if user already joined this task
     $joinedAlready = false;
 
     if ($userId) {
         $joinedAlready = JoinTask::where('userID', $userId)
-            ->where('taskID', $id)
+            ->where('taskID', $task->id)
             ->exists();
     }
-    
 
     return view('frontend.preview', compact('task', 'topic', 'joinedAlready'));
 }
+
 
 
     /*----------------------------------------------------------

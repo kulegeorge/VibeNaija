@@ -1,3 +1,6 @@
+@section('title')
+  Create New Task
+@endsection
 @extends('admin.admin_dashboard')
 @section('admin')
 

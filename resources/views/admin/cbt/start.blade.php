@@ -1,3 +1,6 @@
+@section('title')
+{{ $topic->name }} - CBT Test
+@endsection
 @extends('admin.admin_dashboard')
 @section('admin')
 

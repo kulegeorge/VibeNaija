@@ -1,3 +1,6 @@
+@section('title')
+  Task Approval
+@endsection
 @extends('admin.admin_dashboard')
 @section('admin')
 

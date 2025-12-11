@@ -1,3 +1,6 @@
+@section('title')
+  Questions in: {{ $topic->name }}
+@endsection
 @extends('admin.admin_dashboard')
 @section('admin')
 

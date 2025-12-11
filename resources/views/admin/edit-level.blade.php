@@ -1,3 +1,6 @@
+@section('title')
+  Edit Level
+@endsection
  @extends('admin.admin_dashboard')
 @section('admin')
 

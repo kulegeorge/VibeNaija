@@ -1,12 +1,26 @@
+@section('title', 'Vibe Nigeria- All Task')
 @extends('admin.admin_dashboard')
 @section('admin')
+@php
+$backgrounds = [
+    '#D18B21',
+    '#BD645B',   // extracted color 1
+    '#A0782E',   // extracted color 2
+    '#734642',   // extracted color 3
+    '#AB873A',   // extracted color 4
+];
+@endphp
+
 <div class="container" style="padding-top:80px;">
 <div class="row">
 @foreach($tasks as $task)
 <div class="col-md-4 col-sm-6 mb-4">
 
     <a href="{{ route('task.show', encrypt($task->id)) }}"class="text-decoration-none text-dark">
-        <div class="card shadow-sm border rounded-3 h-100">
+     <div class="card shadow-sm border-0 rounded-3 h-100 text-white"
+     style="background-color: {{ $backgrounds[$loop->index % count($backgrounds)] }};">
+
+
 @php
     $duration = $task->duration;
 
@@ -64,7 +78,7 @@
 
             <!-- CARD BODY -->
             <div class="card-body">
-                <p class="small text-muted mb-2">
+                <p class="small text-white mb-2">
                     {{ Str::limit($task->task_description, 80) }}
                 </p>
 
@@ -114,6 +128,10 @@
 </div>
 @endforeach
 </div>
+<div class="d-flex justify-content-center mt-4">
+    {!! $tasks->links('pagination::bootstrap-5') !!}
+</div>
+
 <!-- Success Enrollment Modal -->
 <div class="modal fade" id="enrollSuccessModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
