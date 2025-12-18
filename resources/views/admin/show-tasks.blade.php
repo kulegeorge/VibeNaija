@@ -1,8 +1,12 @@
 @section('title')
   Available Task
 @endsection
-@extends('admin.admin_dashboard')
-@section('admin')
+@extends('admin.admin_dashboard_new')
+@section('admin2')
+
+
+ 
+    
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
@@ -25,7 +29,11 @@
     }
 </style>
 
-<div class="container" style="padding-top:80px;">
+<!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
+    
     <div class="row">
         <div class="col-lg-12">
 
@@ -74,7 +82,7 @@
                                     </td>
 
                                     <td class="action-buttons">
-                                        <a href="{{ route('task.show', encrypt($task->id)) }}" 
+                                        <a href="{{ route('task.show', $task) }}" 
                                            class="btn btn-outline-primary btn-sm">View</a>
 
                                         <a href="{{ route('admin.edit-task', encrypt($task->id)) }}" 

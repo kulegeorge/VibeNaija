@@ -1,13 +1,16 @@
 @section('title', 'Vibe Nigeria- All Topics')
-@extends('admin.admin_dashboard')
-@section('admin')
+@extends('admin.admin_dashboard_new')
+@section('admin2')
 
-<div class="container" style="padding-top:80px;">
+<!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
     <div class="row">
         <div class="col-lg-12">
 
             <div class="card shadow-sm border-0">
-                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <div class="card-header card-bg d-flex justify-content-between align-items-center">
                     <h2 class="fw-bold mb-0">
                         <i class="fa-solid fa-book-open"></i> All Topics
                     </h2>
@@ -20,7 +23,7 @@
                 <div class="card-body">
                     @if ($topics->count() > 0)
                         <table class="table table-bordered table-striped align-middle">
-                            <thead class="table-dark">
+                            <thead class="table-light">
                                 <tr>
                                     <th>#</th>
                                     <th><i class="fa-solid fa-folder-open"></i> Topic Name</th>

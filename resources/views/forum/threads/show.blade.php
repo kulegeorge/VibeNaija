@@ -1,5 +1,12 @@
-@extends('admin.admin_dashboard')
-@section('admin')
+@extends('admin.admin_dashboard_new')
+@section('admin2')
+
+
+ 
+    <!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
 
 <style>
     .post-card:hover {
@@ -13,7 +20,7 @@
     }
 </style>
 
-<div class="container" style="padding-top:80px; max-width: 900px;">
+<!-- <div class="container" style="padding-top:80px; max-width: 900px;"> -->
 
     <a href="{{ route('forum.threads.index') }}" class="btn btn-light mb-4">
         ← Back to Forum

@@ -1,16 +1,19 @@
 @section('title')
   Questions in: {{ $topic->name }}
 @endsection
-@extends('admin.admin_dashboard')
-@section('admin')
+@extends('admin.admin_dashboard_new')
+@section('admin2')
 
-<div class="container" style="padding-top:80px;">
+<!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
 	<div class="row">
         <div class="col-lg-12">
 
             <!-- Create Task Card -->
             <div class="card">
-                <div class="card-header">
+                <div class="card-header card-bg">
                   <h2>Questions in: {{ $topic->name }}</h2>
                 </div>
 

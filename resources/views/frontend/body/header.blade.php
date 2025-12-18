@@ -29,10 +29,6 @@
 										<a href="#tasks">Tasks</a>
 										 <!-- END Mega Menu -->
 									</li> <!-- END Pages -->
-									<li>
-										<a href="#">Blog</a>
-										
-									</li> <!-- END Blog -->
 									
 									
 									<li><a href="/forum" class="last btn btn-primary" style="padding-right: 20px !important; color: white !important;" href="#" target="_blank">Join Community</a></li>

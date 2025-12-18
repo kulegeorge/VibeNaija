@@ -1,8 +1,13 @@
 @section('title')
   User Profile
 @endsection
-@extends('admin.admin_dashboard')
-@section('admin')
+@extends('admin.admin_dashboard_new')
+@section('admin2')
+
+<!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <div class="page-content">
 
@@ -15,7 +20,8 @@
                 <div class="d-flex align-items-center justify-content-between mb-2">
                  
                   <div>
-                    <img class="wd-80 rounded-circle" src="{{ (!empty($profileData->photo)) ? url('upload/'.$profileData->photo) : url('upload/no_image.jpg'); }}" alt="profile">
+                    <img class="wd-80 rounded-circle" src="{{ (!empty($profileData->photo)) ? url('upload/'.$profileData->photo) : url('upload/no_image.jpg'); }}" alt="profile" style="width: 70px; height:70px;">
+                    
                     <span class="h4 ms-3 text-dark">{{ $profileData->title}} {{ $profileData->name}}</span>
                   </div>
                  
@@ -132,7 +138,7 @@
                   </div>
                                     <div class="mb-3">
                     
-                                    <img class="wd-70 rounded-circle" id="showImage" src="{{ (!empty($profileData->photo)) ? url('upload/'.$profileData->photo) : url('upload/no_image.jpg'); }}" alt="profile">
+                                    <img class="wd-70 rounded-circle" id="showImage" src="{{ (!empty($profileData->photo)) ? url('upload/'.$profileData->photo) : url('upload/no_image.jpg'); }}" alt="profile" style="width: 70px; height:70px;">
                 
                   </div>
                   

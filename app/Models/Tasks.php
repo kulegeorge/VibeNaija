@@ -27,4 +27,9 @@ class Tasks extends Model
         'level_image',
         'status'
     ];
+
+     public function getRouteKeyName()
+    {
+        return 'id';
+    }
 }

@@ -1,13 +1,19 @@
 @section('title', 'Vibe Nigeria- All Enrolled Task')
-@extends('admin.admin_dashboard')
-@section('admin')
-<div class="container" style="padding-top:80px;">
+@extends('admin.admin_dashboard_new')
+@section('admin2')
+
+
+ 
+    <!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
 <div class="row">
 @foreach($tasks as $task)
 @if($enrolled->contains($task->id))
 <div class="col-md-4 col-sm-6 mb-4">
 
-    <a href="{{ route('task.show', encrypt($task->id)) }}"class="text-decoration-none text-dark">
+    
         <div class="card shadow-sm border rounded-3 h-100">
 @php
     $duration = $task->duration;
@@ -96,11 +102,11 @@
 
 
                @if(!$isExpired)
-                <a href="{{ route('task.show', encrypt($task->id))}}" class="btn btn-outline-primary btn-sm">
-                   View Task →
-                </a>
+                <a href="{{ route('task.show', $task) }}" class="btn btn-outline-info btn-sm">
+    View Task →
+</a>
 @else
-<a href="{{ route('task.show', encrypt($task->id))}}" class="btn btn-warning btn-sm">
+<a href="{{ route('task.show', $task)}}" class="btn btn-danger btn-sm">
                    Task Expired →
                 </a>
                 @endif
@@ -108,7 +114,7 @@
             </div>
 
         </div>
-    </a>
+   
 
 </div>
  @endif

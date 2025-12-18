@@ -2,10 +2,13 @@
   Vibe Nigeria-  {{ $topic->name }}
 @endsection
 
-@extends('admin.admin_dashboard')
-@section('admin')
+@extends('admin.admin_dashboard_new')
+@section('admin2')
 
-<div class="container" style="padding-top:80px;">
+<!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
 
     <div class="card shadow-sm p-4">
         <h3 class="fw-bold">Topic Details</h3>

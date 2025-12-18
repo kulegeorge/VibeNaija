@@ -308,7 +308,7 @@ if (!$exists) {
                     'message' => "Task '{$task->taskname}' was successfully unenrolled successfully!",
                     'alert-type' => 'success'
                 );
-                return redirect()->route('task.show', encrypt($task->id))->with($notification);
+                return redirect()->route('task.show', $task)->with($notification);
 
 
 }

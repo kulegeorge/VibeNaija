@@ -1,7 +1,13 @@
 @section('title', 'Vibe Nigeria- Unenroll from Task')
-@extends('admin.admin_dashboard')
-@section('admin')
-<div class="container" style="padding-top:80px;">
+@extends('admin.admin_dashboard_new')
+@section('admin2')
+
+
+ 
+    <!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
 <div class="container mt-4">
     <div class="card shadow">
         <div class="card-header bg-light text-dark">

@@ -1,7 +1,10 @@
-@extends('admin.admin_dashboard')
+@extends('admin.admin_dashboard_new')
+@section('admin2')
 
-@section('admin')
-<div class="container" style="padding-top:80px;">
+ <!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
 <div class="card p-4">
     <div class="card-header">
     <h4>{{ $notification->data['title'] ?? 'Notification' }}</h4>
@@ -12,7 +15,7 @@
     </p>
 
     @if(!empty($notification->data['url']))
-        <a href="{{ $notification->data['url'] }}" class="btn btn-primary mt-3">
+        <a href="{{ $notification->data['url'] }}" class="btn btn-danger mt-3">
             Open Related Content
         </a>
     @endif

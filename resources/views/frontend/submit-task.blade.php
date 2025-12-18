@@ -1,6 +1,13 @@
 @section('title', 'Vibe Nigeria- Submit Task page')
-@extends('admin.admin_dashboard')
-@section('admin')
+@extends('admin.admin_dashboard_new')
+@section('admin2')
+
+
+ 
+    <!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
 
 <style>
 /* --- Drag & Drop Style --- */
@@ -42,7 +49,7 @@
 }
 </style>
 
-<div class="container my-5" style="padding-top:80px;">
+
 @if(session('submission_failed'))
 <div class="alert alert-danger alert-dismissible fade show">
     <strong>⚠ Error:</strong> {{ session('error_message') }}

@@ -1,18 +1,21 @@
 @section('title')
   Create New Badges
 @endsection
-@extends('admin.admin_dashboard')
-@section('admin')
-<div class="container" style="padding-top:80px;">
-        
+@extends('admin.admin_dashboard_new')
+@section('admin2')
 
 
-        <!-- [ Main Content ] start -->
+ 
+    <!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
+    
         <div class="row">
 <div class="col-lg-12">
 
     <div class="card">
-        <div class="card-header">
+        <div class="card-header card-bg">
                 <h5 class="mb-3">Add Badge:</h5>
               </div>
         <div class="card-body">
@@ -61,9 +64,9 @@
                         </button>
                     </div>
                 </div>
-<div id="loading-spinner" style="display:none; text-align:center; margin-top:15px;">
+<div id="loading-spinner" style="display:none; text-align:center; margin-top:15px;"></div>
             </form>
-        </div>
+        
     </div>
 
     {{-- Badge Table --}}

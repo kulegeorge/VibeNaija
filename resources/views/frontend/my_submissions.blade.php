@@ -1,6 +1,13 @@
 @section('title', 'Vibe Nigeria- All submitted Task')
-@extends('admin.admin_dashboard')
-@section('admin')
+@extends('admin.admin_dashboard_new')
+@section('admin2')
+
+
+ 
+    <!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
 
 <style>
     /* GLOBAL CARD IMPROVEMENTS */
@@ -47,8 +54,8 @@
 </style>
 
 
-<div class="container py-5" style="padding-top:80px;">
-    <h2 class="fw-bold mb-4">📑 My Task Submissions</h2>
+
+    <h4 class="fw-bold mb-4">📑 My Task Submissions</h4>
 
     @if($submissions->count() == 0)
         <div class="alert alert-info">
@@ -92,7 +99,7 @@
                     <span class="badge 
                         @if($submission->status == 'approved') bg-success
                         @elseif($submission->status == 'rejected') bg-danger
-                        @else bg-warning text-dark 
+                        @else bg-danger text-dark 
                         @endif px-3 py-2">
                         {{ ucfirst($submission->status) }}
                     </span>
@@ -110,13 +117,13 @@
 
                 {{-- APPROVED OR REJECTED NOTE --}}
                 @if($submission->status == 'approved')
-                    <p><strong>Task Approval Note:</strong></p>
+                    <p><strong>Task Approval Note:</strong> @if($submission->decision_date) Aproved on: {{ $submission->decision_date }}@endif</p>
                     <div class="p-3 bg-light rounded border mb-3">
                         {{ $submission->decision_message }}
                     </div>
 
                 @elseif($submission->status == 'rejected')
-                    <p><strong>Task Rejection Note:</strong></p>
+                    <p><strong>Task Rejection Note:</strong> @if($submission->decision_date) Rejected on: {{ $submission->decision_date }} @endif</p>
                     <div class="p-3 alert-danger rounded border mb-3">
                         {{ $submission->decision_message }}
                     </div>

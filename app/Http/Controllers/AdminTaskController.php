@@ -43,6 +43,7 @@ class AdminTaskController extends Controller
         $submission->badge_icon = $submission->task->badge_icon;
         $submission->badges_name = $submission->task->badge_name;
         $submission->decision_message = $request->decision_message;
+        $submission->decision_date = now();
         $submission->save();
 
         // Award task points to user's total points
@@ -76,6 +77,7 @@ $user->notify(new PlatformNotification(
         $submission->status = 'rejected';
 
         $submission->decision_message = $request->decision_message;
+        $submission->decision_date = now();
         $submission->save();
 // Get the user who submitted it
     $user = $submission->user; // <-- FIXED HERE

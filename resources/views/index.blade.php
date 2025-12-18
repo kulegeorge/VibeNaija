@@ -1,615 +1,476 @@
 <!DOCTYPE html>
-<html lang="en-us">
+
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<meta charset="utf-8" >
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+    <meta name="author" content="NobleUI">
+    <meta name="keywords" content="LIMS">
 
-	<title> Vibe Naija Home Page</title>
+    <title>Administrator Panel</title>
+      <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-	<meta name="author" content="shiftthemes">
-	<meta name="description" content="Palas is a Business HTML Template developed with the the latest HTML5 and CSS3 technologies.">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- End fonts -->
 
-	
- 	
+    <!-- core:css -->
+    <link rel="stylesheet" href="{{ asset('Backend/assets/vendors/core/core.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('Backend/assets/vendors/sweetalert2/sweetalert2.min.css') }}"> -->
+    <!-- endinject -->
 
-  	<!-- CSS files -->
-	<link href="{{ asset('Frontend/fonts/Montserrat.css')}}" rel='stylesheet'>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="{{ asset('Frontend/css/void.css')}}" id="_include_elegant_font">
-	
-	<link rel="stylesheet" href="{{ asset('Frontend/plugins/magnific-popup/magnific-popup.css')}}">
-	
+    <!-- core:css -->
+      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script> -->
+    <link rel="stylesheet" href="{{ asset('Backend/assets/vendors/fullcalendar/main.min.css') }}">
+    <!-- endinject -->
 
-
-	
-	<!-- Main CSS file -->
-	<link rel="stylesheet" href="{{ asset('Frontend/css/style.css')}}">
-	
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="{{ asset('Backend/assets/vendors/datatables.net-bs5/dataTables.bootstrap5.css') }}">
+    <!-- End plugin css for this page -->
 
 
-	
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="{{ asset('Backend/assets/vendors/flatpickr/flatpickr.min.css') }}">
+    <!-- End plugin css for this page -->
 
-	
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{{ asset('Backend/assets/fonts/feather-font/css/iconfont.css') }}">
+    <link rel="stylesheet" href="{{ asset('Backend/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
+    <!-- endinject -->
+
+  <!-- Layout styles -->  
+    <link rel="stylesheet" href="{{ asset('Backend/assets/css/demo1/style.css') }}">
+  <!-- End layout styles -->
+  
+  <link rel="shortcut icon" href="{{ asset('Backend/assets/images/favicon.png') }}" />
+
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" > -->
+    <script src="{{ asset('Backend/assets/js/sweet.js')}}"></script>
+ 
+
+
+
+     
 </head>
 <body>
+    <div class="main-wrapper">
 
-<div id="preloader">
-	<div id="status">&nbsp;</div>
-</div>
+        <!-- partial:partials/_sidebar.html -->
+    
+        @include('admin.body.sidebar')
+        <!-- partial -->
+    
+        <div class="page-wrapper">
+                    
+            <!-- partial:partials/_navbar.html -->
+        @include('admin.body.header')
+            <!-- partial -->
 
+       <div class="page-content">
 
-
-
-
-<!-- Global Wrapper -->
-<div id="wrapper">
-
-	<div class="h-wrapper">
-
-		<!-- Top Bar -->
-		<div class="topbar">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6">
-						<ul class="top-menu">
-							<li><a href="page_services_4.html#">About</a></li>
-							<li><a href="page_services_4.html#">Features</a></li>
-							<li><a href="page_services_4.html#">Pricing</a></li>
-							<li><a href="page_services_4.html#">Terms</a></li>
-						</ul>
-					</div>
-					<!-- This column is hidden on mobiles -->
-					<div class="col-sm-6">
-						<div class="pull-right hidden-xs">
-							<ul class="social-icon unstyled">
-								<li><a href="page_services_4.html#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="page_services_4.html#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="page_services_4.html#"><i class="fa fa-instagram"></i></a></li>
-								<li><a href="page_services_4.html#"><i class="fa fa-dribbble"></i></a></li>
-								<li><a href="page_services_4.html#"><i class="fa fa-behance"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Header -->
-		<header class="header-wrapper header-transparent with-topbar">
-			<div class="main-header">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-12 col-md-2">
-							<!-- Logo - Read documentation to see how to change the logo-->
-							<a href="index.html" class="logo"></a>
-						</div>
-						<div class="col-sm-12 col-md-10">
-							<nav class="navbar-right">
-								<ul class="menu">
-									<!-- Toggle Menu - For Mobile Devices -->
-									<li class="toggle-menu"><i class="fa icon_menu"></i></li> 
-									
-									<li class="first">
-										<a href="page_services_4.html#">Home</a>
-										<!--Instead of full class you can type one_two (50%), two_three (66.66%), three_four (75%) -->
-										<div class="megamenu full">
-											<!-- Similar to Bootstrap gid system (12 columns) -->
-			                                <div class="row">
-			                                    <div class="col-4">
-			                                    	<!-- You can alsoo include paragraps, images, iframes etc, not only lists, but probably you will have to style them -->
-			                                   		<ul class="megamenu-list">
-			                                            <li><a href="index_02.html">Home Transparent Header</a></li>
-			                                            <li><a href="index_09.html">Home Simple Header</a></li>
-			                                            <li><a href="index_06.html">Home Full screen Slider</a></li>
-			                                            <li><a href="index_13.html">Home Video Full Width</a></li>
-			                                            <li><a href="index_10.html">Home Left Dark Menu</a></li>
-			                                            <li><a href="index_13.html">Home Full Screen Menu</a></li>
-			                                            <li><a href="index_14.html">Home Top Menu</a></li>
-			                                            <li><a href="index_04.html">Home Parallax Image</a></li>
-			                                            <li><a href="index_15.html">Home Full Kenburns Slider</a></li>
-			                                        </ul>
-			                                	</div>
-			                                    <div class="col-4">
-													<ul class="megamenu-list">
-			                                            <li><a href="index_10.html">Home Kenburns Slider</a></li>
-			                                            <li><a href="index_05.html">Home Boxed Slider</a></li>
-			                                            <li><a href="index_11.html">Home Right Menu</a></li>
-			                                            <li><a href="index_04.html">Home Dark Top bar</a></li>
-			                                            <li><a href="index_05.html">Home Dark Header</a></li>
-			                                            <li><a href="index_08.html">Home Bottom Header</a></li>
-			                                            <li><a href="index_08.html">Home Video Full Screen</a></li>
-			                                            <li><a href="index_12.html">Home Text Rotator</a></li>
-			                                            <li><a href="index_03.html">Home Static Menu</a></li>
-			                                        </ul>
-			                                    </div>
-			                                    <div class="col-4">
-			                                        <ul class="megamenu-list">
-			                                            <li><a href="index_07.html">Home Menu under Logo</a></li>
-			                                            <li><a href="index.html">Home Transparent Dark Header</a></li>
-			                                            <li><a href="index_03.html">Home Gray Top Bar</a></li>
-			                                            <li><a href="index_07.html">Home Icons Menu</a></li>
-			                                            <li><a href="index_03.html">Home Menu White </a></li>
-			                                            <li><a href="index_12.html">Home Left White Menu</a></li>
-			                                            <li><a href="index_06.html">Home Menu Dark Transparent</a></li>
-			                                            <li><a href="index_11.html">Home Parallax Full Image</a></li>
-			                                        </ul>
-			                                    </div>                        
-			                                </div>
-			                            </div> <!-- END Mega Menu -->
-									</li> <!-- END Home -->
-									<li>
-										<a href="page_services_4.html#">Features</a>
-										<div class="megamenu full">
-											<div class="row">
-												<div class="col-4">
-													<ul class="megamenu-list">
-														<li class="title">Headers</li>
-														<li><a href="index_02.html">Header Transparent</a></li>
-														<li><a href="index_09.html">Header Simple</a></li>
-														<li><a href="index_08.html">Header Bottom Menu</a></li>
-														<li><a href="index_07.html">Header Icons Menu</a></li>
-														<li><a href="index_05.html">Header Dark</a></li>
-														<li><a href="index.html">Header Transparent Dark</a></li>
-														<li><a href="index_04.html">Header Dark Bar</a></li>
-														<li><a href="index_03.html">Header Gray Bar</a></li>
-														<li><a href="index_14.html">Header Top Menu</a></li>
-														<li><a href="index_13.html">Header Full Screen</a></li>
-														<li><a href="index_03.html">Header Static Menu</a></li>
-														<li><a href="index_07.html">Header Menu under Logo</a></li>
-													</ul>
-												</div>
-												<div class="col-4">
-													<ul class="megamenu-list">
-														<li class="title">Menus</li>
-														<li><a href="index_06.html">Menu Dark Transparent</a></li>
-														<li><a href="index.html">Menu Dark</a></li>
-														<li><a href="index_03.html">Menu Light</a></li>
-
-														<li> &nbsp; </li>
-														<li class="title">Footers</li>
-														<li><a href="index_04.html#footer_index">Footer Dark Simple</a></li>
-														<li><a href="index_03.html#footer_index">Footer Gray</a></li>
-														<li><a href="index.html#footer_index">Footer Background</a></li>
-														<li><a href="index_10.html#footer_index">Footer Simple</a></li>
-														<li><a href="index_02.html#footer_index">Footer Small</a></li>
-													</ul>
-												</div>
-												<div class="col-4">
-													<ul class="megamenu-list">
-														<li class="title">Vertical Menu</li>
-														<li><a href="index_10.html">Header Left Dark</a></li>
-														<li><a href="index_12.html">Header Left Light</a></li>
-														<li><a href="index_11.html">Header Right Menu</a></li>
-
-														<li> &nbsp; </li>
-														<li class="title">Sliders</li>
-														<li><a href="index.html">Slider Full width</a></li>
-														<li><a href="index_05.html">Slider Boxed</a></li>
-														<li><a href="index_06.html">Slider Full screen</a></li>
-														<li><a href="index_10.html">Slider Kenburns</a></li>
-														<li><a href="index_15.html">Slider Kenburns Full screen</a></li>
-														<li><a href="index_13.html">Slider Video Full width</a></li>
-														<li><a href="index_08.html">Slider Video Full screen</a></li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</li> <!-- END Features -->
-									<li>
-										<a href="page_services_4.html#">Pages</a>
-										<div class="megamenu full">
-			                                <div class="row">
-			                                    <div class="col-3">
-			                                   		<ul class="megamenu-list">
-			                                   			<li class="title">Pages</li>
-			                                            <li><a href="page_about.html">About 1</a></li>
-														<li><a href="page_about_2.html">About 2</a></li>
-														<li><a href="page_about_3.html">About 3</a></li>
-														<li><a href="page_about_4.html">About 4</a></li>
-														<li><a href="page_team.html">Team 1</a></li>
-														<li><a href="page_team_2.html">Team 2</a></li>
-														<li><a href="page_team_3.html">Team 3</a></li>
-														<li><a href="page_team_4.html">Team 4</a></li>
-			                                        </ul>
-			                                	</div>
-			                                    <div class="col-3">
-													<ul class="megamenu-list">
-														<li class="title">that you</li>
-														<li><a href="page_services.html">Services 1</a></li>
-														<li><a href="page_services_2.html">Services 2</a></li>
-														<li><a href="page_services_3.html">Services 3</a></li>
-														<li><a href="page_services_4.html">Services 4</a></li>
-														<li><a href="page_contact.html">Contact 1</a></li>
-														<li><a href="page_contact_2.html">Contact 2</a></li>
-														<li><a href="page_contact_3.html">Contact 3</a></li>
-														<li><a href="page_clients.html">Clients</a></li>
-			                                        </ul>
-			                                    </div>
-			                                    <div class="col-3">
-			                                        <ul class="megamenu-list">
-			                                        	<li class="title">really</li>
-														<li><a href="page_pricing.html">Pricing</a></li>
-			                                        	<li><a href="page_faq.html">FAQ 1</a></li>
-			                                        	<li><a href="page_faq_2.html">FAQ 2</a></li>
-														<li><a href="page_sign_in.html">Sign In</a></li>
-														<li><a href="page_sign_up.html">Sign Up</a></li>
-														<li><a href="page_404.html">404 Not Found</a></li>
-														<li><a href="page_403.html">403 Forbidden</a></li>
-			                                        </ul>
-			                                    </div>
-			                                    <div class="col-3">
-			                                        <ul class="megamenu-list">
-			                                        	<li class="title">need</li>
-														<li><a href="page_sidebar.html">Sidebar</a></li>
-														<li><a href="page_sidebars.html">Sidebars</a></li>
-														<li><a href="page_sidebar_navigation.html">Sidebar Navigation</a></li>
-
-														<li> &nbsp; </li>
-														<li class="title">Simple Page Headers</li>
-														<li><a href="page_sidebar.html">Small</a></li>
-														<li><a href="page_sidebar_navigation.html">Centered</a></li>
-														<li><a href="page_sidebars.html">Simple (Dark)</a></li>
-			                                        </ul>
-			                                    </div>                           
-			                                </div>
-			                            </div> <!-- END Mega Menu -->
-									</li> <!-- END Pages -->
-									<li>
-										<a href="page_services_4.html#">Blog</a>
-										<ul class="submenu">
-											<li><a href="blog_list_small.html">List Small</a></li>
-											<li><a href="blog_list_large.html">List Large</a></li>
-											<li><a href="blog_grid.html">Grid</a></li>
-											<li><a href="blog_grid_sidebar.html">Grid Sidebar</a></li>
-											<li><a href="blog_masonry.html">Masonry</a></li>
-											<li><a href="blog_masonry_sidebar.html">Masonry Sidebar</a></li>
-											<li><a href="blog_post.html">Post</a></li>
-											<li><a href="blog_post_sidebar.html">Post Sidebar</a></li>
-										</ul>
-									</li> <!-- END Blog -->
-									<li>
-										<a href="page_services_4.html#">Portfolio</a>
-										<ul class="submenu">
-											<li><a href="portfolio.html">Portfolio</a></li>
-											<li><a href="portfolio_2.html">2 Columns</a></li>
-											<li><a href="portfolio_3.html">3 Columns</a></li>
-											<li><a href="portfolio_4.html">4 Columns</a></li>
-											<li><a href="portfolio_boxed.html">Boxed</a></li>
-											<li><a href="portfolio_sidebar.html">Sidebar</a></li>
-											<li><a href="portfolio_project_wide.html">Wide Project</a></li>
-											<li><a href="portfolio_project_half.html">Half Project</a></li>
-											<li><a href="portfolio_project_sidebar.html">Sidebar Project</a></li>
-										</ul>
-									</li> <!-- END Portfolio -->
-									<li>
-										<a href="page_services_4.html#">Shop</a>
-										<ul class="submenu">
-											<li><a href="shop_products.html">Products</a></li>
-											<li><a href="shop_products_sidebar.html">Products Sidebar</a></li>
-											<li><a href="shop_product.html">Product</a></li>
-											<li><a href="shop_product_sidebar.html">Product Sidebar</a></li>
-											<li><a href="shop_account.html">Account</a></li>
-											<li><a href="shop_cart.html">Cart</a></li>
-											<li><a href="shop_checkout.html">Checkout</a></li>
-										</ul>
-									</li> <!-- END Shop -->
-									<li><a href="shortcodes.html">Shortcodes</a></li>
-									<!-- Always include last class to link to solve some padding issues -->
-									<li><a class="last" href="page_services_4.html#" target="_blank">Documentation</a></li>
-								</ul>
-							</nav>
-						</div>
-					</div>
-				</div> <!-- END Container -->
-			</div> <!-- END Main Header -->
-		</header>
-
-	</div>
-
-	<!-- Do not remove this class -->
-	<div class="push-top"></div>
-
-	
-
-	<section class="section-intro bg-img bg11 stellar" data-stellar-background-ratio="0.4">
-		<div class="bg-overlay op6"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-5 col-sm-8">
-					<h1 class="intro-title mb20">Services</h1>
-					<p class="intro-p mb0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit tenetur reiciendis molestias nostrum excepturi porro dolorum aset!</p>
-				</div>
-			</div>
-		</div>
-	</section>
+        <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+          <div>
+            <h4 class="mb-3 mb-md-0">Welcome to Dashboard</h4>
+          </div>
+          <div class="d-flex align-items-center flex-wrap text-nowrap">
+            <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
+              <span class="input-group-text input-group-addon bg-transparent border-primary" data-toggle><i data-feather="calendar" class="text-primary"></i></span>
+              <input type="text" class="form-control bg-transparent border-primary" placeholder="Select date" data-input>
+            </div>
+            <button type="button" class="btn btn-outline-primary btn-icon-text me-2 mb-2 mb-md-0">
+              <i class="btn-icon-prepend" data-feather="printer"></i>
+              Print
+            </button>
+            <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
+              <i class="btn-icon-prepend" data-feather="download-cloud"></i>
+              Download Report
+            </button>
+          </div>
+        </div>
 
 
+       
 
-	<section class="section mt40">
-		<div class="container">
-			<div class="row mb40">
-				<div class="col-sm-6 col-md-4 xs-box">
-					<div class="box-services-a">
-						<h3 class="title-small"><i class="fa fa-cloud-download fa-bg"></i> Fully customizable <a href="page_services_4.html#" class="link-read-more">read more</a></h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis maiores repudiandae, accusantium reiciendis!</p>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-4">
-					<div class="box-services-a">
-						<h3 class="title-small"><i class="fa fa-cloud-upload fa-bg"></i> Easy to use <a href="page_services_4.html#" class="link-read-more">read more</a></h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis maiores repudiandae, accusantium reiciendis!</p>
-					</div>
-				</div>
-				<div class="hidden-sm col-md-4">
-					<div class="box-services-a">
-						<h3 class="title-small"><i class="fa fa-star fa-bg"></i> Free updates <a href="page_services_4.html#" class="link-read-more">read more</a></h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis maiores repudiandae, accusantium reiciendis!</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-6 col-md-4 xs-box">
-					<div class="box-services-a">
-						<h3 class="title-uppercased mb10"><i class="fa icon_mobile fa-style5"></i> Responsive Design <a href="page_services_4.html#" class="link-read-more">read more</a></h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis maiores repudiandae, accusantium reiciendis!</p>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-4">
-					<div class="box-services-a">
-						<h3 class="title-uppercased mb10"><i class="fa icon_lifesaver fa-style5"></i> Premium Support <a href="page_services_4.html#" class="link-read-more">read more</a></h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis maiores repudiandae, accusantium reiciendis!</p>
-					</div>
-				</div>
-				<div class="hidden-sm col-md-4">
-					<div class="box-services-a">
-						<h3 class="title-uppercased mb10"><i class="fa icon_lightbulb_alt fa-style5"></i> SEO Friendly <a href="page_services_4.html#" class="link-read-more">read more</a></h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis maiores repudiandae, accusantium reiciendis!</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+       <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-3 d-none d-md-block">
+                <div class="card">
+                  <div class="card-body">
+                    <h6 class="card-title mb-4">Full calendar</h6>
+                    <div id='external-events' class='external-events'>
+                    
+                      
+                      <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+                        <div class='fc-event-main'>Activities</div>
+                      </div>
+                      <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+                        <div class='fc-event-main'>Expenses</div>
+                      </div>
+                     <!--  <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+                        <div class='fc-event-main'>Clent Meeting</div>
+                      </div> -->
+                     <!--  <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+                        <div class='fc-event-main'>Office Trip</div>
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-9">
+                <div class="card">
+                  <div class="card-body">
+                    <div id='fullcalendar'></div>
+                  </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
+        <div id="fullCalModal" class="modal fade" style="border-radius: 0;">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius:0;">
+              <div class="modal-header">
+                <h4 id="modalTitle1" class="modal-title"></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"><span class="visually-hidden">close</span></button>
+              </div>
+              <div id="modalBody1" class="modal-body">
+                
+              </div>
+              <div class="modal-footer">
+          
+                <a href=""  class="btn btn-icon-text btn-linkedin" id="viewEvent" style="border-radius:0;"> 
+                 <i class="btn-icon-prepend" data-feather="check-square"></i>  View more</a>
 
-	<section class="section-bg section-large section-dark mt20">
-		<div class="container">
-			<div class="row col-p30">
-				<div class="col-sm-4 xs-box2">
-					<i class="icon_box-checked color-on-dark fa-4x op8"></i>
-					<h3 class="title-uppercased color-on-dark title-shadow-a mt20 mb10">We do this</h3>
-					<div class="br-bottom mb20"></div>
-					<p class="color-on-dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, ipsa, itaque. Vel dolorem voluptate quae.</p>
-				</div>
-				<div class="col-sm-4 xs-box2">
-					<i class="icon_piechart color-on-dark fa-4x op8"></i>
-					<h3 class="title-uppercased color-on-dark title-shadow-a mt20 mb10">We did that</h3>
-					<div class="br-bottom mb20"></div>
-					<p class="color-on-dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, ipsa, itaque. Vel dolorem voluptate quae.</p>
-				</div>
-				<div class="col-sm-4">
-					<i class="icon_tags_alt color-on-dark fa-4x op8"></i>
-					<h3 class="title-uppercased color-on-dark title-shadow-a mt20 mb10">We will do these</h3>
-					<div class="br-bottom mb20"></div>
-					<p class="color-on-dark">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel, ipsa, itaque. Vel dolorem voluptate quae.</p>
-				</div>
-			</div>
-		</div>
-	</section>
+                <button class="btn btn-icon-text btn-danger" id="removeEvent" style="border-radius:0;">
+
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg> Delete Event
+
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
+ <div id="choseEvent" class="modal fade">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius:0;">
+              <div class="modal-header">
+               
+                <button type="button" class="btn-close" data-bs-dismiss="modal"><span class="visually-hidden">close</span></button>
+              </div>
+              <div id="modalBody2" class="modal-body">
+                <form>
+                  
+                  <button type="button" class="btn btn-outline-danger" id="expensebtn">Expenses</button>
+                <button type="button" class="btn btn-icon-text btn-linkedin" id="activity">Activity</button>
+                </form>
+              </div>
+              
+            </div>
+          </div>
+        
+         
+        </div> <!-- row -->
+<!-- create -->
+        <div id="createEventModal" class="modal fade">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius:0;">
+              <div class="modal-header">
+                <h4 id="modalTitle2" class="modal-title">Create New Activity</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"><span class="visually-hidden">close</span></button>
+              </div>
+              <div id="modalBody2" class="modal-body">
+                <form>
+                  <div class="mb-3">
+                    <label for="title" class="form-label">Activity Title</label>
+                    <input type="text" name="title" class="form-control" id="title" required />
+                      <span id="titleError" class="text-danger"></span>
+                  </div>
+                  
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="saveBtn" class="btn btn-icon-text btn-linkedin">Save Activity</button>
+                
+              </div>
+            </div>
+          </div>
+        
+         
+        </div> <!-- row -->
 
-	<section class="section">
-		<div class="container">
-			<div class="row col-p20">
-				<div class="col-sm-6 col-md-4 xs-box3">
-					<div class="box-services-f">
-						<!-- Image popup -->
-						<div class="portfolio-text portfolio-center mb20">
-							<div class="view">
-                            	<img src="images/demo/office1.jpg" class="br2" alt="Image Popup">
-                            	<div class="mask">
-									<a href="images/demo/office1.jpg" title="Image title here" class="init-popup image-popup portfolio-middle"><i class="fa fa-search"></i></a>
-                            	</div>
-							</div>
-						</div> <!-- END Image Popup -->
-						<div class="content">
-							<h3 class="title-uppercased br-bottom">Free updates <a href="page_services_4.html#" class="link-read-more">read more</a></h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti, id voluptate aspernatur quas tempora consequatur quasi in molestias est nesciunt dolorum!</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-4">
-					<div class="box-services-f">
-						<!-- Image popup -->
-						<div class="portfolio-text portfolio-center mb20">
-							<div class="view">
-                            	<img src="images/demo/office2.jpg" class="br2" alt="Image Popup">
-                            	<div class="mask">
-									<a href="images/demo/office2.jpg" title="Image title here" class="init-popup image-popup portfolio-middle"><i class="fa fa-search"></i></a>
-                            	</div>
-							</div>
-						</div> <!-- END Image Popup -->
-						<div class="content">
-							<h3 class="title-uppercased br-bottom">Boxed Layout <a href="page_services_4.html#" class="link-read-more">read more</a></h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti, id voluptate aspernatur quas tempora consequatur quasi in molestias est nesciunt dolorum!</p>
-						</div>
-					</div>
-				</div>
-				<div class="hidden-sm col-md-4">
-					<div class="box-services-f">
-						<!-- Image popup -->
-						<div class="portfolio-text portfolio-center mb20">
-							<div class="view">
-                            	<img src="images/demo/office3.jpg" class="br2" alt="Image Popup">
-                            	<div class="mask">
-									<a href="images/demo/office3.jpg" title="Image title here" class="init-popup image-popup portfolio-middle"><i class="fa fa-search"></i></a>
-                            	</div>
-							</div>
-						</div> <!-- END Image Popup -->
-						<div class="content">
-							<h3 class="title-uppercased br-bottom">Responsive design <a href="page_services_4.html#" class="link-read-more">read more</a></h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti, id voluptate aspernatur quas tempora consequatur quasi in molestias est nesciunt dolorum!</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+       
 
-	<section class="section p0">
-		<div class="row col-p0 max_height xs_max_height">
-			<div class="col-sm-6 col-md-3">
-				<div class="box-services-d box-services-e el_max_height">
-					<div class="bg-overlay"></div>
-					<div class="row col-p0">
-						<div class="col-sm-12">
-							<h3 class="title-uppercased title-shadow-a">customizable</h3>
-							<p class="mb0 ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum recusandae sequi dolorum ispum asodea ipsum dolor.</p>
-							<i class="fa icon_tools"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3">
-				<div class="box-services-d box-services-e dark el_max_height">
-					<div class="bg-overlay"></div>
-					<div class="row col-p0">
-						<div class="col-sm-12">
-							<h3 class="title-uppercased title-shadow-a">easy to use</h3>
-							<p class="mb0 ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum recusandae sequi dolorum ispum asodea ipsum dolor.</p>
-							<i class="fa icon_lightbulb_alt"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3">
-				<div class="box-services-d box-services-e green el_max_height">
-					<div class="bg-overlay"></div>
-					<div class="row col-p0">
-						<div class="col-sm-12">
-							<h3 class="title-uppercased title-shadow-a">clean code</h3>
-							<p class="mb0 ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum recusandae sequi dolorum ispum asodea ipsum dolor.</p>
-							<i class="fa icon_tag_alt"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-3">
-				<div class="box-services-d box-services-e orange el_max_height">
-					<div class="bg-overlay"></div>
-					<div class="row col-p0">
-						<div class="col-sm-12">
-							<h3 class="title-uppercased title-shadow-a">reliable</h3>
-							<p class="mb0 ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum recusandae sequi dolorum ispum asodea ipsum dolor.</p>
-							<i class="fa icon_shield"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+   
 
-	
-	<!-- Footer wrapper -->
-	<footer class="footer-wrapper footer-bg">
-		<div class="container">
-			<div class="row col-p30">
-				<div class="col-sm-12 col-md-4">
-					<div class="footer-widget">
-						<h3 class="footer-title">Palas</h3>
-						<ul class="footer-links clearfix">
-							<li><a href="page_services_4.html#">Home</a></li>
-							<li><a href="page_services_4.html#">Contact</a></li>
-							<li><a href="page_services_4.html#">Privacy Policy</a></li>
-							<li><a href="page_services_4.html#">Services</a></li>
-							<li><a href="page_services_4.html#">Terms</a></li>
-							<li><a href="page_services_4.html#">Security</a></li>
-							<li><a href="page_services_4.html#">Pricing</a></li>
-							<li><a href="page_services_4.html#">Features</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-sm-12 col-md-4">
-					<div class="footer-widget">
-						<h3 class="footer-title">Get social</h3>
-						<ul class="footer-social clearfix">
-							<li><a href="page_services_4.html#" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="page_services_4.html#" data-toggle="tooltip" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="page_services_4.html#" data-toggle="tooltip" title="Google Plus"><i class="fa fa-google-plus"></i></a></li>
-							<li><a href="page_services_4.html#" data-toggle="tooltip" title="Pinterest"><i class="fa fa-pinterest"></i></a></li>
-							<li><a href="page_services_4.html#" data-toggle="tooltip" title="Instagram"><i class="fa fa-instagram"></i></a></li>
-							<li><a href="page_services_4.html#" data-toggle="tooltip" title="Dribbble"><i class="fa fa-dribbble"></i></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-sm-12 col-md-4">
-					<div class="footer-widget">
-						<h3 class="footer-title">Tweets</h3>
-						<!-- This is just a dummy twitter feed with typed content (not generetad).
-						Didn't include the twitter feed for performance benefits.
-						See in documentation how to include a fully functional twitter feed widget -->
-						<div class="sidebar-tweet clearfix">
-							<i class="fa fa-twitter"></i>
-							<p class="tweet-content">
-								<a href="page_services_4.html#" class="tweet-user">@shiftThemes</a> 
-								<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span> 
-								<small>22 hours ago</small>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-6 col-md-4 col-sm-push-6 col-md-push-4 xs-box">
+            </div>
+     
 
+    @include('admin.body.footer')
 
-					<!-- MailChimp Subscribe Form -->
-					<div id="mc_embed_signup">
-						<!-- Replace the below url with the action link from mailchimp (see documentation) -->
-						<form action="page_services_4.html#" method="post" 
-						id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate class="footer-subscribe">
-							<div id="mc_embed_signup_scroll">
-								<input type="email" value="" name="EMAIL" id="mce-EMAIL" required placeholder=" Type email and hit enter">
-								<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-						    	<div style="position: absolute; left: -5000px;">
-						    		<input type="text" name="b_111fbc1ae1a748cfb4ef9ac27_ac969aca2f" tabindex="-1" value="">
-						    	</div>
-								<button type="submit" name="subscribe" id="mc-embedded-subscribe" class="hidden"></button>
-							</div>
-						</form>
-					</div>
-					<!-- END mc_embed_signup -->
+    
+        </div>
+    </div>
 
-				</div>
-				<div class="col-sm-6 col-md-4 col-sm-pull-6 col-md-pull-4">
-					<p class="copyright">&copy; Copyright 2015 - 2022 shiftThemes</p>
-				</div>
-			</div>
-		</div>
-	</footer>
-	
-</div> <!-- END Global Wrapper -->
+<!-- core:js -->
+    <script src="{{ asset('Backend/assets/vendors/core/core.js') }}"></script>
+  <!-- <script src="{{ asset('Backend/assets/vendors/sweetalert2/sweetalert2.min.js') }}"></script> -->
+
+    <!-- endinject -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> -->
+    <script src="{{ asset('Backend/assets/js/code/code.js') }}"></script>
+    <script src="{{ asset('Backend/assets/js/code/validate.min.js') }}"></script>
+    <!-- Plugin js for this page -->
+  <script src="{{ asset('Backend/assets/vendors/flatpickr/flatpickr.min.js') }}"></script>
+  <script src="{{ asset('Backend/assets/vendors/apexcharts/apexcharts.min.js') }}"></script>
+    <!-- End plugin js for this page -->
+    <!-- Plugin js for this page -->
+    <script src="{{ asset('Backend/assets/vendors/datatables.net/jquery.dataTables.js') }}"></script>
+  <script src="{{ asset('Backend/assets/vendors/datatables.net-bs5/dataTables.bootstrap5.js') }}"></script>
+    <!-- End plugin js for this page -->
+
+    <!-- inject:js -->
+    <script src="{{ asset('Backend/assets/vendors/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('Backend/assets/js/template.js') }}"></script>
+    <!-- endinject -->
+
+    <!-- Custom js for this page -->
+  <script src="{{ asset('Backend/assets/js/dashboard-dark.js') }}"></script>
+  <!-- <script src="{{ asset('Backend/assets/js/sweet-alert.js') }}"></script> -->
+    <!-- End custom js for this page -->
+
+    <!-- Plugin js for this page -->
+<script src="{{ asset('Backend/assets/vendors/moment/moment.min.js') }}"></script>
+<script src="{{ asset('Backend/assets/vendors/fullcalendar/main.min.js') }}"></script>
+
+    <!-- endinject -->
 
 
 
 
-	<!-- Javascript files -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-	<div id="_include_main_plugins"></div>
-	
-	<script src="plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
-	
+    <!-- End custom js for this page -->
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> -->
 
 
-	<!-- Main javascript file -->
-	<script src="js/script.js"></script>
+    <!-- Custom js for this page -->
+  <script src="{{ asset('Backend/assets/js/data-table.js') }}"></script>
+    <!-- End custom js for this page -->
+    <script>
+ @if(Session::has('message'))
+ var type = "{{ Session::get('alert-type','info') }}"
+ switch(type){
+    case 'info':
+    toastr.info(" {{ Session::get('message') }} ");
+    break;
+
+    case 'success':
+    toastr.success(" {{ Session::get('message') }} ");
+    break;
+
+    case 'warning':
+    toastr.warning(" {{ Session::get('message') }} ");
+    break;
+
+    case 'error':
+    toastr.error(" {{ Session::get('message') }} ");
+    break; 
+ }
+ @endif 
+</script>
 
 
-	
+   <script>
+        $(document).ready(function() {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+  // sample calendar events data
+
+  var Draggable = FullCalendar.Draggable;
+  var calendarEl = document.getElementById('fullcalendar');
+  var containerEl = document.getElementById('external-events');
+
+  var curYear = moment().format('YYYY');
+  var curMonth = moment().format('MM');
+
+
+  // Calendar Event Source
+  var programes = @json($records);
+  var expense = @json($exp);
+ 
+  var calendarEvents = {
+    id: programes['id'],
+    backgroundColor: 'rgba(1,104,250, .15)',
+    borderColor: '#0168fa',
+    events: programes
+  };
+
+  
+
+  // initialize the calendar
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    headerToolbar: {
+      left: "prev,today,next",
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+    },
+    editable: true,
+    droppable: true, // this allows things to be dropped onto the calendar
+    fixedWeekCount: true,
+   selectable: true,
+    // height: 300,
+    initialView: 'dayGridMonth',
+    timeZone: 'UTC',
+    hiddenDays:[],
+    navLinks: 'true',
+    // weekNumbers: true,
+    // weekNumberFormat: {
+    //   week:'numeric',
+    // },
+    dayMaxEvents: 4,
+    events: [],
+    // , birthdayEvents, holidayEvents, discoveredEvents, meetupEvents, otherEvents
+    eventSources: [calendarEvents],
+   
+     eventDrop: function(info) {
+      
+        var obj = info.event;
+            var title = obj.title;
+           var id = obj.id;
+           var start_date = obj.startStr;
+           var end_date = obj.endStr;
+
+                    $.ajax({
+                            url:"/calendar/store",
+                            type:"POST",
+                            dataType:'json',
+                            data:{
+                                id:id,
+                              title: title,
+                              start: start_date,
+                              end: end_date,
+                              type: 'update'
+                          },
+                            success:function(response)
+                            {
+                              swal("Good job!", "Event Updated!", "success");
+                                
+                            },
+                            error:function(error)
+                            {
+                                console.log(error);
+                            },
+                        });
+                },
+    eventClick: function(info) {
+       var eventObj = info.event;
+      $('#modalTitle1').html(eventObj.title);
+      $('#modalBody1').html(eventObj._def.extendedProps.description);
+      $('#viewEvent').attr('href','/event-record/'+ eventObj.id);
+      $('#fullCalModal').modal("show");
+
+   $('#removeEvent').click(function() {
+
+    if(confirm("Are you sure you want to remove it?"))
+            {
+                var id = eventObj.id;
+                
+                $.ajax({
+                    url:"/calendar/store",
+                    type:"POST",
+                    data:{
+                        id:id,
+                        type:"delete"
+                    },
+                    success:function(response)
+                    {
+                       $('#fullCalModal').modal('hide');
+                       swal("Good job!", "Event deleted!", "success");
+                               
+                    }
+                })
+            }
+
+  });
+    
+
+     
+      
+    },
+    eventMouseEnter:function(info){
+      // var eventObj = info.event;
+      // $('#modalTitle1').html(eventObj.title);
+      // $('#modalBody1').html(eventObj._def.extendedProps.description);
+      // $('#viewEvent').attr('href','/event-record/'+ eventObj.id);
+      // $('#fullCalModal').modal("show");
+
+    },
+
+    select:function( info ) {
+       $("#createEventModal").modal("show");
+     
+
+      $('#saveBtn').click(function(){
+        var title = $('#title').val();
+         var start_date = info.startStr;
+         var end_date = info.endStr;
+        if(title != ''){
+           $.ajax({
+                            url:"/calendar/store",
+                            type:"POST",
+                            data:{
+                              title: title,
+                              start: start_date,
+                              end: end_date,
+                              type: 'add'
+                          },
+                            success:function(response)
+                            {
+                                swal("Good job!", "Event Created!", "success");
+                                $('#createEventModal').modal('hide');
+
+                             
+  
+                            },
+                            error:function(error)
+                            {
+                              console.log(error);
+                                if(error.responseJSON.errors) {
+                                    $('#titleError').html(error.responseJSON.errors.title);
+                                }
+                            },
+                        });
+
+        }else{
+          $('#titleError').html('Event Title is required!');
+        }
+        
+          
+      });
+      
+    },
+
+  });
+
+  calendar.render();
+
+
+});  
+
+
+      </script>
 
 </body>
-</html>
+</html>    

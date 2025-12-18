@@ -13,6 +13,7 @@ use DB;
 use App\Models\User;
 use App\Models\Badge;
 use App\Models\Level;
+use App\Models\JoinTask;
 use App\Models\UserTaskSubmission;
 
 class ProfileController extends Controller
@@ -88,6 +89,13 @@ class ProfileController extends Controller
             ->where('status', 'approved')
             ->count(); 
             
+
+
+            /*--------------------------------------------------
+            * Enrolled Task Count
+            *----------------------------------------------------*/
+
+            $enrolled_count = JoinTask::where('userID', $userId)->count(); 
         /* ------------------------------
          * 6. Leaderboard (Top 10)
          * ------------------------------ */
@@ -96,7 +104,7 @@ class ProfileController extends Controller
         ->get();
 
        
-        return view('frontend.user_earnings', compact('user','badges','taskcompleted','leaders'));
+        return view('frontend.user_earnings', compact('user','badges','taskcompleted','leaders','enrolled_count'));
     }
 }
 

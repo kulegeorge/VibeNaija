@@ -1,12 +1,13 @@
 @section('title')
   Task Approval
 @endsection
-@extends('admin.admin_dashboard')
-@section('admin')
+@extends('admin.admin_dashboard_new')
+@section('admin2')
 
-
-
-<div class="container my-5" style="padding-top:80px;">
+<!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
 
     {{-- CHECK IF EMPTY --}}
     @if($submissions->isEmpty())
@@ -23,7 +24,7 @@
         <!-- HEADER -->
         <div class="card-header bg-primary text-white py-3 d-flex justify-content-between align-items-center">
             <div>
-                <h5 class="mb-0 fw-bold">{{ $submission->task->taskname ?? 'Task Not Found' }}</h5>
+                <h5 class="mb-0 fw-bold text-white">{{ $submission->task->taskname ?? 'Task Not Found' }}</h5>
                 <small class="opacity-75">
                     Submitted by: {{ $submission->user->name ?? 'Unknown User' }}
                 </small>
@@ -32,7 +33,7 @@
             <span class="badge fs-6
                 @if($submission->status == 'approved') bg-success
                 @elseif($submission->status == 'rejected') bg-danger
-                @else bg-warning text-dark
+                @else bg-danger text-white
                 @endif
             ">
                 {{ ucfirst($submission->status ?? 'pending') }}
@@ -167,7 +168,7 @@
 </form>
 
         </div>
-
+ 
     </div>
 
     @endforeach

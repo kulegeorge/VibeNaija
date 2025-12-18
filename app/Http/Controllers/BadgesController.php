@@ -55,7 +55,7 @@ class BadgesController extends Controller
                 'points' => $validated['points'] ?? null,
                 'badge_image' => $fileUrl,
             ]);
-$notification = array(
+                $notification = array(
                     'message' => 'Badge uploaded and saved successfully!',
                     'alert-type' => 'success'
                 );

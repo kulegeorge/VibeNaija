@@ -6,9 +6,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Vibe NIgeria</title>
+	<title>Vibe Nigeria</title>
 
-	<meta name="author" content="shiftthemes">
+	<meta name="Vibe Nigeria" content="Vibe Nigeria">
 	<meta name="description" content="VibeNaija is an online cultural immersion platform designed to help Nigerian teenagers and young adults in the diaspora and at home, reconnect with their roots through interactive social and cultural challenges.
 The platform will combine learning, fun, and community through weekly or monthly cultural tasks that promote Nigerian traditions, language, history, music, and lifestyle — all presented in a gamified way (points, badges, and levels).
 The long-term vision is to create a global online community of young Nigerians who celebrate and share their heritage proudly.
@@ -34,6 +34,9 @@ The long-term vision is to create a global online community of young Nigerians w
 	<!-- Main CSS file -->
 	<link rel="stylesheet" href="{{ asset('Frontend/css/style.css') }}">
 	
+	<link rel="stylesheet" href="{{ asset('Backend/assets/images/favicon.png') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 <style>
     /* FORCE ALL TASK IMAGES TO BE SAME SIZE */
@@ -434,6 +437,10 @@ The long-term vision is to create a global online community of young Nigerians w
     </div>
 </section>
 
+
+
+	
+</section>
 
 	<section class="section p0 mb50 max_height xs_max_height">
 		<div class="row col-p0">

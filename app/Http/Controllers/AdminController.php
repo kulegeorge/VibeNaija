@@ -9,6 +9,10 @@ use App\Models\User;
 use App\Models\Event;
 use App\Models\Activities;
 use App\Models\Expenses;
+use App\Models\Users;
+use App\Models\Subscriber;
+use App\Models\Tasks;
+
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
   use App\Notifications\PlatformNotification;
@@ -46,9 +50,21 @@ class AdminController extends Controller
                 'author' => $expenses->author,
                         ];
         }
+ $users = User::count();
+ $subscriber = Subscriber::count();
+ $task = Tasks::count();
+
+        return view('admin.index',compact('users','subscriber','task'), ['records' => $records, 'exp' => $exp]);
+    } // End Method
 
 
-        return view('admin.index', ['records' => $records, 'exp' => $exp]);
+ public function AdminDashboard2(Request $request)
+    {
+        
+       
+       
+
+        return view('admin.index2');
     } // End Method
 
 

@@ -51,7 +51,7 @@ The long-term vision is to create a global online community of young Nigerians w
   <!-- Layout styles -->  
 	<link rel="stylesheet" href="{{ asset('Backend/assets/css/demo1/style.css') }}">
   <!-- End layout styles -->
-  
+
   <link rel="shortcut icon" href="{{ asset('Backend/assets/images/favicon.png') }}" />
 
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >

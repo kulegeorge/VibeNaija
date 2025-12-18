@@ -1,8 +1,13 @@
 @section('title', 'Vibe Nigeria- Edit Task submitted')
-@extends('admin.admin_dashboard')
-@section('admin')
+@extends('admin.admin_dashboard_new')
+@section('admin2')
 
-<div class="container my-5" style="padding-top:80px;">
+
+ 
+    <!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
 
     <!-- ================================
          PAGE HEADER

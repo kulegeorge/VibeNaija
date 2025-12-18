@@ -1,7 +1,10 @@
 @section('title', 'Vibe Nigeria- Task Preview')
-@extends('admin.admin_dashboard')
-@section('admin')
-
+@extends('admin.admin_dashboard_new')
+@section('admin2')
+  <!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
 <style>
 /* === YOUR ORIGINAL STYLES (unchanged) === */
 
@@ -38,7 +41,7 @@
 }
 </style>
 
-<div class="container" style="padding-top:80px;">
+
 
 <div class="row">
     <div class="col-sm-12">
@@ -57,8 +60,12 @@
     }
 @endphp
 <!-- HEADER WITH IMAGES -->
-   <div class="card shadow-sm    mb-4" style="border 2px solid #dcdcdc;">
-<div class="card-header bg-light text-black">
+
+
+ 
+  
+   <div class="card shadow-sm    mb-4" style="border 2px solid #ddd;">
+<div class="card-header btn-light-warning text-black" style="background: linear-gradient(-135deg, #1abc9c, #16a085);">
 
     <div class="row align-items-center gy-3">
 
@@ -72,9 +79,9 @@
             @endif
 
             <div class="flex-grow-1">
-                <h4 class="mb-1">{{ $task->taskname }}</h4>
+                <h4 class="mb-1 text-white">{{ $task->taskname }}</h4>
                 <p class="mb-0">
-                    <small class="text-muted">{{ $task->category }} • <strong>Time: {{ $duration_text }} <span id="timer-{{ $task->id }}" data-end="{{ $task->end_time }}"></span>
+                    <h6 class="text-white">{{ $task->category }} • <strong>Time: {{ $duration_text }} <span id="timer-{{ $task->id }}" data-end="{{ $task->end_time }}"></h6>
 
                 </strong>
             </small>
@@ -123,7 +130,7 @@
 
     @else
   <div class="border card p-3">
-           <a href="{{ route('task.unenroll.form', $task->id) }}" class="btn btn-warning float-end">
+           <a href="{{ route('task.unenroll.form', $task->id) }}" class="btn btn-danger float-end">
     Un-enroll Task <i class="fa fa-user-slash"></i>
 </a>
         </div>
@@ -141,7 +148,7 @@
 
 
         <div class="border card p-3">
-            <a href="{{ route('enrol.task', encrypt($task->id)) }}" class="btn bg-light float-end">
+            <a href="{{ route('enrol.task', encrypt($task->id)) }}" class="btn btn-light-warning float-end">
                 <strong>Join Challenge</strong>
             </a>
         </div>
@@ -161,7 +168,7 @@
     <!-- TASK DESCRIPTION -->
     <div class="col-lg-8">
         <div class="border card p-3">
-           <h5 class="card-title">Task Description</h5>
+           <h5 class="card-title text-dark">Task Description</h5>
             
 
             <div class="task-description-box">
@@ -240,7 +247,7 @@
 
 @endif
 
-    </div>
+     </div><!-- End Col-8 -->
 
     <!-- GAMIFIED REWARDS -->
     <div class="col-lg-4">
@@ -249,22 +256,22 @@
             <span class="btn btn-outline-secondary mb-3">🏆 Gamified Rewards</span>
 
             <div class="d-flex justify-content-between mb-2">
-                <div><strong>Points:</strong> <span class="badge bg-success">+{{ $task->task_points }}</span></div>
-                <div><strong>Badge:</strong> <span class="badge bg-warning text-dark">{{ $task->badge_name }}</span></div>
-                <div><strong>Level:</strong> <span class="badge bg-info text-dark">{{ $task->task_level ?? 'N/A' }}</span></div>
+                <div><strong>Points:</strong> <span class="badge text-bg-success">+{{ $task->task_points }}</span></div>
+                <div><strong>Badge:</strong> <span class="badge warning text-dark">{{ $task->badge_name }}</span></div>
+                <div><strong>Level:</strong> <span class="badge bg-light-warning">{{ $task->task_level ?? 'N/A' }}</span></div>
             </div>
 
 
 
         </div>
         <!-- ===================== SKILLS GAINED ===================== -->
-<div class="card shadow-sm p-3 mb-4">
-<h5 class="fw-bold mb-3">Skills You Gain</h5>
-<span class="badge bg-light text-dark me-2 mb-2">Cultural Knowledge</span>
-<span class="badge bg-light text-dark me-2 mb-2">Creativity</span>
-<span class="badge bg-light text-dark me-2 mb-2">Language Skills</span>
-<span class="badge bg-light text-dark me-2 mb-2">Critical Thinking</span>
-</div>
+            <div class="card shadow-sm p-3 mb-4">
+            <h5 class="fw-bold mb-3">Skills You Gain</h5>
+            <span class="badge bg-light-warning text-dark me-2 mb-2">Cultural Knowledge</span>
+            <span class="badge bg-light-warning text-dark me-2 mb-2">Creativity</span>
+            <span class="badge bg-light-warning text-dark me-2 mb-2">Language Skills</span>
+            <span class="badge bg-light-warning text-dark me-2 mb-2">Critical Thinking</span>
+            </div>
 
 
 
@@ -287,7 +294,7 @@
 
 
 
-    </div>
+   </div>  <!--     End col-4 -->
 
 
     <!-- IMAGES PREVIEW (existing) -->
@@ -348,7 +355,7 @@
         </div>
     </div>
 
-</div>
+
 
 
 <!-- ACTION BUTTONS -->
@@ -392,7 +399,7 @@
         
     @endif
 </div>
-
+</div>
 <div class="card-footer text-center">
     Posted on: {{ $task->created_at->format('M d, Y') }}
 </div>

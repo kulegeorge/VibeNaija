@@ -63,16 +63,12 @@ class UserTaskController extends Controller
     /*----------------------------------------------------------
         SHOW TASK PREVIEW
     ----------------------------------------------------------*/
-    public function showTask($encryptedId)
+   public function showTask(Tasks $task)
 {
-    // Decrypt ID
-    $id = decrypt($encryptedId);
-
-    // Fetch task or fail
-    $task = Tasks::findOrFail($id);
 
     // Fetch topic or abort 404 if not found
-    $topic = Topic::findOrFail($task->topic_id);
+    $topic = Topic::find($task->topic_id);
+
 
     // Get current user ID
     $userId = Auth::id();
@@ -88,6 +84,7 @@ class UserTaskController extends Controller
 
     return view('frontend.preview', compact('task', 'topic', 'joinedAlready'));
 }
+
 
 
 

@@ -28,6 +28,8 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Forum\ThreadController;
 use App\Http\Controllers\Forum\PostController;
 
+use App\Http\Controllers\EmailCampaignController;
+use App\Http\Controllers\UnsubscribeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +43,19 @@ use App\Http\Controllers\Forum\PostController;
 
 Route::get('/', [HomeController::class, 'homepage']);
 
+Route::get('/unsubscribe/{token}', [UnsubscribeController::class, 'unsubscribe'])
+    ->name('unsubscribe');
+
+Route::post('/subscribe', function (\Illuminate\Http\Request $request) {
+    $request->validate(['email' => 'required|email']);
+
+   \App\Models\Subscriber::updateOrCreate(
+    ['email' => $request->email],
+    ['is_active' => true]
+);
+
+    return back()->with('success', 'Subscribed successfully!');
+})->name('subscribe');
 
 
 
@@ -68,7 +83,7 @@ Route::post('/task/{id}/unenroll', [TasksController::class, 'unenroll'])->name('
 
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('logout', [AuthenticatedSessionController::class, "destroy"])->name('logout');
+   
     // Route::get('/checkvEmailVerification', [EmailVerificationPromptController::class, "__invoke"]);
 
     //list Task to all users
@@ -79,7 +94,7 @@ Route::post('/task/{id}/unenroll', [TasksController::class, 'unenroll'])->name('
      //User Completed tasked
      Route::get('/user/completed-task', [UserTaskController::class, "completed_task"])->name('user.completed-task');
     //show preview task
-    Route::get('/task/show/{id}', [UserTaskController::class, "showTask"])->name('task.show');
+    Route::get('/task/show/{task}', [UserTaskController::class, "showTask"])->name('task.show');
 
     //enroll into task
     Route::get('/enrol/task/{id}', [JoinTaskController::class, "enrolTask"])->name('enrol.task');
@@ -150,8 +165,19 @@ Route::prefix('forum')->name('forum.')->group(function () {
 //route for admin
 Route::middleware(['auth', 'role:Admin'])->group(function(){
 
+    // Email composer (admin)
+    Route::get('/admin/emails/compose', [EmailCampaignController::class, 'create'])
+        ->name('emails.compose');
+
+    // Send email
+    Route::post('/admin/emails/send', [EmailCampaignController::class, 'send'])
+        ->name('emails.send');
+
     Route::get('/admin/dashboard', [AdminController::class, "adminDashboard"])->name('admin.dashboard');
-    Route::get('/admin/logout', [AdminController::class, "adminLogout"])->name('admin.logout');
+    // Route::get('/admin/dashboard2', [AdminController::class, "adminDashboard2"])->name('admin.dashboard2');
+
+
+    // Route::get('/admin/logout', [AdminController::class, "adminLogout"])->name('admin.logout');
     Route::get('/admin/Badges', [BadgesController::class, "createBadges"])->name('admin.Badges');
     Route::post('/admin/Badges', [BadgesController::class, "badgeUpload"])->name('badge.upload');
     Route::get('/badges/edit/{id}', [BadgesController::class, 'editBadge'])->name('badge.edit');
@@ -181,7 +207,7 @@ Route::get('/admin/Tasks', [TasksController::class, "createTasks"])->name('admin
 Route::post('/admin/store-task', [TasksController::class, 'store'])->name('store-task');
 
 //List all tasks
-// Route::get('/admin/show-task', [TasksController::class, 'showTask'])->name('admin.showTask');
+Route::get('/admin/show-task', [TasksController::class, 'showTask'])->name('admin.showTask');
 //edit task view page
 Route::get('/admin/edit-task/{id}', [TasksController::class, 'editTask'])->name('admin.edit-task');
 //upadte task

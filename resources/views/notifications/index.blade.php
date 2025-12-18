@@ -1,4 +1,5 @@
-@extends('admin.admin_dashboard')
+@extends('admin.admin_dashboard_new')
+
 
 @section('content')
 

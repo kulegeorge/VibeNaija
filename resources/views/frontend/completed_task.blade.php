@@ -1,6 +1,13 @@
 @section('title', 'Vibe Nigeria- Completed Task')
-@extends('admin.admin_dashboard')
-@section('admin')
+@extends('admin.admin_dashboard_new')
+@section('admin2')
+
+
+ 
+    <!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
 
 <style>
 .completed-watermark {
@@ -21,7 +28,7 @@
 }
 </style>
 
-<div class="container" style="padding-top:80px;">
+
     <div class="row">
 
         @foreach($tasks as $task)
@@ -120,12 +127,12 @@
 
 
                @if(!$isExpired)
-                        <a href="{{ route('task.show', encrypt($task->id)) }}" class="btn btn-outline-primary btn-sm">
+                        <a href="{{ route('task.show', $task->id) }}" class="btn btn-outline-primary btn-sm">
                             View Task →
                         </a>
 
                         @else
-<a href="{{ route('task.show', encrypt($task->id))}}" class="btn btn-warning btn-sm">
+<a href="{{ route('task.show', $task->id)}}" class="btn btn-warning btn-sm">
                    Task Expired →
                 </a>
                         @endif

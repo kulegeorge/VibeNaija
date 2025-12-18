@@ -1,6 +1,13 @@
-@extends('admin.admin_dashboard')
-@section('admin')
-<div class="container" style="padding-top:80px;">
+@extends('admin.admin_dashboard_new')
+@section('admin2')
+
+
+ 
+    <!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
+
     <h2>Create Thread</h2>
     <form method="POST" action="{{ route('forum.threads.store') }}">
         @csrf

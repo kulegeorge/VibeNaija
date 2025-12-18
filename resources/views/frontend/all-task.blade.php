@@ -1,6 +1,6 @@
 @section('title', 'Vibe Nigeria- All Task')
-@extends('admin.admin_dashboard')
-@section('admin')
+@extends('admin.admin_dashboard_new')
+@section('admin2')
 @php
 $backgrounds = [
     '#D18B21',
@@ -11,12 +11,14 @@ $backgrounds = [
 ];
 @endphp
 
-<div class="container" style="padding-top:80px;">
+ <!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content" style="background:#fff;">
 <div class="row">
 @foreach($tasks as $task)
 <div class="col-md-4 col-sm-6 mb-4">
 
-    <a href="{{ route('task.show', encrypt($task->id)) }}"class="text-decoration-none text-dark">
+    
      <div class="card shadow-sm border-0 rounded-3 h-100 text-white"
      style="background-color: {{ $backgrounds[$loop->index % count($backgrounds)] }};">
 
@@ -112,18 +114,19 @@ $backgrounds = [
 
 
 @if(!$isExpired)
-                <a href="{{ route('task.show', encrypt($task->id))}}" class="btn btn-outline-primary btn-sm">
-                   View Task →
-                </a>
+    <a href="{{ route('task.show', $task) }}" class="btn btn-outline-info btn-sm">
+    View Task →
+</a>
 @else
-<a href="{{ route('task.show', encrypt($task->id))}}" class="btn btn-warning btn-sm">
-                   Task Expired →
-                </a>
-                @endif
+    <button class="btn btn-danger btn-sm" disabled>
+        Task Expired
+    </button>
+@endif
+
             </div>
 
         </div>
-    </a>
+    
 
 </div>
 @endforeach
@@ -183,6 +186,7 @@ $backgrounds = [
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <!-- Auto-trigger Script -->

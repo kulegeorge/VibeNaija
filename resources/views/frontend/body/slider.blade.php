@@ -110,7 +110,7 @@
 						data-endspeed="600" data-end="7950"
 						data-easing="Power3.easeInOut" data-endeasing=""
 						style="z-index: 4">
-						<a href="/challenges" class="btn-slider reversed">Explore Challenges</a>
+						<a href="{{ route('user.all-task')}}" class="btn-slider reversed">Explore Challenges</a>
 					</div>
 					
 				</li>

@@ -1,76 +1,107 @@
+
 <footer class="footer-wrapper footer-bg">
-		<div class="container">
-			<div class="row col-p30">
-				<div class="col-sm-12 col-md-4">
-					<div class="footer-widget">
-						<h3 class="footer-title">NaijaVibe</h3>
-						<ul class="footer-links clearfix">
-							<li><a href="page_services_4.html#">Home</a></li>
-							<li><a href="page_services_4.html#">Contact</a></li>
-							<li><a href="page_services_4.html#">Privacy Policy</a></li>
-							<li><a href="page_services_4.html#">Services</a></li>
-							<li><a href="page_services_4.html#">Terms</a></li>
-							<li><a href="page_services_4.html#">Security</a></li>
-							<li><a href="page_services_4.html#">Pricing</a></li>
-							<li><a href="page_services_4.html#">Features</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-sm-12 col-md-4">
-					<div class="footer-widget">
-						<h3 class="footer-title">Get social</h3>
-						<ul class="footer-social clearfix">
-							<li><a href="page_services_4.html#" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="page_services_4.html#" data-toggle="tooltip" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="page_services_4.html#" data-toggle="tooltip" title="Google Plus"><i class="fa fa-google-plus"></i></a></li>
-							<li><a href="page_services_4.html#" data-toggle="tooltip" title="Pinterest"><i class="fa fa-pinterest"></i></a></li>
-							<li><a href="page_services_4.html#" data-toggle="tooltip" title="Instagram"><i class="fa fa-instagram"></i></a></li>
-							<li><a href="page_services_4.html#" data-toggle="tooltip" title="Dribbble"><i class="fa fa-dribbble"></i></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-sm-12 col-md-4">
-					<div class="footer-widget">
-						<h3 class="footer-title">Tweets</h3>
-						<!-- This is just a dummy twitter feed with typed content (not generetad).
-						Didn't include the twitter feed for performance benefits.
-						See in documentation how to include a fully functional twitter feed widget -->
-						<div class="sidebar-tweet clearfix">
-							<i class="fa fa-twitter"></i>
-							<p class="tweet-content">
-								<a href="page_services_4.html#" class="tweet-user">@shiftThemes</a> 
-								<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span> 
-								<small>22 hours ago</small>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-6 col-md-4 col-sm-push-6 col-md-push-4 xs-box">
+    <div class="container">
 
+        {{-- MAIN FOOTER --}}
+        <div class="row py-5">
 
-					<!-- MailChimp Subscribe Form -->
-					<div id="mc_embed_signup">
-						<!-- Replace the below url with the action link from mailchimp (see documentation) -->
-						<form action="page_services_4.html#" method="post" 
-						id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate class="footer-subscribe">
-							<div id="mc_embed_signup_scroll">
-								<input type="email" value="" name="EMAIL" id="mce-EMAIL" required placeholder=" Type email and hit enter">
-								<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-						    	<div style="position: absolute; left: -5000px;">
-						    		<input type="text" name="b_111fbc1ae1a748cfb4ef9ac27_ac969aca2f" tabindex="-1" value="">
-						    	</div>
-								<button type="submit" name="subscribe" id="mc-embedded-subscribe" class="hidden"></button>
-							</div>
-						</form>
-					</div>
-					<!-- END mc_embed_signup -->
+            {{-- BRAND / ABOUT --}}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h3 class="footer-title">Vibe Nigeria</h3>
+                <p class="text-white small">
+                   An online cultural immersion platform designed to help Nigerian teenagers and young adults in the diaspora and at home, reconnect with their roots through interactive social and cultural challenges.
+The platform will combine learning, fun, and community through weekly or monthly cultural tasks that promote Nigerian traditions, language, history, music, and lifestyle — all presented in a gamified way (points, badges, and levels).
+                </p>
 
-				</div>
-				<div class="col-sm-6 col-md-4 col-sm-pull-6 col-md-pull-4">
-					<p class="copyright">&copy; Copyright 2025 Naijavibes</p>
-				</div>
-			</div>
-		</div>
-	</footer>
+                <ul class="footer-social list-inline mt-3">
+                    <li class="list-inline-item text-white">
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="{{ route('forum.threads.index') }}">
+                            <i class="fa fa-comments"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            {{-- QUICK LINKS --}}
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h4 class="footer-title">Platform</h4>
+                <ul class="footer-links list-unstyled">
+                    <li><a href="{{ url('/') }}">Home</a></li>
+                    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ route('user.all-task') }}">All Tasks</a></li>
+                    <li><a href="{{ route('user.enrolled-task') }}">My Tasks</a></li>
+                    <li><a href="{{ route('notifications.index') }}">Notifications</a></li>
+                </ul>
+            </div>
+
+            {{-- COMMUNITY --}}
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h4 class="footer-title">Community</h4>
+                <ul class="footer-links list-unstyled">
+                    <li><a href="{{ route('forum.threads.index') }}">Forum</a></li>
+                    <li><a href="{{ route('user.completed-task') }}">Completed Tasks</a></li>
+                    <li><a href="{{ route('profile.edit') }}">Profile</a></li>
+                    <li><a href="{{ route('profile.edit') }}">Settings</a></li>
+                </ul>
+            </div>
+
+            {{-- SUBSCRIBE --}}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h4 class="footer-title">Stay Updated</h4>
+                <p class="text-muted small">
+                    Get notified about new tasks, computer based tests, and platform updates.
+                </p>
+
+                <form action="{{ route('subscribe') }}" method="POST" class="footer-subscribe">
+                    @csrf
+                    <div class="input-group">
+                        <input 
+                            type="email" 
+                            name="email" 
+                            class="form-control" 
+                            placeholder="Enter your email" 
+                            required
+                        >
+                        <button class="btn btn-primary btn-block" type="submit">
+                            Subscribe
+                        </button>
+                    </div>
+
+                    @error('email')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+
+                    @if(session('success'))
+                        <small class="text-warning">{{ session('success') }}</small>
+                    @endif
+                </form>
+            </div>
+
+        </div>
+
+        {{-- FOOTER BOTTOM --}}
+        <div class="row border-top pt-3">
+            <div class="col-md-6 text-center text-md-start">
+                <small class="text-muted">
+                    &copy; {{ now()->year }} Vibe Nigeria. All rights reserved.
+                </small>
+            </div>
+
+            <div class="col-md-6 text-center text-md-end">
+                <small class="text-muted">
+                    Tasks • Computer Based Tests • Community • Growth
+                </small>
+            </div>
+        </div>
+
+    </div>
+</footer>

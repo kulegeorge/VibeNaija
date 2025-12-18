@@ -5593,7 +5593,10 @@ div.tox .btn-group-vertical > .btn-group:not(:first-child) > .tox-button,
 .modal-fullscreen .modal-body {
   overflow-y: auto;
 }
-
+.card-bg {
+  background: #D18B21;
+  color: #fff;
+}
 @media (max-width: 575.98px) {
   .modal-fullscreen-sm-down {
     width: 100vw;

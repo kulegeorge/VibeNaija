@@ -1,10 +1,17 @@
-@extends('admin.admin_dashboard')
-@section('admin')
-<div class="container" style="padding-top:80px;">
+@extends('admin.admin_dashboard_new')
+@section('admin2')
+
+
+ 
+    <!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
+
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h3">Community Forum</h1>
         @auth
-        <a href="{{ route('forum.threads.create') }}" class="btn btn-primary">New Topic</a>
+        <a href="{{ route('forum.threads.create') }}" class="btn btn-primary">Start Conversation</a>
         @endauth
     </div>
 

@@ -1,8 +1,11 @@
 @section('title', 'Vibe Nigeria- Quiz page')
-@extends('admin.admin_dashboard')
-@section('admin')
+@extends('admin.admin_dashboard_new')
+@section('admin2')
 
-<div class="container" style="padding-top:80px;">
+<!-- [ Main Content ] start -->
+    <div class="pc-container">
+      <div class="pc-content">
+        <!-- [ breadcrumb ] start -->
     <div class="row">
         <div class="col-lg-12">
 
@@ -54,8 +57,8 @@
     <a href="{{ route('cbt.start', [
         'topic' => encrypt($topic->id),
         'task'  => encrypt($topic->id)
-    ]) }}" class="btn btn-success">
-                                        <i class="fa-solid fa-play"></i> 
+    ]) }}" class="btn card-bg">
+        <i class="fa-solid fa-play"></i> 
         Start CBT
     </a>
 @else
